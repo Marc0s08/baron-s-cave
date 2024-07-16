@@ -1,63 +1,124 @@
+/* Estilos para o menu lateral */
 .sidebar {
-    width: 250px;
-    background-color: #343a40;
-    color: #ffffff;
-    transition: transform 0.3s ease;
-    transform: translateX(-100%); /* Inicialmente escondido */
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    z-index: 1000;
-  }
-  
-  .sidebar.show {
-    transform: translateX(0); /* Mostra a sidebar */
-  }
-  
-  .sidebar.hide {
-    transform: translateX(-100%); /* Esconde a sidebar */
-  }
-  
-  .sidebar nav {
-    margin-top: 50px;
-  }
-  
-  .sidebar ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .sidebar li {
-    padding: 10px 20px;
-    cursor: pointer;
-    border-bottom: 1px solid #495057;
-  }
-  
-  .sidebar li:hover {
-    background-color: #495057;
-  }
-  
-  .sidebar a {
-    text-decoration: none;
-    color: #ffffff;
-  }
-  
+  width: 250px;
+  background-color: #1F656D;
+  color: #ffffff;
+  transition: transform 0.3s ease;
+  transform: translateX(-100%); /* Inicialmente escondido */
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.sidebar.show {
+  transform: translateX(0); /* Mostra a sidebar */
+}
+
+.sidebar.hide {
+  transform: translateX(-100%); /* Esconde a sidebar */
+}
+
+.sidebar nav {
+  margin-top: 50px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 10px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #1F656D;
+}
+
+.sidebar li:hover {
+  background-color: #1F656D;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+/* Estilos para o botão toggle */
+.toggle-btn {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 1.5rem;
+  z-index: 1100;
+}
+
+/* Esconder o botão toggle em telas maiores */
+@media (min-width: 768px) {
   .toggle-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: #ffffff;
-    font-size: 1.5rem;
+    display: none;
   }
-  
-  @media (min-width: 768px) {
-    .sidebar {
-      display: none; /* Esconde a sidebar em telas maiores */
-    }
+}
+
+/* Estilos para o menu horizontal */
+.horizontal-menu {
+  display: none;
+  text-align: center;
+  background-color: #1F656D;
+  padding: 10px 0;
+}
+
+.horizontal-menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.horizontal-menu li {
+  margin: 0 15px; /* Espaçamento entre os itens do menu */
+  position: relative;
+}
+
+.horizontal-menu a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  position: relative;
+  padding: 5px 0;
+  display: block;
+  font-family: 'MedievalSharp', cursive;
+}
+
+.horizontal-menu a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.horizontal-menu a:hover::before {
+  transform: scaleX(1);
+}
+
+/* Mostrar o menu horizontal em telas maiores */
+@media (min-width: 768px) {
+  .horizontal-menu {
+    display: block;
   }
-  
+
+  .sidebar {
+    display: none;
+  }
+}

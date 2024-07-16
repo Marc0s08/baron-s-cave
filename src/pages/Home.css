@@ -1,0 +1,22 @@
+.news-card {
+    background-color: #337178;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .news-card h3 {
+    font-family: 'Uncial Antiqua', cursive;
+    margin-bottom: 10px;
+    color: #ffffff;
+  }
+  
+  .news-card p {
+    font-family: 'MedievalSharp', cursive;
+    margin: 0;
+    color: #cccccc;
+  }
+  

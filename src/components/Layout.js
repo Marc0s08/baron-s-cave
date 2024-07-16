@@ -9,9 +9,9 @@ const Layout = ({ children }) => {
       <header>
         <div className="logo-container">
           <img src={logo} alt="Logo" className="logo" />
-          <h1>BARON'S CAVE</h1>
+          <h1>Baron's Cave</h1>
         </div>
-        {/* Substitui o menu pelo Sidebar */}
+        {/* Inclui o Sidebar que se adapta às telas */}
         <Sidebar />
       </header>
       <main>

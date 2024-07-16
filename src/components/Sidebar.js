@@ -9,18 +9,27 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`sidebar ${showSidebar ? 'show' : 'hide'}`}>
-      <nav>
+    <>
+      <div className={`sidebar ${showSidebar ? 'show' : 'hide'}`}>
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/midia">Mídia</a></li>
+            <li><a href="/contact">Contato</a></li>
+          </ul>
+        </nav>
+      </div>
+      <button className="toggle-btn" onClick={toggleSidebar}>
+        ☰ Menu
+      </button>
+      <nav className="horizontal-menu">
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/midia">Mídia</a></li>
           <li><a href="/contact">Contato</a></li>
         </ul>
       </nav>
-      <button className="toggle-btn" onClick={toggleSidebar}>
-        ☰ Menu
-      </button>
-    </div>
+    </>
   );
 };
 
