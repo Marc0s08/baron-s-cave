@@ -1,5 +1,5 @@
 import React from 'react';
-import './Layout.css'; // Adiciona a importação do arquivo CSS
+import './Layout.css'; // Certifique-se de que o arquivo CSS está corretamente referenciado
 import logo from '../assets/logo.jpg'; // Substitua pelo caminho correto da sua logo
 import Sidebar from './Sidebar';
 
@@ -9,16 +9,32 @@ const Layout = ({ children }) => {
       <header>
         <div className="logo-container">
           <img src={logo} alt="Logo" className="logo" />
-          <h1>Baron's Cave</h1>
+          <h1>UNIDADE TÁTICA AIRSOFT</h1>
         </div>
-        {/* Inclui o Sidebar que se adapta às telas */}
         <Sidebar />
       </header>
       <main>
         {children}
       </main>
       <footer>
-        <p>&copy; 2024 Baron's Cave</p>
+        <div className="container">
+          <div className="contacts">
+            <h3>Contatos</h3>
+            <ul>
+              <li>GRUPO WHATSAPP</li>
+              <li>INSTAGRAM</li>
+            </ul>
+          </div>
+          <div className="logo">
+            <img src={logo} alt="Logo" className="footer-logo" />
+          </div>
+          <div className="fields">
+            <h3>Campos</h3>
+            <ul>
+              <li>📍CHÁCARA ARGOLO</li>
+            </ul>
+          </div>
+        </div>
       </footer>
     </div>
   );

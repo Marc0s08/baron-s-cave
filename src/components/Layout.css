@@ -1,85 +1,23 @@
-/* Importação das fontes */
-@import url('https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
-
-/* Estilos para o Layout */
-
 body {
-  font-family: 'MedievalSharp', cursive;
-  background-color: #1F656D;
   margin: 0;
-  padding: 0;
-  color: #ffffff;
+  font-family: Arial, sans-serif;
 }
 
 header {
-  background-color: #A87651;
-  padding: 20px 0;
-  border-bottom: 2px solid #ccc;
+  background-color: #191919;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
 }
 
 .logo-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
 }
 
 .logo {
-  width: 60px;
-  height: 60px;
-  margin-right: 10px;
-}
-
-h1 {
-  font-family: 'Uncial Antiqua', cursive;
-  font-size: 2.5rem;
-  margin: 0;
-  color: #ffffff;
-}
-
-nav {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.menu {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center; /* Alinha os itens no centro horizontalmente */
-}
-
-.menu li {
-  margin: 0 15px; /* Espaçamento entre os itens do menu */
-  position: relative; /* Para a faixa animada */
-}
-
-.menu a {
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: bold;
-  position: relative;
-  padding: 5px 0;
-  display: block;
-  font-family: 'MedievalSharp', cursive;
-}
-
-.menu a::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #ffffff;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.menu a:hover::before {
-  transform: scaleX(1);
+  height: 100px;
 }
 
 main {
@@ -89,13 +27,55 @@ main {
 footer {
   text-align: center;
   padding: 10px 0;
-  background-color: #A87651;
+  background-color: #191919;
   border-top: 2px solid #ccc;
   margin-top: 20px;
 }
 
-footer p {
-  margin: 0;
-  font-family: 'MedievalSharp', cursive;
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.contacts, .fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contacts h3, .fields h3 {
+  margin-bottom: 10px;
   color: #ffffff;
+}
+
+.contacts ul, .fields ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  color: #ffffff;
+}
+
+.contacts ul li, .fields ul li {
+  margin: 5px 0;
+}
+
+.footer-logo {
+  height: 100px; /* Ajuste conforme necessário */
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .container {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .footer-logo {
+      margin: 20px 0;
+  }
 }

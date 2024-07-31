@@ -32,8 +32,13 @@ const Home = () => {
       ) : (
         content.map((item, index) => (
           <div key={index} className="news-card">
-            <h3>{item.title}</h3>
-            <p>{item.description}</p>
+            {item.imageUrl && (
+              <img src={item.imageUrl} alt={item.title} className="news-card-image" />
+            )}
+            <div className="news-card-content">
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </div>
           </div>
         ))
       )}
