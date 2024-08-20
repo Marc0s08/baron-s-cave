@@ -23,13 +23,13 @@
 }
 
 .news-card h3 {
-  font-family: 'Uncial Antiqua', cursive;
+  font-family: 'arial', cursive;
   margin: 0 0 10px; /* Remove a margem superior e adiciona margem inferior */
   color: #000000;
 }
 
 .news-card p {
-  font-family: 'MedievalSharp', cursive;
+  font-family: 'arial', cursive;
   margin: 0;
   color: #000000;
 }
