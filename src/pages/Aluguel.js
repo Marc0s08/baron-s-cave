@@ -25,8 +25,8 @@ const Aluguel = () => {
     return () => unsubscribe();
   }, []);
 
-  const toggleExpandImage = (imageId) => {
-    setExpandedImage(expandedImage === imageId ? null : imageId); // Alterna a expansão/redução
+  const toggleExpandImage = (imageUrl) => {
+    setExpandedImage(expandedImage === imageUrl ? null : imageUrl); // Alterna a exibição da imagem expandida
   };
 
   return (
@@ -34,6 +34,10 @@ const Aluguel = () => {
       <h1>Armas para aluguel</h1>
       {error ? (
         <p style={{ color: 'red' }}>{error}</p>
+      ) : expandedImage ? (
+        <div className="expanded-image-container" onClick={() => setExpandedImage(null)}>
+          <img src={expandedImage} alt="Expanded" className="expanded-image" />
+        </div>
       ) : (
         content.map((item) => (
           <div key={item.id} className="news-card">
@@ -41,8 +45,8 @@ const Aluguel = () => {
               <img
                 src={item.imageUrl}
                 alt={item.title}
-                className={`news-card-image ${expandedImage === item.id ? 'expanded' : ''}`}
-                onClick={() => toggleExpandImage(item.id)} // Adiciona o evento de clique
+                className="news-card-image"
+                onClick={() => toggleExpandImage(item.imageUrl)} // Adiciona o evento de clique para expandir a imagem
               />
             )}
             <div className="news-card-content">
