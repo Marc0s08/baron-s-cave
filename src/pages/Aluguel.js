@@ -7,6 +7,7 @@ import './Home.css'; // Certifique-se de importar o arquivo CSS
 const Aluguel = () => {
   const [content, setContent] = useState([]);
   const [error, setError] = useState(null);
+  const [expandedImage, setExpandedImage] = useState(null); // Estado para rastrear a imagem expandida
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -24,6 +25,10 @@ const Aluguel = () => {
     return () => unsubscribe();
   }, []);
 
+  const toggleExpandImage = (imageId) => {
+    setExpandedImage(expandedImage === imageId ? null : imageId); // Alterna a expansão/redução
+  };
+
   return (
     <Layout>
       <h1>Armas para aluguel</h1>
@@ -33,7 +38,12 @@ const Aluguel = () => {
         content.map((item) => (
           <div key={item.id} className="news-card">
             {item.imageUrl && (
-              <img src={item.imageUrl} alt={item.title} className="news-card-image" />
+              <img
+                src={item.imageUrl}
+                alt={item.title}
+                className={`news-card-image ${expandedImage === item.id ? 'expanded' : ''}`}
+                onClick={() => toggleExpandImage(item.id)} // Adiciona o evento de clique
+              />
             )}
             <div className="news-card-content">
               {Object.keys(item).map((field, index) => (

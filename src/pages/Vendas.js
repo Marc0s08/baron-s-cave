@@ -7,6 +7,7 @@ import './Home.css'; // Certifique-se de importar o arquivo CSS
 const Vendas = () => {
   const [content, setContent] = useState([]);
   const [error, setError] = useState(null);
+  const [expandedImage, setExpandedImage] = useState(null); // Estado para rastrear a imagem expandida
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -24,6 +25,23 @@ const Vendas = () => {
     return () => unsubscribe();
   }, []);
 
+  const formatFieldContent = (value) => {
+    if (value && typeof value === 'object') {
+      if ('seconds' in value && 'nanoseconds' in value) {
+        return new Date(value.seconds * 1000).toLocaleString();
+      }
+      if (Array.isArray(value)) {
+        return value.join(', ');
+      }
+      return JSON.stringify(value);
+    }
+    return value;
+  };
+
+  const toggleExpandImage = (imageId) => {
+    setExpandedImage(expandedImage === imageId ? null : imageId); // Alterna a expansão/redução
+  };
+
   return (
     <Layout>
       <h1>Lojinha</h1>
@@ -33,14 +51,19 @@ const Vendas = () => {
         content.map((item) => (
           <div key={item.id} className="news-card">
             {item.imageUrl && (
-              <img src={item.imageUrl} alt={item.title} className="news-card-image" />
+              <img
+                src={item.imageUrl}
+                alt={item.title}
+                className={`news-card-image ${expandedImage === item.id ? 'expanded' : ''}`}
+                onClick={() => toggleExpandImage(item.id)} // Adiciona o evento de clique
+              />
             )}
             <div className="news-card-content">
               {Object.keys(item).map((field, index) => (
                 field !== 'imageUrl' && field !== 'id' && (
                   <p key={index}>
                     <span className="field-name">{field}: </span>
-                    <span className="field-content">{item[field]}</span>
+                    <span className="field-content">{formatFieldContent(item[field])}</span>
                   </p>
                 )
               ))}

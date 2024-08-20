@@ -7,6 +7,7 @@ import './Home.css'; // Certifique-se de importar o arquivo CSS
 const Home = () => {
   const [content, setContent] = useState([]);
   const [error, setError] = useState(null);
+  const [expandedImage, setExpandedImage] = useState(null); // Estado para rastrear a imagem expandida
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -24,6 +25,10 @@ const Home = () => {
     return () => unsubscribe();
   }, []);
 
+  const toggleExpandImage = (imageIndex) => {
+    setExpandedImage(expandedImage === imageIndex ? null : imageIndex); // Alterna a expansão/redução
+  };
+
   return (
     <Layout>
       <h2>Página Inicial</h2>
@@ -33,7 +38,12 @@ const Home = () => {
         content.map((item, index) => (
           <div key={index} className="news-card">
             {item.imageUrl && (
-              <img src={item.imageUrl} alt={item.title} className="news-card-image" />
+              <img
+                src={item.imageUrl}
+                alt={item.title}
+                className={`news-card-image ${expandedImage === index ? 'expanded' : ''}`}
+                onClick={() => toggleExpandImage(index)} // Adiciona o evento de clique
+              />
             )}
             <div className="news-card-content">
               <h3>{item.title}</h3>

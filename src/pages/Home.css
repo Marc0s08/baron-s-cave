@@ -44,3 +44,20 @@
   color: #000000; /* Cor do texto normal */
 }
 
+.news-card img {
+  width: 30%;
+  height: auto;
+  border-right: 1px solid #ccc;
+  margin-right: 20px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.news-card img.expanded {
+  transform: scale(2);
+  z-index: 10;
+  border-right: none;
+  position: relative; /* Para garantir que a imagem fique acima dos outros elementos */
+}
+
+
