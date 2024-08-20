@@ -31,7 +31,10 @@ const Layout = ({ children }) => {
           <div className="fields">
             <h3>Campos</h3>
             <ul>
-              <li>📍CHÁCARA ARGOLO</li>
+            <li>
+  📍<a href="https://www.google.com/maps/place/Ch%C3%A1cara+Argolo" target="_blank" rel="noopener noreferrer">CHÁCARA ARGOLO</a>
+</li>
+
             </ul>
           </div>
         </div>

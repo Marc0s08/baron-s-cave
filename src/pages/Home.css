@@ -33,3 +33,14 @@
   margin: 0;
   color: #000000;
 }
+
+.news-card .field-name {
+  font-weight: bold;
+  color: #000000; /* Cor do texto em negrito */
+}
+
+.news-card .field-content {
+  font-weight: normal;
+  color: #000000; /* Cor do texto normal */
+}
+

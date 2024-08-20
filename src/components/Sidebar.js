@@ -15,7 +15,9 @@ const Sidebar = () => {
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/midia">Mídia</a></li>
-            <li><a href="/contact">Contato</a></li>
+            <li><a href="/Briefings">Briefings</a></li>
+            <li><a href="/Vendas">Vendas</a></li>
+            <li><a href="/Aluguel">Aluguel</a></li>
           </ul>
         </nav>
       </div>
@@ -23,11 +25,13 @@ const Sidebar = () => {
         ☰ Menu
       </button>
       <nav className="horizontal-menu">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/midia">Mídia</a></li>
-          <li><a href="/contact">Contato</a></li>
-        </ul>
+      <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/midia">Mídia</a></li>
+            <li><a href="/Briefings">Briefings</a></li>
+            <li><a href="/Vendas">Vendas</a></li>
+            <li><a href="/Aluguel">Aluguel</a></li>
+          </ul>
       </nav>
     </>
   );
