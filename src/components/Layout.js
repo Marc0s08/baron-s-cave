@@ -21,8 +21,8 @@ const Layout = ({ children }) => {
           <div className="contacts">
             <h3>Contatos</h3>
             <ul>
-              <li>GRUPO WHATSAPP</li>
-              <li>INSTAGRAM</li>
+              <li><a href="https://chat.whatsapp.com/DmTld80rm2yElfHfB8LYVS" target="_blank" rel="noopener noreferrer">GRUPO WHATSAPP</a></li>
+              <li><a href="https://www.instagram.com/unidade_tatica_airsoft/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a></li>
             </ul>
           </div>
           <div className="logo">
