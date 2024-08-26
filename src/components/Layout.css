@@ -39,6 +39,8 @@ footer {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  flex-direction: row; /* Mantém o layout horizontal */
+  flex-wrap: wrap; /* Permite que os itens se ajustem em telas menores */
 }
 
 .contacts, .fields {
@@ -61,7 +63,7 @@ footer {
 }
 
 .contacts ul {
-  display: flex; /* Faz os itens da lista aparecerem lado a lado */
+  display: flex; /* Mantém os itens lado a lado */
   gap: 15px; /* Espaçamento entre os ícones */
 }
 
@@ -78,18 +80,19 @@ footer {
 .footer-logo {
   height: 100px; /* Ajuste conforme necessário */
   margin-bottom: 10px;
-  display: block; /* Garante que a imagem seja tratada como um bloco */
+  display: block;
   margin-left: auto;
-  margin-right: auto; /* Centraliza horizontalmente */
+  margin-right: auto;
 }
 
 @media (max-width: 768px) {
   .container {
-      flex-direction: column;
-      text-align: center;
+      flex-direction: row; /* Mantém os itens em linha no mobile */
+      justify-content: space-around; /* Distribui os itens de maneira uniforme */
+      flex-wrap: wrap; /* Permite que os itens se ajustem em linhas, se necessário */
   }
 
   .footer-logo {
-      margin: 20px 0;
+      margin: 20px auto;
   }
 }
