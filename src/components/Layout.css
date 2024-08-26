@@ -29,12 +29,11 @@ main {
 }
 
 footer {
-  text-align: center;
-  padding: 10px 0;
   background-color: #191919;
   border-top: 2px solid #ccc;
+  padding: 10px 0;
+  text-align: center;
   margin-top: 20px;
-  position: relative; /* Necessário para a centralização da logo */
 }
 
 .container {
