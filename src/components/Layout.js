@@ -17,28 +17,39 @@ const Layout = ({ children }) => {
         {children}
       </main>
       <footer>
-        <div className="container">
-          <div className="contacts">
-            <h3>Contatos</h3>
-            <ul>
-              <li><a href="https://chat.whatsapp.com/DmTld80rm2yElfHfB8LYVS" target="_blank" rel="noopener noreferrer">GRUPO WHATSAPP</a></li>
-              <li><a href="https://www.instagram.com/unidade_tatica_airsoft/" target="_blank" rel="noopener noreferrer">INSTAGRAM</a></li>
-            </ul>
-          </div>
-          <div className="logo">
-            <img src={logo} alt="Logo" className="footer-logo" />
-          </div>
-          <div className="fields">
-            <h3>Campos</h3>
-            <ul>
-            <li>
-  📍<a href="https://maps.app.goo.gl/zNKffFuPJ3orHrru8" target="_blank" rel="noopener noreferrer">CHÁCARA ARGOLO</a>
-</li>
-
-            </ul>
-          </div>
-        </div>
-      </footer>
+  <div className="container">
+    <div className="contacts">
+      <h3>Contatos</h3>
+      <ul>
+        <li>
+          <a href="https://chat.whatsapp.com/DmTld80rm2yElfHfB8LYVS" target="_blank" rel="noopener noreferrer">
+          <img src={process.env.PUBLIC_URL + '/images/whatsapp-logo.png'} alt="Grupo WhatsApp" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/unidade_tatica_airsoft/" target="_blank" rel="noopener noreferrer">
+            <img src={process.env.PUBLIC_URL + '/images/instagram-logo.png'} alt="Instagram" />
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div className="logo">
+      <a href="/">
+        <img src={logo} alt="Logo" className="footer-logo" />
+      </a>
+    </div>
+    <div className="fields">
+      <h3>Campos</h3>
+      <ul>
+        <li>
+          <a href="https://maps.app.goo.gl/zNKffFuPJ3orHrru8" target="_blank" rel="noopener noreferrer">
+            <img src={process.env.PUBLIC_URL + '/images/loc.png'} alt="Chácara Argolo" />
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>
     </div>
   );
 };

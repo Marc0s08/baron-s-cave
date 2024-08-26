@@ -64,9 +64,18 @@ footer {
   margin: 5px 0;
 }
 
+.contacts ul li img, .fields ul li img {
+  max-width: 100%;
+  height: auto;
+  max-height: 2em; /* Ajusta o tamanho da imagem para ser proporcional ao texto */
+}
+
 .footer-logo {
-  height: 100px; /* Ajuste conforme necessário */
+  height: 70px; /* Ajuste conforme necessário */
   margin-bottom: 10px;
+  display: block; /* Garante que a imagem seja tratada como um bloco */
+  margin-left: auto;
+  margin-right: auto; /* Centraliza horizontalmente */
 }
 
 @media (max-width: 768px) {
