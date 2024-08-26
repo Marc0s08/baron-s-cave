@@ -60,6 +60,11 @@ footer {
   color: #ffffff;
 }
 
+.contacts ul {
+  display: flex; /* Faz os itens da lista aparecerem lado a lado */
+  gap: 15px; /* Espaçamento entre os ícones */
+}
+
 .contacts ul li, .fields ul li {
   margin: 5px 0;
 }
@@ -71,7 +76,7 @@ footer {
 }
 
 .footer-logo {
-  height: 70px; /* Ajuste conforme necessário */
+  height: 100px; /* Ajuste conforme necessário */
   margin-bottom: 10px;
   display: block; /* Garante que a imagem seja tratada como um bloco */
   margin-left: auto;
