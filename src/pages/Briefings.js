@@ -24,6 +24,18 @@ const Briefings = () => {
     return () => unsubscribe();
   }, []);
 
+  const formatFieldContent = (value) => {
+    if (typeof value === 'string') {
+      return value.split('\n').map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          <br />
+        </React.Fragment>
+      ));
+    }
+    return value;
+  };
+
   return (
     <Layout>
       <h1>Briefings</h1>
@@ -40,8 +52,8 @@ const Briefings = () => {
                 {Object.keys(item).map((field, index) => (
                   field !== 'imageUrl' && field !== 'id' && (
                     <p key={index}>
-                      <span className="field-name">{field}: </span>
-                      <span className="field-content">{item[field]}</span>
+                      <span className="field-name">{field.includes(':') ? field : `${field}: `}</span>
+                      <span className="field-content">{formatFieldContent(item[field])}</span>
                     </p>
                   )
                 ))}

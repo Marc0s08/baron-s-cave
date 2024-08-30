@@ -25,21 +25,20 @@ const Vendas = () => {
     return () => unsubscribe();
   }, []);
 
-  const formatFieldContent = (value) => {
-    if (value && typeof value === 'object') {
-      if ('seconds' in value && 'nanoseconds' in value) {
-        return new Date(value.seconds * 1000).toLocaleString();
-      }
-      if (Array.isArray(value)) {
-        return value.join(', ');
-      }
-      return JSON.stringify(value);
-    }
-    return value;
-  };
-
   const toggleExpandImage = (imageUrl) => {
     setExpandedImage(expandedImage === imageUrl ? null : imageUrl); // Alterna a exibição da imagem expandida
+  };
+
+  const formatFieldContent = (value) => {
+    if (typeof value === 'string') {
+      return value.split('\n').map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          <br />
+        </React.Fragment>
+      ));
+    }
+    return value;
   };
 
   return (
@@ -66,7 +65,7 @@ const Vendas = () => {
               {Object.keys(item).map((field, index) => (
                 field !== 'imageUrl' && field !== 'id' && (
                   <p key={index}>
-                    <span className="field-name">{field}: </span>
+                    <span className="field-name">{field}</span>
                     <span className="field-content">{formatFieldContent(item[field])}</span>
                   </p>
                 )

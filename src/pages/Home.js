@@ -29,6 +29,18 @@ const Home = () => {
     setExpandedImage(expandedImage === imageUrl ? null : imageUrl); // Alterna a exibição da imagem expandida
   };
 
+  const formatFieldContent = (value) => {
+    if (typeof value === 'string') {
+      return value.split('\n').map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          <br />
+        </React.Fragment>
+      ));
+    }
+    return value;
+  };
+
   return (
     <Layout>
       <h2>Página Inicial</h2>
@@ -50,8 +62,8 @@ const Home = () => {
               />
             )}
             <div className="news-card-content">
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
+              <h3>{formatFieldContent(item.title)}</h3>
+              <p>{formatFieldContent(item.description)}</p>
             </div>
           </div>
         ))
