@@ -2,30 +2,36 @@
 
 /* Estilo geral da página */
 .midia-container {
-  max-width: 800px;
+  max-width: 1200px; /* Aumenta a largura máxima para melhor visualização da galeria */
   margin: 0 auto;
   padding: 20px;
+  background-color: #f4f4f4; /* Cor de fundo para destacar o conteúdo */
+  text-align: center; /* Centraliza o título e o texto */
 }
 
 /* Estilo para a lista de imagens */
 .image-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Ajusta o tamanho das colunas para imagens menores */
+  gap: 10px; /* Espaço entre as imagens */
+  justify-content: center; /* Centraliza a galeria */
 }
 
 /* Estilo para cada item de imagem */
 .image-item {
   border: 1px solid #ddd;
-  padding: 10px;
-  background-color: #f8f9fa;
+  padding: 2px; /* Reduz o padding para imagens menores */
+  background-color: #fff; /* Ajusta o fundo para uma cor mais neutra */
+  border-radius: 8px; /* Bordas arredondadas */
+  overflow: hidden; /* Garante que o conteúdo não saia do contêiner */
+  cursor: pointer; /* Adiciona um cursor de ponteiro para indicar que a imagem é clicável */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adiciona uma transição suave */
 }
 
-/* Estilo para o título */
-.image-item h3 {
-  margin-top: 0;
-  font-size: 1.2rem;
-  color: #333;
+/* Adiciona um efeito de hover nas imagens */
+.image-item:hover {
+  transform: scale(1.05); /* Aumenta a imagem um pouco ao passar o mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra suave */
 }
 
 /* Estilo para a imagem */
@@ -33,4 +39,45 @@
   width: 100%;
   height: auto;
   display: block; /* Garante que a imagem seja exibida corretamente */
+  object-fit: cover; /* Faz com que a imagem cubra o contêiner sem distorcer */
+}
+
+/* Estilo para a mensagem de erro e carregamento */
+.midia-container p {
+  color: #333;
+  font-size: 16px;
+  margin: 20px 0; /* Adiciona margem para separar o texto do restante do conteúdo */
+}
+
+/* Estilo para a imagem expandida */
+.expanded-image-container {
+  display: none; /* Inicialmente escondido */
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  cursor: pointer;
+  transition: opacity 0.3s ease; /* Adiciona uma transição suave para a opacidade */
+}
+
+.expanded-image-container.visible {
+  display: flex; /* Exibe a imagem expandida */
+}
+
+.expanded-image {
+  max-width: 90%;
+  max-height: 90%;
+  border: 5px solid #fff; /* Adiciona uma borda branca para destacar a imagem expandida */
+}
+
+/* Estilo para responsividade */
+@media (max-width: 768px) {
+  .image-list {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Ajusta o tamanho das colunas em dispositivos menores */
+  }
 }
