@@ -7,7 +7,7 @@ import './Midia.css'; // Importa o arquivo CSS
 const Midia = () => {
   const [content, setContent] = useState([]);
   const [error, setError] = useState(null);
-  const [expandedImage, setExpandedImage] = useState(null); // Estado para rastrear a imagem expandida
+  const [expandedImage, setExpandedImage] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -15,12 +15,7 @@ const Midia = () => {
       collection(db, 'midia'),
       (snapshot) => {
         const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        console.log('Dados brutos do Firestore:', data);
-
-        // Remove a filtragem baseada no campo "type"
-        const images = data.filter(item => item.imageUrl); // Garante que o item tenha um URL de imagem
-        console.log('Imagens filtradas:', images);
-
+        const images = data.filter(item => item.imageUrl); // Filtra apenas itens com URL de imagem
         setContent(images);
         setLoading(false);
         setError(null);
@@ -36,39 +31,41 @@ const Midia = () => {
   }, []);
 
   const toggleExpandImage = (imageUrl) => {
-    setExpandedImage(expandedImage === imageUrl ? null : imageUrl); // Alterna a exibição da imagem expandida
+    setExpandedImage(expandedImage === imageUrl ? null : imageUrl);
   };
 
   return (
     <Layout>
-      <div className="midia-container">
-        <h2>Galeria de Imagens</h2>
-        {loading ? (
-          <p>Carregando...</p>
-        ) : error ? (
-          <p style={{ color: 'red' }}>{error}</p>
-        ) : (
-          <div className="image-list">
-            {content.length === 0 ? (
-              <p>Nenhuma imagem encontrada.</p>
-            ) : (
-              content.map((item) => (
-                <div key={item.id} className="image-item" onClick={() => toggleExpandImage(item.imageUrl)}>
-                  {item.imageUrl ? (
-                    <img src={item.imageUrl} alt={item.title || 'Imagem'} />
-                  ) : (
-                    <p>Imagem não disponível</p>
-                  )}
-                </div>
-              ))
-            )}
-          </div>
-        )}
-        {expandedImage && (
-          <div className="expanded-image-container visible" onClick={() => setExpandedImage(null)}>
-            <img src={expandedImage} alt="Expanded" className="expanded-image" />
-          </div>
-        )}
+      <div className="midia-page"> {/* Adicione a classe específica */}
+        <div className="midia-container">
+          <h2>Galeria de Imagens</h2>
+          {loading ? (
+            <p>Carregando...</p>
+          ) : error ? (
+            <p style={{ color: 'red' }}>{error}</p>
+          ) : (
+            <div className="image-list">
+              {content.length === 0 ? (
+                <p>Nenhuma imagem encontrada.</p>
+              ) : (
+                content.map((item) => (
+                  <div key={item.id} className="image-item" onClick={() => toggleExpandImage(item.imageUrl)}>
+                    {item.imageUrl ? (
+                      <img src={item.imageUrl} alt={item.title || 'Imagem'} />
+                    ) : (
+                      <p>Imagem não disponível</p>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+          {expandedImage && (
+            <div className="expanded-image-container visible" onClick={() => setExpandedImage(null)}>
+              <img src={expandedImage} alt="Expanded" className="expanded-image" />
+            </div>
+          )}
+        </div>
       </div>
     </Layout>
   );

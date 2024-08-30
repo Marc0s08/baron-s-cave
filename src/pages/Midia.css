@@ -1,57 +1,47 @@
-/* Estilos para a página de mídia */
-
-/* Estilo geral da página */
-.midia-container {
-  max-width: 1200px; /* Aumenta a largura máxima para melhor visualização da galeria */
+/* Estilos exclusivos para a página de mídia */
+.midia-page .midia-container {
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f4f4f4; /* Cor de fundo para destacar o conteúdo */
-  text-align: center; /* Centraliza o título e o texto */
+  background-color: #f4f4f4;
+  text-align: center;
 }
 
-/* Estilo para a lista de imagens */
-.image-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Ajusta o tamanho das colunas para imagens menores */
-  gap: 10px; /* Espaço entre as imagens */
-  justify-content: center; /* Centraliza a galeria */
+.midia-page .image-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
 }
 
-/* Estilo para cada item de imagem */
-.image-item {
+.midia-page .image-item {
+  width: 200px; /* Largura fixa para as imagens */
+  height: 200px; /* Altura fixa para as imagens */
   border: 1px solid #ddd;
-  padding: 2px; /* Reduz o padding para imagens menores */
-  background-color: #fff; /* Ajusta o fundo para uma cor mais neutra */
-  border-radius: 8px; /* Bordas arredondadas */
-  overflow: hidden; /* Garante que o conteúdo não saia do contêiner */
-  cursor: pointer; /* Adiciona um cursor de ponteiro para indicar que a imagem é clicável */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Adiciona uma transição suave */
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Adiciona um efeito de hover nas imagens */
-.image-item:hover {
-  transform: scale(1.05); /* Aumenta a imagem um pouco ao passar o mouse */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra suave */
-}
-
-/* Estilo para a imagem */
-.image-item img {
+.midia-page .image-item img {
   width: 100%;
-  height: auto;
-  display: block; /* Garante que a imagem seja exibida corretamente */
-  object-fit: cover; /* Faz com que a imagem cubra o contêiner sem distorcer */
+  height: 100%;
+  object-fit: cover; /* Garante que a imagem cubra todo o espaço, cortando excessos */
+  display: block;
 }
 
-/* Estilo para a mensagem de erro e carregamento */
-.midia-container p {
-  color: #333;
-  font-size: 16px;
-  margin: 20px 0; /* Adiciona margem para separar o texto do restante do conteúdo */
+.midia-page .image-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Estilo para a imagem expandida */
-.expanded-image-container {
-  display: none; /* Inicialmente escondido */
+.midia-page .expanded-image-container {
+  display: none;
   justify-content: center;
   align-items: center;
   position: fixed;
@@ -62,22 +52,29 @@
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1000;
   cursor: pointer;
-  transition: opacity 0.3s ease; /* Adiciona uma transição suave para a opacidade */
+  transition: opacity 0.3s ease;
 }
 
-.expanded-image-container.visible {
-  display: flex; /* Exibe a imagem expandida */
+.midia-page .expanded-image-container.visible {
+  display: flex;
 }
 
-.expanded-image {
+.midia-page .expanded-image {
   max-width: 90%;
   max-height: 90%;
-  border: 5px solid #fff; /* Adiciona uma borda branca para destacar a imagem expandida */
+  border: 5px solid #fff;
 }
 
-/* Estilo para responsividade */
 @media (max-width: 768px) {
-  .image-list {
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Ajusta o tamanho das colunas em dispositivos menores */
+  .midia-page .image-item {
+    width: 150px; /* Ajusta o tamanho para telas menores */
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .midia-page .image-item {
+    width: 100px; /* Ajusta o tamanho para telas ainda menores */
+    height: 100px;
   }
 }
