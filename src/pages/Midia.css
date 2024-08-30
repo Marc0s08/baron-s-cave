@@ -7,56 +7,30 @@
   padding: 20px;
 }
 
-/* Estilo para a lista de vídeos e fotos */
-.video-list {
+/* Estilo para a lista de imagens */
+.image-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
 
-/* Estilo para cada item de vídeo ou foto */
-.video-item {
+/* Estilo para cada item de imagem */
+.image-item {
   border: 1px solid #ddd;
   padding: 10px;
   background-color: #f8f9fa;
 }
 
 /* Estilo para o título */
-.video-item h3 {
+.image-item h3 {
   margin-top: 0;
   font-size: 1.2rem;
   color: #333;
 }
 
-/* Estilo para o vídeo */
-.video-item video {
-  width: 100%;
-  outline: none; /* Remove a borda padrão do vídeo */
-}
-
-/* Estilo para os controles do vídeo */
-.video-item video::-webkit-media-controls {
-  display: block;
-}
-
-/* Estilo para o botão de reproduzir do vídeo */
-.video-item video::-webkit-media-controls-play-button {
-  background-color: #007bff;
-  color: #fff;
-  border-radius: 5px;
-  font-size: 1rem;
-  padding: 5px 10px;
-}
-
-/* Estilo para a barra de progresso do vídeo */
-.video-item video::-webkit-media-controls-enclosure {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
-  padding: 5px;
-}
-
 /* Estilo para a imagem */
-.video-item img {
+.image-item img {
   width: 100%;
   height: auto;
+  display: block; /* Garante que a imagem seja exibida corretamente */
 }

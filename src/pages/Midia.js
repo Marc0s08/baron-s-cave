@@ -13,11 +13,14 @@ const Midia = () => {
       collection(db, 'midia'),
       (snapshot) => {
         const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        setContent(data);
+        // Filtra apenas itens do tipo 'image'
+        const images = data.filter(item => item.type === 'image');
+        setContent(images);
         setError(null);
       },
       (error) => {
-        setError(`Error fetching data: ${error.message}`);
+        console.error('Erro ao buscar dados: ', error);
+        setError(`Erro ao buscar dados: ${error.message}`);
       }
     );
 
@@ -27,29 +30,21 @@ const Midia = () => {
   return (
     <Layout>
       <div className="midia-container">
-        <h2>Vídeos e Fotos</h2>
+        <h2>Fotos</h2>
         {error ? (
           <p style={{ color: 'red' }}>{error}</p>
         ) : (
-          <div className="video-list">
-            {content.map((item) => (
-              <div key={item.id} className="video-item">
-                {item.type === 'video' ? (
-                  <>
-                    <h3>{item.title}</h3>
-                    <video controls width="600">
-                      <source src={item.url} type="video/mp4" />
-                      Seu navegador não suporta o elemento de vídeo.
-                    </video>
-                  </>
-                ) : (
-                  <>
-                    <h3>{item.title}</h3>
-                    <img src={item.url} alt={item.title} style={{ maxWidth: '100%', height: 'auto' }} />
-                  </>
-                )}
-              </div>
-            ))}
+          <div className="image-list">
+            {content.length === 0 ? (
+              <p>Nenhuma imagem encontrada.</p>
+            ) : (
+              content.map((item) => (
+                <div key={item.id} className="image-item">
+                  <h3>{item.title}</h3>
+                  <img src={item.imageUrl} alt={item.title} />
+                </div>
+              ))
+            )}
           </div>
         )}
       </div>
