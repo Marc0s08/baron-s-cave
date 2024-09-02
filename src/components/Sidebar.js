@@ -10,29 +10,19 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className={`sidebar ${showSidebar ? 'show' : 'hide'}`}>
-        <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/midia">Mídia</a></li>
-            <li><a href="/Briefings">Briefings</a></li>
-            <li><a href="/Vendas">Vendas</a></li>
-            <li><a href="/Aluguel">Aluguel</a></li>
-          </ul>
-        </nav>
-      </div>
       <button className="toggle-btn" onClick={toggleSidebar}>
         ☰ Menu
       </button>
-      <nav className="horizontal-menu">
-      <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/midia">Mídia</a></li>
-            <li><a href="/Briefings">Briefings</a></li>
-            <li><a href="/Vendas">Vendas</a></li>
-            <li><a href="/Aluguel">Aluguel</a></li>
-          </ul>
-      </nav>
+      {showSidebar && <div className="blur-background"></div>} {/* Fundo embaçado somente quando o menu estiver aberto */}
+      <div className={`floating-menu ${showSidebar ? 'show' : 'hide'}`}>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/midia">Mídia</a></li>
+          <li><a href="/Briefings">Briefings</a></li>
+          <li><a href="/Vendas">Vendas</a></li>
+          <li><a href="/Aluguel">Aluguel</a></li>
+        </ul>
+      </div>
     </>
   );
 };

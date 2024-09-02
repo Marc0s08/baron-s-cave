@@ -1,61 +1,85 @@
-/* Estilos para o menu lateral */
-.sidebar {
-  width: 250px;
-  background-color: #787b7b;
+/* Estilos para o menu flutuante mobile */
+.floating-menu {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+  width: 200px;
+  background-color: rgba(0, 0, 0, 0.8); /* Preto meio transparente */
   color: #ffffff;
-  transition: transform 0.3s ease;
-  transform: translateX(-100%); /* Inicialmente escondido */
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
+  border-radius: 10px;
+  padding: 10px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0;
+  transform: scale(0);
   z-index: 1000;
 }
 
-.sidebar.show {
-  transform: translateX(0); /* Mostra a sidebar */
+.floating-menu.show {
+  opacity: 1;
+  transform: scale(1);
 }
 
-.sidebar.hide {
-  transform: translateX(-100%); /* Esconde a sidebar */
+.floating-menu.hide {
+  opacity: 0;
+  transform: scale(0);
 }
 
-.sidebar nav {
-  margin-top: 50px;
-}
-
-.sidebar ul {
+.floating-menu ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-.sidebar li {
-  padding: 10px 20px;
+.floating-menu li {
+  padding: 10px;
   cursor: pointer;
-  border-bottom: 1px solid #787b7b;
+  border-bottom: 1px solid #555;
 }
 
-.sidebar li:hover {
-  background-color: #787b7b;
+.floating-menu li:last-child {
+  border-bottom: none;
 }
 
-.sidebar a {
+.floating-menu li:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Cor de hover suave */
+}
+
+.floating-menu a {
   text-decoration: none;
   color: #ffffff;
 }
 
-/* Estilos para o botão toggle */
+/* Estilos para o botão toggle mais estilizado */
 .toggle-btn {
   position: fixed;
   top: 10px;
   left: 10px;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.8); /* Preto meio transparente */
   border: none;
   cursor: pointer;
   color: #ffffff;
   font-size: 1.5rem;
+  padding: 10px;
+  border-radius: 50%;
   z-index: 1100;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-btn:active {
+  background-color: rgba(0, 0, 0, 0.6); /* Cor cinza quando o botão é clicado */
+}
+
+/* Estilos para o fundo embaçado */
+.blur-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  z-index: 900;
+  pointer-events: none; /* Impede interação com o fundo quando o menu está aberto */
+  transition: backdrop-filter 0.3s ease;
 }
 
 /* Esconder o botão toggle em telas maiores */
@@ -118,7 +142,7 @@
     display: block;
   }
 
-  .sidebar {
+  .floating-menu {
     display: none;
   }
 }
