@@ -15,7 +15,7 @@
 }
 
 .news-card img {
-  width: 30%;
+  width: 40%;
   height: auto;
   border-right: 1px solid #ccc; /* Adiciona uma borda à direita da imagem para separação */
   margin-right: 20px; /* Espaçamento entre a imagem e o texto */
