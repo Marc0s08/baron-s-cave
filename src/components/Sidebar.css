@@ -1,9 +1,8 @@
 /* Estilos para o menu flutuante mobile */
 .floating-menu {
-  position: absolute;
-  top: 50px;
+  position: fixed; /* Mantém o menu fixo na tela */
+  top: 50px; /* Ajuste conforme necessário para ficar abaixo do botão */
   left: 10px;
-  width: 200px;
   background-color: rgba(0, 0, 0, 0.8); /* Preto meio transparente */
   color: #ffffff;
   border-radius: 10px;
@@ -12,6 +11,7 @@
   opacity: 0;
   transform: scale(0);
   z-index: 1000;
+  /* Garantir que o menu seja exibido corretamente sobre o conteúdo */
 }
 
 .floating-menu.show {
@@ -49,10 +49,10 @@
   color: #ffffff;
 }
 
-/* Estilos para o botão toggle mais estilizado */
+/* Estilos para o botão toggle */
 .toggle-btn {
-  position: fixed;
-  top: 10px;
+  position: fixed; /* Mantém o botão fixo na tela */
+  top: 10px; /* Ajuste conforme necessário */
   left: 10px;
   background-color: rgba(0, 0, 0, 0.8); /* Preto meio transparente */
   border: none;
@@ -60,9 +60,10 @@
   color: #ffffff;
   font-size: 1.5rem;
   padding: 10px;
-  border-radius: 50%;
+  border-radius: 4px; /* Ajuste da hitbox quadrada */
   z-index: 1100;
   transition: background-color 0.3s ease;
+  display: inline-block;
 }
 
 .toggle-btn:active {
@@ -80,13 +81,12 @@
   z-index: 900;
   pointer-events: none; /* Impede interação com o fundo quando o menu está aberto */
   transition: backdrop-filter 0.3s ease;
+  display: none; /* Esconde o fundo quando o menu não está aberto */
 }
 
-/* Esconder o botão toggle em telas maiores */
-@media (min-width: 768px) {
-  .toggle-btn {
-    display: none;
-  }
+/* Mostrar o fundo embaçado quando o menu está aberto */
+.floating-menu.show ~ .blur-background {
+  display: block;
 }
 
 /* Estilos para o menu horizontal */
@@ -143,6 +143,10 @@
   }
 
   .floating-menu {
+    display: none;
+  }
+
+  .toggle-btn {
     display: none;
   }
 }
