@@ -63,7 +63,7 @@ const Vendas = () => {
             )}
             <div className="news-card-content">
               {Object.keys(item).map((field, index) => (
-                field !== 'imageUrl' && field !== 'id' && (
+                field !== 'imageUrl' && field !== 'id' && field !== 'contactLink' && ( // Exclui 'contactLink' da exibição
                   <p key={index}>
                     <span className="field-name">{field}</span>
                     <span className="field-content">{formatFieldContent(item[field])}</span>
@@ -71,6 +71,11 @@ const Vendas = () => {
                 )
               ))}
             </div>
+            {item.contactLink && (
+              <a href={item.contactLink} className="contact-button" target="_blank" rel="noopener noreferrer">
+                Entrar em contato com o vendedor
+              </a>
+            )}
           </div>
         ))
       )}
