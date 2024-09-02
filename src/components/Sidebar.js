@@ -22,7 +22,7 @@ const Sidebar = () => {
         </nav>
       </div>
       <button className="toggle-btn" onClick={toggleSidebar}>
-        ☰ Menu
+        ☰
       </button>
       {showSidebar && <div className="blur-background"></div>}
       <nav className="horizontal-menu">
