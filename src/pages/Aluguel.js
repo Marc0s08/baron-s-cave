@@ -64,7 +64,7 @@ const Aluguel = () => {
             )}
             <div className="news-card-content">
               {Object.keys(item).map((field, index) => (
-                field !== 'imageUrl' && field !== 'id' && field !== 'contactLink' && (
+                field !== 'imageUrl' && field !== 'id' && field !== 'contactLink' && field !== 'isAlugada' && (
                   <p key={index}>
                     <span className="field-name">{field}</span>
                     <span className="field-content">{formatFieldContent(item[field])}</span>
