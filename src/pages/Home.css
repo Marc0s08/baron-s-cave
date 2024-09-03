@@ -89,3 +89,13 @@
 .field-value {
   white-space: pre-wrap; /* Preserva as quebras de linha */
 }
+.ribbon {
+  position: absolute;
+  top: 10px;
+  left: -5px;
+  background-color: red;
+  color: white;
+  padding: 5px 10px;
+  transform: rotate(-45deg);
+  z-index: 1;
+}

@@ -53,6 +53,7 @@ const Aluguel = () => {
       ) : (
         content.map((item) => (
           <div key={item.id} className="news-card">
+            {item.isAlugada && <div className="ribbon">Alugada</div>} {/* Faixa de Alugada */}
             {item.imageUrl && (
               <img
                 src={item.imageUrl}
