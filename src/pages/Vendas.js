@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import { db } from '../firebaseConfig';
 import { collection, onSnapshot } from 'firebase/firestore';
-import './Home.css'; // Certifique-se de importar o arquivo CSS
+import './general.css'; // Certifique-se de importar o arquivo CSS
 
 const Vendas = () => {
   const [content, setContent] = useState([]);
