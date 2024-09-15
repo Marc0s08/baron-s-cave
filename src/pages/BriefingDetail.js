@@ -37,20 +37,24 @@ const BriefingDetail = () => {
     return <p>Loading...</p>;
   }
 
+  console.log('Briefing Data:', briefing); // Adicione esta linha para depuração
+
   return (
     <Layout>
       <div className="briefing-detail-container">
         <img src={briefing.imageUrl} alt={briefing.title} className="briefing-detail-image" />
         <div className="briefing-detail-content">
           <h1>{briefing.title}</h1>
-          {briefing.fields && briefing.fields
-            .sort((a, b) => a.order - b.order)
-            .map((field, index) => (
-              <div key={index} className="field-card">
-                <h2 className="field-name">{field.name}</h2>
-                <p className="field-content">{field.value}</p>
-              </div>
-            ))}
+          {briefing.fields && Array.isArray(briefing.fields)
+            ? briefing.fields
+                .sort((a, b) => a.order - b.order)
+                .map((field, index) => (
+                  <div key={index} className="field-card">
+                    <h2 className="field-name">{field.name}</h2>
+                    <p className="field-content">{field.value}</p>
+                  </div>
+                ))
+            : <p>No fields available</p>}
         </div>
       </div>
     </Layout>
