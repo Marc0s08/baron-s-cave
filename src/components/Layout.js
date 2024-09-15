@@ -1,6 +1,6 @@
 import React from 'react';
 import './Layout.css'; // Certifique-se de que o arquivo CSS está corretamente referenciado
-import logo from '../assets/logo.jpg'; // Substitua pelo caminho correto da sua logo
+import logo from '../assets/logo.png'; // Substitua pelo caminho correto da sua logo
 import Sidebar from './Sidebar';
 
 const Layout = ({ children }) => {

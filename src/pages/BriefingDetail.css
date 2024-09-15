@@ -1,0 +1,42 @@
+/* Estilos específicos para o componente BriefingDetail */
+.briefing-detail-container {
+    padding: 20px;
+}
+
+.briefing-detail-image {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+.briefing-detail-content {
+    font-family: 'Arial', sans-serif;
+    color: #555555;
+}
+
+.briefing-detail-content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.field-card {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.field-name {
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 5px;
+}
+
+.field-content {
+    font-weight: normal;
+    color: #555555;
+    white-space: pre-line; /* Mantém a formatação de pular linha */
+}
