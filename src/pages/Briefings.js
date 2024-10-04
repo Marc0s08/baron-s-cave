@@ -14,8 +14,9 @@ const Briefings = () => {
       collection(db, 'Briefings'),
       (snapshot) => {
         const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-        const images = data.filter(item => item.imageUrl); // Filtra apenas itens com URL de imagem
-        setContent(images);
+        console.log('Dados recebidos:', data); // Para depuração
+        const missionsWithImages = data.filter(item => item.images && item.images.length > 0); // Filtra apenas itens com imagens
+        setContent(missionsWithImages);
         setLoading(false);
         setError(null);
       },
@@ -45,9 +46,14 @@ const Briefings = () => {
               ) : (
                 content.map((item) => (
                   <div key={item.id} className="image-item">
-                    {item.imageUrl ? (
+                    {/* Exibir a primeira imagem */}
+                    {item.images && item.images.length > 0 ? (
                       <a href={`/briefings/${item.id}`}>
-                        <img src={item.imageUrl} alt={item.title || 'Imagem'} />
+                        <img
+                          src={item.images[0]}
+                          alt={item.title || 'Imagem'}
+                          className="mission-image" // Classe para estilização
+                        />
                       </a>
                     ) : (
                       <p>Imagem não disponível</p>
