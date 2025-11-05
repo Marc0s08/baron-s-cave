@@ -18,13 +18,17 @@ const Sidebar = () => {
             <li><a href="/Briefings">Briefings</a></li>
             <li><a href="/Vendas">Vendas</a></li>
             <li><a href="/Aluguel">Aluguel</a></li>
+            <li><a href="/regras">Regras</a></li> {/* ✅ Nova página */}
           </ul>
         </nav>
       </div>
+
       <button className="toggle-btn" onClick={toggleSidebar}>
         ☰
       </button>
+
       {showSidebar && <div className="blur-background"></div>}
+
       <nav className="horizontal-menu">
         <ul>
           <li><a href="/">Home</a></li>
@@ -32,6 +36,7 @@ const Sidebar = () => {
           <li><a href="/Briefings">Briefings</a></li>
           <li><a href="/Vendas">Vendas</a></li>
           <li><a href="/Aluguel">Aluguel</a></li>
+          <li><a href="/regras">Regras</a></li> {/* ✅ Nova página */}
         </ul>
       </nav>
     </>

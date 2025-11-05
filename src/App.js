@@ -6,6 +6,7 @@ import Briefings from './pages/Briefings';
 import Vendas from './pages/Vendas';
 import Aluguel from './pages/Aluguel';
 import BriefingDetail from './pages/BriefingDetail';
+import Regras from './pages/Regras';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/Aluguel" element={<Aluguel />} />
         <Route path="/briefings" element={<Briefings />} />
         <Route path="/briefings/:id" element={<BriefingDetail />} /> {/* Rota dinâmica */}
+        <Route path="/regras" element={<Regras />} />
       </Routes>
     </Router>
   );
