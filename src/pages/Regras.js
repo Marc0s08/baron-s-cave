@@ -59,6 +59,10 @@ const Regras = () => {
               brigando em campo, caso veja que acertou e que o operador não acusou, avise um dos 
               organizadores no particular, assim ele tomará medidas sobre o ocorrido.
             </li>
+             <li>
+              <strong>Rendimento</strong> Rendimento é opcional, sendo da escolha do operador aceitar ou não.
+              Somente obrigatório quando for tocado nas costas, assim passa a ser obrigatório o rendimento.
+            </li>
           </ul>
         </div>
 
