@@ -60,7 +60,7 @@ const Regras = () => {
               organizadores no particular, assim ele tomará medidas sobre o ocorrido.
             </li>
              <li>
-              <strong>Rendimento</strong> Rendimento é opcional, sendo da escolha do operador aceitar ou não.
+              <strong>Rendimento</strong> é <strong>opcional</strong>, sendo da escolha do operador aceitar ou não.
               Somente obrigatório quando for tocado nas costas, assim passa a ser obrigatório o rendimento.
             </li>
           </ul>
