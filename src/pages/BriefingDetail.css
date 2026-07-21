@@ -1,56 +1,81 @@
 .briefing-detail-container {
 
+
     max-width:1200px;
 
-    margin:0 auto;
+    margin:auto;
 
-    padding:20px;
+    padding:25px;
+
 
     animation:fadeIn .8s ease;
 
+
 }
+
 
 
 
 /* TITULO */
 
+
 .mission-title {
+
 
     text-align:center;
 
-    font-size:38px;
 
-    letter-spacing:4px;
+    font-size:40px;
+
+
+    letter-spacing:5px;
+
 
     color:white;
 
-    margin-bottom:40px;
+
+    margin-bottom:45px;
+
 
 }
 
 
 
-/* GALERIA DE IMAGENS */
+
+/* GALERIA */
+
 
 .image-gallery {
 
+
     display:flex;
+
 
     flex-direction:column;
 
-    gap:30px;
+
+    gap:35px;
+
 
     margin-bottom:50px;
+
 
 }
 
 
 
-/* CARD DA IMAGEM */
+
 
 .detail-image-card {
 
+
     width:100%;
+
+
+    padding:20px;
+
+
+    border-radius:20px;
 
 
     background:
@@ -58,34 +83,37 @@
     rgba(255,255,255,.05);
 
 
+
     border:
 
-    1px solid rgba(255,255,255,.12);
+    1px solid rgba(255,255,255,.15);
 
-
-    border-radius:20px;
-
-
-    padding:20px;
 
 
     backdrop-filter:blur(10px);
 
 
+
     display:flex;
 
+
     justify-content:center;
+
 
     align-items:center;
 
 
-    transition:.35s;
+
+    transition:.3s;
+
 
 }
 
 
 
+
 .detail-image-card:hover {
+
 
     transform:translateY(-5px);
 
@@ -93,15 +121,12 @@
     border-color:#27ae60;
 
 
-    box-shadow:
-
-    0 15px 35px rgba(0,0,0,.5);
-
 }
 
 
 
-/* IMAGEM GRANDE SEM CORTE */
+
+
 
 .briefing-detail-image {
 
@@ -112,25 +137,25 @@
     height:auto;
 
 
-    max-width:100%;
+    max-height:900px;
 
 
     object-fit:contain;
 
 
-    display:block;
-
-
     border-radius:15px;
 
-
-    background:#050505;
 
 }
 
 
 
-/* CONTEÚDO DOS CAMPOS */
+
+
+
+
+/* CAMPOS */
+
 
 .briefing-detail-content {
 
@@ -141,51 +166,72 @@
     flex-direction:column;
 
 
-    gap:20px;
+    gap:25px;
+
 
 }
 
 
 
-/* CARD DE INFORMAÇÃO */
+
+
+
 
 .field-card {
 
 
     background:
 
-    rgba(255,255,255,.06);
+    linear-gradient(
+
+    145deg,
+
+    rgba(255,255,255,.08),
+
+    rgba(255,255,255,.03)
+
+    );
+
 
 
     border:
 
-    1px solid rgba(255,255,255,.12);
+    1px solid rgba(39,174,96,.25);
+
 
 
     border-radius:18px;
 
 
-    padding:25px;
+    padding:30px;
 
 
-    backdrop-filter:blur(10px);
+
+    backdrop-filter:blur(12px);
+
 
 
     transition:.3s;
 
+
 }
+
 
 
 
 .field-card:hover {
 
 
+    transform:translateX(8px);
+
+
     border-color:#27ae60;
 
 
-    transform:translateX(5px);
-
 }
+
+
+
 
 
 
@@ -195,12 +241,17 @@
     color:#27ae60;
 
 
-    font-size:22px;
+    font-size:24px;
 
 
-    margin-bottom:15px;
+    margin-bottom:18px;
+
 
 }
+
+
+
+
 
 
 
@@ -213,16 +264,34 @@
     font-size:17px;
 
 
-    line-height:1.7;
+    line-height:1.9;
 
 
-    white-space:pre-line;
+
+    /* mantém formato do Firebase */
+
+
+    white-space:pre-wrap;
+
+
+
+    text-align:left;
+
+
+
+    word-break:break-word;
+
 
 }
 
 
 
-/* LOADING / ERRO */
+
+
+
+
+/* LOADING */
+
 
 .briefing-loading,
 .briefing-error {
@@ -236,53 +305,74 @@
 
     font-size:22px;
 
+
 }
 
 
 
 .briefing-error {
 
-    color:red;
+
+    color:#ff4444;
+
 
 }
+
+
+
 
 
 
 /* ANIMAÇÃO */
 
+
 @keyframes fadeIn {
 
 
-    from {
+    from{
+
 
         opacity:0;
 
+
         transform:translateY(20px);
+
 
     }
 
 
-    to {
+    to{
+
 
         opacity:1;
 
+
         transform:translateY(0);
+
 
     }
 
+
 }
+
+
+
+
 
 
 
 /* TABLET */
 
+
 @media(max-width:900px){
 
 
-    .mission-title {
+
+    .mission-title{
 
 
         font-size:32px;
+
 
     }
 
@@ -291,21 +381,29 @@
 
 
 
+
+
+
+
+
 /* MOBILE */
+
 
 @media(max-width:600px){
 
 
-    .briefing-detail-container {
+
+    .briefing-detail-container{
 
 
-        padding:10px;
+        padding:12px;
+
 
     }
 
 
 
-    .mission-title {
+    .mission-title{
 
 
         font-size:24px;
@@ -314,57 +412,82 @@
         letter-spacing:2px;
 
 
-        margin-bottom:25px;
+        margin-bottom:30px;
+
 
     }
 
 
 
-    .detail-image-card {
+
+    .detail-image-card{
 
 
-        padding:10px;
+        padding:8px;
 
 
         border-radius:15px;
 
-    }
-
-
-
-    .briefing-detail-image {
-
-
-        border-radius:10px;
 
     }
 
 
 
-    .field-card {
+
+    .briefing-detail-image{
 
 
-        padding:18px;
+        width:100%;
+
+
+        max-height:none;
+
 
     }
 
 
 
-    .field-name {
+
+    .field-card{
 
 
-        font-size:18px;
+        padding:20px;
+
+
+        border-radius:15px;
+
 
     }
 
 
 
-    .field-content {
+
+
+    .field-name{
+
+
+        font-size:20px;
+
+
+    }
+
+
+
+
+    .field-content{
 
 
         font-size:15px;
 
+
+        line-height:1.7;
+
+
+        white-space:pre-wrap;
+
+
     }
+
 
 
 }

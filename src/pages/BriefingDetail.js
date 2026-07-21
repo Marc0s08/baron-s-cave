@@ -8,6 +8,7 @@ import "./BriefingDetail.css";
 
 const BriefingDetail = () => {
 
+
   const { id } = useParams();
 
   const [briefing, setBriefing] = useState(null);
@@ -24,13 +25,13 @@ const BriefingDetail = () => {
       try {
 
 
-        const docRef = doc(db,"Briefings",id);
+        const docRef = doc(db, "Briefings", id);
 
         const docSnap = await getDoc(docRef);
 
 
 
-        if(docSnap.exists()){
+        if (docSnap.exists()) {
 
 
           setBriefing(docSnap.data());
@@ -38,7 +39,7 @@ const BriefingDetail = () => {
           setError(null);
 
 
-        }else{
+        } else {
 
 
           setError("Briefing não encontrado");
@@ -48,7 +49,7 @@ const BriefingDetail = () => {
 
 
 
-      }catch(error){
+      } catch (error) {
 
 
         setError(error.message);
@@ -63,11 +64,13 @@ const BriefingDetail = () => {
     fetchBriefing();
 
 
-  },[id]);
+  }, [id]);
 
 
 
-  if(error){
+
+  if (error) {
+
 
     return (
 
@@ -87,7 +90,9 @@ const BriefingDetail = () => {
 
 
 
-  if(!briefing){
+
+
+  if (!briefing) {
 
 
     return (
@@ -100,7 +105,6 @@ const BriefingDetail = () => {
 
         </div>
 
-
       </Layout>
 
     );
@@ -109,144 +113,145 @@ const BriefingDetail = () => {
 
 
 
-return (
 
-<Layout>
+  return (
 
 
-<div className="briefing-detail-container">
+    <Layout>
 
 
-<h1 className="mission-title">
+      <div className="briefing-detail-container">
 
-BRIEFING DA OPERAÇÃO
 
-</h1>
+        <h1 className="mission-title">
 
+          BRIEFING DA OPERAÇÃO
 
+        </h1>
 
-{/* GALERIA */}
 
 
-{
 
-briefing.images && briefing.images.length > 0 && (
+        {/* GALERIA DE IMAGENS */}
 
 
-<div className="image-gallery">
+        {briefing.images && briefing.images.length > 0 && (
 
 
-{
+          <div className="image-gallery">
 
-briefing.images.map((image,index)=>(
 
+            {briefing.images.map((image,index)=>(
 
-<div className="detail-image-card" key={index}>
 
+              <div 
+                className="detail-image-card"
+                key={index}
+              >
 
-<img
 
-src={image}
+                <img
 
-alt={`Imagem ${index+1}`}
+                  src={image}
 
-className="briefing-detail-image"
+                  alt={`Imagem ${index + 1}`}
 
-/>
+                  className="briefing-detail-image"
 
+                />
 
-</div>
 
+              </div>
 
-))
 
+            ))}
 
-}
 
+          </div>
 
-</div>
 
+        )}
 
-)
 
-}
 
 
 
 
+        {/* CAMPOS DO BRIEFING */}
 
-{/* INFORMAÇÕES */}
 
 
-<div className="briefing-detail-content">
+        <div className="briefing-detail-content">
 
 
-{
+          {briefing.fields && briefing.fields.length > 0 ? (
 
-briefing.fields && briefing.fields.length > 0 ? (
 
 
-briefing.fields.map((field,index)=>(
+            briefing.fields.map((field,index)=>(
 
 
-<div
+              <div
 
-key={index}
+                key={index}
 
-className="field-card"
+                className="field-card"
 
->
+              >
 
 
-<h2>
+                <h2 className="field-name">
 
-{field.name || "Sem título"}
+                  {field.name || "Sem título"}
 
-</h2>
+                </h2>
 
 
-<p>
 
-{field.value || "Sem informação"}
+                <p className="field-content">
 
-</p>
+                  {field.value || "Sem informação"}
 
+                </p>
 
-</div>
 
 
-))
+              </div>
 
 
-):(
+            ))
 
 
-<p>
 
-Nenhuma informação disponível.
+          ) : (
 
-</p>
 
+            <p>
 
-)
+              Nenhuma informação disponível.
 
+            </p>
 
-}
 
+          )}
 
-</div>
 
+        </div>
 
 
-</div>
 
 
-</Layout>
+      </div>
 
-);
+
+    </Layout>
+
+
+  );
 
 
 };
+
 
 
 export default BriefingDetail;
