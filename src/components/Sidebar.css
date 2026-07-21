@@ -1,153 +1,394 @@
-/* Estilos para o menu flutuante mobile */
-.floating-menu {
-  position: fixed; /* Mantém o menu fixo na tela */
-  top: 50px; /* Ajuste conforme necessário para ficar abaixo do botão */
-  left: 10px;
-  background-color: rgba(0, 0, 0, 0.8); /* Preto meio transparente */
-  color: #ffffff;
-  border-radius: 10px;
-  padding: 10px;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0;
-  transform: scale(0);
-  z-index: 1000;
-  /* Garantir que o menu seja exibido corretamente sobre o conteúdo */
-  /* Ajuste para garantir que o menu fique fixo no local correto */
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 40px;
+
+    background: rgba(15, 15, 15, 0.35);
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+
+    transition: .35s ease;
+
+    z-index: 1000;
 }
 
-.floating-menu.show {
-  opacity: 1;
-  transform: scale(1);
+.navbar.scrolled{
+    height:70px;
+    background:rgba(10,10,10,.95);
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
 }
 
-.floating-menu.hide {
-  opacity: 0;
-  transform: scale(0);
+
+/* ===========================
+   LOGO
+=========================== */
+
+.brand{
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    text-decoration:none;
+
 }
 
-.floating-menu ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+.brand-logo{
+
+    width:58px;
+    transition:.35s;
+
 }
 
-.floating-menu li {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #555;
+.brand-logo:hover{
+
+    transform:rotate(-8deg) scale(1.08);
+
 }
 
-.floating-menu li:last-child {
-  border-bottom: none;
+.brand-text{
+
+    display:flex;
+    flex-direction:column;
+
 }
 
-.floating-menu li:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Cor de hover suave */
+.brand-text h2{
+
+    margin:0;
+
+    color:white;
+
+    font-size:20px;
+
+    letter-spacing:2px;
+
 }
 
-.floating-menu a {
-  text-decoration: none;
-  color: #ffffff;
+.brand-text span{
+
+    color:#27ae60;
+
+    font-size:12px;
+
+    letter-spacing:5px;
+
 }
 
-/* Estilos para o botão toggle */
-.toggle-btn {
-  position: fixed; /* Mantém o botão fixo na tela */
-  top: 10px; /* Ajuste conforme necessário */
-  left: 10px;
-  background-color: rgba(0, 0, 0, 0.8); /* Preto meio transparente */
-  border: none;
-  cursor: pointer;
-  color: #ffffff;
-  font-size: 1.5rem;
-  padding: 10px;
-  border-radius: 4px; /* Ajuste da hitbox quadrada */
-  z-index: 1100;
-  transition: background-color 0.3s ease;
-  display: inline-block;
+
+/* ===========================
+   MENU DESKTOP
+=========================== */
+
+.desktop-menu{
+
+    display:flex;
+
+    gap:35px;
+
 }
 
-.toggle-btn:active {
-  background-color: rgba(0, 0, 0, 0.6); /* Cor cinza quando o botão é clicado */
+.desktop-menu a{
+
+    position:relative;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:15px;
+
+    text-transform:uppercase;
+
+    transition:.3s;
+
 }
 
-/* Estilos para o fundo embaçado */
-.blur-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(5px);
-  z-index: 900;
-  pointer-events: none; /* Impede interação com o fundo quando o menu está aberto */
-  transition: backdrop-filter 0.3s ease;
-  display: none; /* Esconde o fundo quando o menu não está aberto */
+.desktop-menu a:hover{
+
+    color:#27ae60;
+
 }
 
-/* Mostrar o fundo embaçado quando o menu está aberto */
-.floating-menu.show ~ .blur-background {
-  display: block;
+.desktop-menu a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-8px;
+
+    width:0;
+
+    height:2px;
+
+    background:#27ae60;
+
+    transform:translateX(-50%);
+
+    transition:.3s;
+
 }
 
-/* Estilos para o menu horizontal */
-.horizontal-menu {
-  display: none;
-  text-align: center;
-  background-color: #787b7b;
-  padding: 10px 0;
+.desktop-menu a:hover::after{
+
+    width:100%;
+
 }
 
-.horizontal-menu ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
+
+/* ===========================
+   BOTÃO MOBILE
+=========================== */
+
+.menu-btn{
+
+    display:none;
+
+    width:50px;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#1c1c1c;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:24px;
+
+    transition:.3s;
+
 }
 
-.horizontal-menu li {
-  margin: 0 15px; /* Espaçamento entre os itens do menu */
-  position: relative;
+.menu-btn:hover{
+
+    background:#27ae60;
+
+    transform:rotate(90deg);
+
 }
 
-.horizontal-menu a {
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: bold;
-  position: relative;
-  padding: 5px 0;
-  display: block;
-  font-family: 'MedievalSharp', cursive;
+
+/* ===========================
+   OVERLAY
+=========================== */
+
+.overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.55);
+
+    backdrop-filter:blur(6px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:998;
+
 }
 
-.horizontal-menu a::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: #ffffff;
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+.overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
+
 }
 
-.horizontal-menu a:hover::before {
-  transform: scaleX(1);
+
+/* ===========================
+   MENU MOBILE
+=========================== */
+
+.mobile-menu{
+
+    position:fixed;
+
+    top:0;
+
+    left:-300px;
+
+    width:280px;
+
+    height:100vh;
+
+    background:#151515;
+
+    transition:.35s;
+
+    z-index:999;
+
+    box-shadow:8px 0 30px rgba(0,0,0,.45);
+
 }
 
-/* Mostrar o menu horizontal em telas maiores */
-@media (min-width: 768px) {
-  .horizontal-menu {
-    display: block;
-  }
+.mobile-menu.show{
 
-  .floating-menu {
-    display: none;
-  }
+    left:0;
 
-  .toggle-btn {
-    display: none;
-  }
+}
+
+.mobile-top{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:40px 20px;
+
+    border-bottom:1px solid #2d2d2d;
+
+}
+
+.mobile-top img{
+
+    width:80px;
+
+    margin-bottom:15px;
+
+}
+
+.mobile-top h3{
+
+    margin:0;
+
+    color:white;
+
+    font-size:18px;
+
+}
+
+.mobile-top span{
+
+    color:#27ae60;
+
+    letter-spacing:4px;
+
+    margin-top:5px;
+
+}
+
+.mobile-menu nav{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-top:20px;
+
+}
+
+.mobile-menu a{
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:18px 30px;
+
+    border-bottom:1px solid #242424;
+
+    transition:.3s;
+
+}
+
+.mobile-menu a:hover{
+
+    background:#27ae60;
+
+    padding-left:45px;
+
+}
+
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media(max-width:900px){
+
+    .desktop-menu{
+
+        display:none;
+
+    }
+
+    .menu-btn{
+
+        display:block;
+
+    }
+
+    .navbar{
+
+        padding:0 20px;
+
+    }
+
+    .brand-logo{
+
+        width:50px;
+
+    }
+
+    .brand-text h2{
+
+        font-size:16px;
+
+    }
+
+    .brand-text span{
+
+        font-size:10px;
+
+        letter-spacing:3px;
+
+    }
+
+}
+
+@media(min-width:901px){
+
+    .mobile-menu{
+
+        display:none;
+
+    }
+
+    .overlay{
+
+        display:none;
+
+    }
+
 }

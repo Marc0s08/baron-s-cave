@@ -1,42 +1,370 @@
-/* Estilos específicos para o componente BriefingDetail */
 .briefing-detail-container {
-    padding: 20px;
+
+    max-width:1200px;
+
+    margin:0 auto;
+
+    padding:20px;
+
+    animation:fadeIn .8s ease;
+
 }
+
+
+
+/* TITULO */
+
+.mission-title {
+
+    text-align:center;
+
+    font-size:38px;
+
+    letter-spacing:4px;
+
+    color:white;
+
+    margin-bottom:40px;
+
+}
+
+
+
+/* GALERIA DE IMAGENS */
+
+.image-gallery {
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:30px;
+
+    margin-bottom:50px;
+
+}
+
+
+
+/* CARD DA IMAGEM */
+
+.detail-image-card {
+
+    width:100%;
+
+
+    background:
+
+    rgba(255,255,255,.05);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.12);
+
+
+    border-radius:20px;
+
+
+    padding:20px;
+
+
+    backdrop-filter:blur(10px);
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    transition:.35s;
+
+}
+
+
+
+.detail-image-card:hover {
+
+    transform:translateY(-5px);
+
+
+    border-color:#27ae60;
+
+
+    box-shadow:
+
+    0 15px 35px rgba(0,0,0,.5);
+
+}
+
+
+
+/* IMAGEM GRANDE SEM CORTE */
 
 .briefing-detail-image {
-    width: 100%;
-    height: auto;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 20px;
+
+
+    width:100%;
+
+
+    height:auto;
+
+
+    max-width:100%;
+
+
+    object-fit:contain;
+
+
+    display:block;
+
+
+    border-radius:15px;
+
+
+    background:#050505;
+
 }
+
+
+
+/* CONTEÚDO DOS CAMPOS */
 
 .briefing-detail-content {
-    font-family: 'Arial', sans-serif;
-    color: #555555;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:20px;
+
 }
 
-.briefing-detail-content h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
+
+
+/* CARD DE INFORMAÇÃO */
 
 .field-card {
-    background: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-bottom: 10px;
+
+
+    background:
+
+    rgba(255,255,255,.06);
+
+
+    border:
+
+    1px solid rgba(255,255,255,.12);
+
+
+    border-radius:18px;
+
+
+    padding:25px;
+
+
+    backdrop-filter:blur(10px);
+
+
+    transition:.3s;
+
 }
+
+
+
+.field-card:hover {
+
+
+    border-color:#27ae60;
+
+
+    transform:translateX(5px);
+
+}
+
+
 
 .field-name {
-    font-weight: bold;
-    color: #333333;
-    margin-bottom: 5px;
+
+
+    color:#27ae60;
+
+
+    font-size:22px;
+
+
+    margin-bottom:15px;
+
 }
 
+
+
 .field-content {
-    font-weight: normal;
-    color: #555555;
-    white-space: pre-line; /* Mantém a formatação de pular linha */
+
+
+    color:#ddd;
+
+
+    font-size:17px;
+
+
+    line-height:1.7;
+
+
+    white-space:pre-line;
+
+}
+
+
+
+/* LOADING / ERRO */
+
+.briefing-loading,
+.briefing-error {
+
+
+    text-align:center;
+
+
+    padding:50px;
+
+
+    font-size:22px;
+
+}
+
+
+
+.briefing-error {
+
+    color:red;
+
+}
+
+
+
+/* ANIMAÇÃO */
+
+@keyframes fadeIn {
+
+
+    from {
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+
+    to {
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+
+/* TABLET */
+
+@media(max-width:900px){
+
+
+    .mission-title {
+
+
+        font-size:32px;
+
+    }
+
+
+}
+
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+
+    .briefing-detail-container {
+
+
+        padding:10px;
+
+    }
+
+
+
+    .mission-title {
+
+
+        font-size:24px;
+
+
+        letter-spacing:2px;
+
+
+        margin-bottom:25px;
+
+    }
+
+
+
+    .detail-image-card {
+
+
+        padding:10px;
+
+
+        border-radius:15px;
+
+    }
+
+
+
+    .briefing-detail-image {
+
+
+        border-radius:10px;
+
+    }
+
+
+
+    .field-card {
+
+
+        padding:18px;
+
+    }
+
+
+
+    .field-name {
+
+
+        font-size:18px;
+
+    }
+
+
+
+    .field-content {
+
+
+        font-size:15px;
+
+    }
+
+
 }

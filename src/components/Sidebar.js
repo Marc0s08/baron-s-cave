@@ -1,44 +1,90 @@
-import React, { useState } from 'react';
-import './Sidebar.css';
+import React, { useState, useEffect } from "react";
+import "./Sidebar.css";
+import logo from "../assets/logo.png";
+
+const menuItems = [
+  { title: "Home", link: "/" },
+  { title: "Mídia", link: "/midia" },
+  { title: "Briefings", link: "/Briefings" },
+  { title: "Regras", link: "/regras" },
+];
 
 const Sidebar = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scroll, setScroll] = useState(false);
 
-  const toggleSidebar = () => {
-    setShowSidebar(!showSidebar);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScroll(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
   };
 
   return (
     <>
-      <div className={`floating-menu ${showSidebar ? 'show' : 'hide'}`}>
-        <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/midia">Mídia</a></li>
-            <li><a href="/Briefings">Briefings</a></li>
-            <li><a href="/Vendas">Vendas</a></li>
-            <li><a href="/Aluguel">Aluguel</a></li>
-            <li><a href="/regras">Regras</a></li> {/* ✅ Nova página */}
-          </ul>
+      <header className={`navbar ${scroll ? "scrolled" : ""}`}>
+
+        <a href="/" className="brand">
+
+          <img src={logo} alt="UTA" className="brand-logo" />
+
+          <div className="brand-text">
+            <h2>UNIDADE TÁTICA</h2>
+            <span>AIRSOFT</span>
+          </div>
+
+        </a>
+
+        <nav className="desktop-menu">
+          {menuItems.map((item) => (
+            <a key={item.title} href={item.link}>
+              {item.title}
+            </a>
+          ))}
         </nav>
-      </div>
 
-      <button className="toggle-btn" onClick={toggleSidebar}>
-        ☰
-      </button>
+        <button
+          className={`menu-btn ${menuOpen ? "active" : ""}`}
+          onClick={toggleMenu}
+        >
+          ☰
+        </button>
 
-      {showSidebar && <div className="blur-background"></div>}
+      </header>
 
-      <nav className="horizontal-menu">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/midia">Mídia</a></li>
-          <li><a href="/Briefings">Briefings</a></li>
-          <li><a href="/Vendas">Vendas</a></li>
-          <li><a href="/Aluguel">Aluguel</a></li>
-          <li><a href="/regras">Regras</a></li> {/* ✅ Nova página */}
-        </ul>
-      </nav>
+      <div
+        className={`overlay ${menuOpen ? "show" : ""}`}
+        onClick={closeMenu}
+      />
+
+      <aside className={`mobile-menu ${menuOpen ? "show" : ""}`}>
+ 
+        <nav>
+
+          {menuItems.map((item) => (
+            <a
+              key={item.title}
+              href={item.link}
+              onClick={closeMenu}
+            >
+              {item.title}
+            </a>
+          ))}
+
+        </nav>
+
+      </aside>
     </>
   );
 };
