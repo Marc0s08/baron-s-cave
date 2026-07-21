@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import { db } from "../firebaseConfig";
 import { collection, onSnapshot } from "firebase/firestore";
 import "./Briefings.css";
+import { Helmet } from "react-helmet-async";
 
 const Briefings = () => {
 
@@ -57,7 +58,11 @@ const Briefings = () => {
 return (
 
 <Layout>
+<Helmet>
 
+<title>Briefings | U.T.A Airsoft</title>
+
+</Helmet>
 
 <div className="briefings-page">
 

@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import { db } from "../firebaseConfig";
 import { collection, onSnapshot } from "firebase/firestore";
 import "./Midia.css";
-
+import { Helmet } from "react-helmet-async";
 
 const Midia = () => {
 
@@ -74,7 +74,11 @@ return ()=>unsubscribe();
 return (
 
 <Layout>
+<Helmet>
 
+<title>Mídia | U.T.A Airsoft</title>
+
+</Helmet>
 
 <div className="midia-container">
 

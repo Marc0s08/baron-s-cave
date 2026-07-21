@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import Ranking from "../components/Ranking";
 import "./Home.css";
-
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
 
@@ -10,6 +10,11 @@ const Home = () => {
 return (
 
 <Layout>
+<Helmet>
+
+<title>U.T.A | Unidade Tática Airsoft</title>
+
+</Helmet>
 
 
 <div className="home-container">

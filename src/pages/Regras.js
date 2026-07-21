@@ -1,12 +1,17 @@
 import React from "react";
 import Layout from "../components/Layout";
 import "./Regras.css";
+import { Helmet } from "react-helmet-async";
 
 const Regras = () => {
 
   return (
     <Layout>
+<Helmet>
 
+<title>Regras do Campo | U.T.A Airsoft</title>
+
+</Helmet>
       <div className="regras-container">
 
         <h1 className="regras-title">
