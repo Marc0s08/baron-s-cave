@@ -1,493 +1,252 @@
-.briefing-detail-container {
 
-
-    max-width:1200px;
-
-    margin:auto;
-
-    padding:25px;
-
-
-    animation:fadeIn .8s ease;
-
-
+.briefings-page {
+  width: 100%;
+  animation: briefingFade .6s ease;
 }
 
-
-
-
-/* TITULO */
-
-
-.mission-title {
-
-
-    text-align:center;
-
-
-    font-size:40px;
-
-
-    letter-spacing:5px;
-
-
-    color:white;
-
-
-    margin-bottom:45px;
-
-
+.briefings-container {
+  width: 100%;
+  max-width: 1500px;
+  margin: auto;
+  padding: 10px 15px 35px;
+  box-sizing: border-box;
 }
 
+/* CABEÇALHO */
 
-
-
-/* GALERIA */
-
-
-.image-gallery {
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
-
-    gap:35px;
-
-
-    margin-bottom:50px;
-
-
+.briefing-title {
+  text-align: center;
+  margin-bottom: 35px;
 }
 
-
-
-
-
-.detail-image-card {
-
-
-    width:100%;
-
-
-    padding:20px;
-
-
-    border-radius:20px;
-
-
-    background:
-
-    rgba(255,255,255,.05);
-
-
-
-    border:
-
-    1px solid rgba(255,255,255,.15);
-
-
-
-    backdrop-filter:blur(10px);
-
-
-
-    display:flex;
-
-
-    justify-content:center;
-
-
-    align-items:center;
-
-
-
-    transition:.3s;
-
-
+.briefing-subtitle {
+  display: block;
+  color: #999;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
 }
 
-
-
-
-.detail-image-card:hover {
-
-
-    transform:translateY(-5px);
-
-
-    border-color:#27ae60;
-
-
+.briefing-title h1 {
+  color: white;
+  font-size: 38px;
+  letter-spacing: 6px;
+  margin: 0;
 }
 
-
-
-
-
-
-.briefing-detail-image {
-
-
-    width:100%;
-
-
-    height:auto;
-
-
-    max-height:900px;
-
-
-    object-fit:contain;
-
-
-    border-radius:15px;
-
-
+.briefing-title p {
+  color: #aaa;
+  font-size: 15px;
+  margin-top: 10px;
 }
 
-
-
-
-
-
-
-/* CAMPOS */
-
-
-.briefing-detail-content {
-
-
-    display:flex;
-
-
-    flex-direction:column;
-
-
-    gap:25px;
-
-
+.briefing-title-line {
+  width: 55px;
+  height: 2px;
+  background: #777;
+  margin: 20px auto 0;
+  border-radius: 5px;
 }
 
+/* GRID */
 
-
-
-
-
-
-.field-card {
-
-
-    background:
-
-    linear-gradient(
-
-    145deg,
-
-    rgba(255,255,255,.08),
-
-    rgba(255,255,255,.03)
-
-    );
-
-
-
-    border:
-
-    1px solid rgba(39,174,96,.25);
-
-
-
-    border-radius:18px;
-
-
-    padding:30px;
-
-
-
-    backdrop-filter:blur(12px);
-
-
-
-    transition:.3s;
-
-
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  align-items: start;
 }
 
+/* CARD */
 
-
-
-.field-card:hover {
-
-
-    transform:translateX(8px);
-
-
-    border-color:#27ae60;
-
-
+.mission-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  text-decoration: none;
+  color: white;
+  background: #111;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 12px;
+  transition: .3s ease;
+  box-sizing: border-box;
 }
 
-
-
-
-
-
-.field-name {
-
-
-    color:#27ae60;
-
-
-    font-size:24px;
-
-
-    margin-bottom:18px;
-
-
+.mission-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,.4);
+  box-shadow: 0 10px 25px rgba(0,0,0,.4);
 }
 
+/* IMAGEM */
 
-
-
-
-
-
-.field-content {
-
-
-    color:#ddd;
-
-
-    font-size:17px;
-
-
-    line-height:1.9;
-
-
-
-    /* mantém formato do Firebase */
-
-
-    white-space:pre-wrap;
-
-
-
-    text-align:left;
-
-
-
-    word-break:break-word;
-
-
+.mission-image-container {
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: transparent;
+  line-height: 0;
 }
 
-
-
-
-
-
-
-/* LOADING */
-
-
-.briefing-loading,
-.briefing-error {
-
-
-    text-align:center;
-
-
-    padding:50px;
-
-
-    font-size:22px;
-
-
+.mission-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
+  transition: transform .4s ease;
 }
 
-
-
-.briefing-error {
-
-
-    color:#ff4444;
-
-
+.mission-card:hover .mission-image {
+  transform: scale(1.01);
 }
 
+/* RODAPÉ */
 
+.mission-footer {
+  height: 43px;
+  min-height: 43px;
+  margin-top: auto;
+  padding: 0 14px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  background: #171717;
+  border-top: 1px solid rgba(255,255,255,.13);
+  color: #aaa;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  transition: .3s ease;
+}
 
+.mission-arrow {
+  font-size: 14px;
+  color: #888;
+}
 
+.mission-card:hover .mission-footer {
+  background: #222;
+  color: #eee;
+}
 
+.mission-card:hover .mission-arrow {
+  color: white;
+}
+
+/* ACESSIBILIDADE */
+
+.mission-card:focus-visible {
+  outline: 2px solid #aaa;
+  outline-offset: 4px;
+}
+
+/* MENSAGENS */
+
+.briefings-message {
+  text-align: center;
+  color: #aaa;
+  padding: 50px 15px;
+  font-size: 16px;
+}
+
+.briefings-error {
+  text-align: center;
+  color: #ff5555;
+}
 
 /* ANIMAÇÃO */
 
+@keyframes briefingFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
 
-@keyframes fadeIn {
-
-
-    from{
-
-
-        opacity:0;
-
-
-        transform:translateY(20px);
-
-
-    }
-
-
-    to{
-
-
-        opacity:1;
-
-
-        transform:translateY(0);
-
-
-    }
-
-
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* TELAS GRANDES */
 
-
-
-
-
+@media (min-width: 1200px) {
+  .mission-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
 
 /* TABLET */
 
-
-@media(max-width:900px){
-
-
-
-    .mission-title{
-
-
-        font-size:32px;
-
-
-    }
-
-
+@media (max-width: 900px) {
+  .mission-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
 }
 
-
-
-
-
-
-
-
-/* MOBILE */
-
-
-@media(max-width:600px){
-
-
-
-    .briefing-detail-container{
-
-
-        padding:12px;
-
-
-    }
-
-
-
-    .mission-title{
-
-
-        font-size:24px;
-
-
-        letter-spacing:2px;
-
-
-        margin-bottom:30px;
-
-
-    }
-
-
-
-
-    .detail-image-card{
-
-
-        padding:8px;
-
-
-        border-radius:15px;
-
-
-    }
-
-
-
-
-    .briefing-detail-image{
-
-
-        width:100%;
-
-
-        max-height:none;
-
-
-    }
-
-
-
-
-    .field-card{
-
-
-        padding:20px;
-
-
-        border-radius:15px;
-
-
-    }
-
-
-
-
-
-    .field-name{
-
-
-        font-size:20px;
-
-
-    }
-
-
-
-
-    .field-content{
-
-
-        font-size:15px;
-
-
-        line-height:1.7;
-
-
-        white-space:pre-wrap;
-
-
-    }
-
-
-
+/* CELULAR */
+
+@media (max-width: 600px) {
+  .briefings-container {
+    padding: 5px 8px 25px;
+  }
+
+  .briefing-title {
+    margin-bottom: 22px;
+  }
+
+  .briefing-subtitle {
+    font-size: 9px;
+    letter-spacing: 3px;
+  }
+
+  .briefing-title h1 {
+    font-size: 29px;
+    letter-spacing: 4px;
+  }
+
+  .briefing-title p {
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 0 10px;
+  }
+
+  .mission-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .mission-card {
+    border-radius: 9px;
+  }
+
+  .mission-footer {
+    height: 36px;
+    min-height: 36px;
+    padding: 0 7px;
+    font-size: 8px;
+    letter-spacing: .3px;
+    gap: 4px;
+  }
+
+  .mission-arrow {
+    font-size: 11px;
+  }
+}
+
+/* CELULARES ESTREITOS */
+
+@media (max-width: 360px) {
+  .mission-footer {
+    font-size: 7px;
+  }
 }
