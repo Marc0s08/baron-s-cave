@@ -1,455 +1,465 @@
-/* HOME U.T.A. — MINIMALISTA TÁTICO */
 
-.home-container {
-  width: 100%;
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 0 28px 70px;
-  color: #f4f6f4;
-  box-sizing: border-box;
-  animation: homeFadeIn .6s ease both;
-}
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+import Layout from "../components/Layout";
+import Ranking from "../components/Ranking";
+import { Helmet } from "react-helmet-async";
+import "./Home.css";
 
-.home-container *,
-.home-container *::before,
-.home-container *::after {
-  box-sizing: border-box;
-}
+// Imagens utilizadas nas seções fixas da página
+const imagens = {
+  hero: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/images%2FWhatsApp%20Image%202026-11-06%20at%2014.24.18.jpeg?alt=media&token=7afb3604-5bcd-43f3-a693-837f0cdf5fc4",
 
-/* HERO */
+  equipe: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/images%2FWhatsApp%20Image%202026-11-06%20at%2014.24.18.jpeg?alt=media&token=7afb3604-5bcd-43f3-a693-837f0cdf5fc4",
 
-.home-hero {
-  min-height: 620px;
-  height: min(76vh, 790px);
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  margin-bottom: 105px;
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 5px;
-  background-size: cover;
-  background-position: center 42%;
-  isolation: isolate;
-}
+  estrategia: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/home%2FC%C3%A3es%20Militares.jpeg?alt=media&token=18369fec-ed4c-4dfb-ab1d-e88393b31bda",
 
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(5,9,6,.94) 0%,
-      rgba(5,9,6,.65) 48%,
-      rgba(5,9,6,.12) 100%
-    ),
-    linear-gradient(
-      0deg,
-      rgba(3,7,4,.72),
-      transparent 48%
-    );
-}
+  combate: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/home%2Fcombat.jpg?alt=media&token=62c1c1fb-4be0-4f08-85b1-1169358bb0a2"
+};
 
-.hero-content {
-  width: min(760px, 90%);
-  padding: 55px 8%;
-}
-
-.hero-label,
-.section-kicker {
-  display: inline-block;
-  color: #8bc34a;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 3px;
-}
-
-.hero-label {
-  padding-left: 13px;
-  border-left: 2px solid #8bc34a;
-  margin-bottom: 22px;
-}
-
-.hero-content h1 {
-  margin: 0;
-  color: #fff;
-  font-size: clamp(76px, 12vw, 150px);
-  line-height: .9;
-  letter-spacing: -7px;
-  font-weight: 900;
-}
-
-.hero-content h1 span,
-.section-topline h2 span {
-  color: #8bc34a;
-}
-
-.hero-content p {
-  margin: 24px 0 32px;
-  color: rgba(255,255,255,.78);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 3px;
-}
-
-.hero-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 35px;
-  padding: 15px 19px;
-  color: #0b1009;
-  background: #8bc34a;
-  border: 1px solid #8bc34a;
-  text-decoration: none;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 1.5px;
-  transition: .25s ease;
-}
-
-.hero-button:hover {
-  color: #fff;
-  background: transparent;
-}
-
-.hero-button span {
-  font-size: 16px;
-}
-
-.hero-bottom {
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  bottom: 25px;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  color: rgba(255,255,255,.55);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
-/* SEÇÕES */
-
-.home-media,
-.home-ranking {
-  margin: 0 auto 110px;
-}
-
-.section-topline {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 25px;
-  margin-bottom: 27px;
-}
-
-.section-kicker {
-  margin-bottom: 10px;
-}
-
-.section-topline h2 {
-  margin: 0;
-  color: #fff;
-  font-size: clamp(25px, 3.2vw, 38px);
-  line-height: 1;
-  letter-spacing: 1px;
-  font-weight: 850;
-}
-
-.section-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 15px;
-  padding-bottom: 7px;
-  color: #a6b39f;
-  border-bottom: 1px solid rgba(139,195,74,.55);
-  text-decoration: none;
-  white-space: nowrap;
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 1.4px;
-  transition: color .2s ease;
-}
-
-.section-link:hover {
-  color: #8bc34a;
-}
-
-.section-link span {
-  color: #8bc34a;
-  font-size: 15px;
-}
-
-/* GALERIA */
-
-.media-grid {
-  display: grid;
-  grid-template-columns: 1.35fr 1fr 1fr;
-  gap: 13px;
-}
-
-.media-card {
-  position: relative;
-  display: block;
-  height: 350px;
-  overflow: hidden;
-  background: #111711;
-  text-decoration: none;
-  isolation: isolate;
-}
-
-.media-card:first-child {
-  height: 410px;
-}
-
-.media-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: linear-gradient(
-    0deg,
-    rgba(0,0,0,.7),
-    transparent 38%
+// Verifica se o valor é uma URL de imagem
+const ehUrlImagem = (valor) => {
+  return (
+    typeof valor === "string" &&
+    /^https?:\/\//i.test(valor.trim()) &&
+    /\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(valor.trim())
   );
-  pointer-events: none;
-}
+};
 
-.media-card img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  transition:
-    transform .65s cubic-bezier(.2,.7,.2,1),
-    filter .4s ease;
-}
+// Extrai imagens de diferentes formatos de documentos
+const extrairMidias = (data) => {
+  let imagensEncontradas = [];
 
-.media-card:hover img {
-  transform: scale(1.045);
-  filter: brightness(1.12);
-}
+  const adicionar = (valor) => {
+    if (Array.isArray(valor)) {
+      valor.forEach(adicionar);
+      return;
+    }
 
-.media-index,
-.media-card-title {
-  position: absolute;
-  z-index: 1;
-  left: 19px;
-  color: #fff;
-}
+    if (typeof valor === "object" && valor !== null) {
+      adicionar(valor.url || valor.imageUrl || valor.src);
+      return;
+    }
 
-.media-index {
-  top: 17px;
-  color: #b5d88c;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 2px;
-}
+    if (ehUrlImagem(valor)) {
+      imagensEncontradas.push(valor.trim());
+    }
+  };
 
-.media-card-title {
-  right: 18px;
-  bottom: 19px;
-  overflow: hidden;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+  // Formato atual
+  adicionar(data.images);
 
-.media-state {
-  display: grid;
-  min-height: 180px;
-  place-items: center;
-  padding: 25px;
-  color: #7e897e;
-  border: 1px solid rgba(255,255,255,.08);
-  background: #0d130e;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  text-align: center;
-}
+  // Formato legado
+  adicionar(data.imageUrl);
 
-/* RANKING */
+  // Outros formatos possíveis
+  adicionar(data.image);
+  adicionar(data.value);
 
-.home-ranking {
-  padding-top: 5px;
-}
+  // Campos dinâmicos em formato de array
+  if (Array.isArray(data.fields)) {
+    data.fields.forEach((field) => {
+      if (!field) return;
 
-/* REGRAS */
+      const nome = String(field.name || "").toLowerCase();
 
-.home-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 25px;
-  padding: 28px 0;
-  border-top: 1px solid rgba(255,255,255,.1);
-  border-bottom: 1px solid rgba(255,255,255,.1);
-}
-
-.home-bottom h2 {
-  margin: 5px 0 0;
-  color: #fff;
-  font-size: clamp(17px, 2.4vw, 25px);
-  letter-spacing: 1px;
-}
-
-/* ANIMAÇÃO */
-
-@keyframes homeFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
+      if (
+        nome.includes("imagem") ||
+        nome.includes("image") ||
+        nome.includes("foto") ||
+        nome.includes("url")
+      ) {
+        adicionar(field.value);
+      }
+    });
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+  // Campos dinâmicos em formato de objeto
+  if (data.fields && typeof data.fields === "object" && !Array.isArray(data.fields)) {
+    Object.entries(data.fields).forEach(([nome, valor]) => {
+      const chave = nome.toLowerCase();
 
-/* TABLETS */
-
-@media (max-width: 900px) {
-  .home-hero {
-    min-height: 560px;
-    height: 68vh;
-    margin-bottom: 80px;
-  }
-
-  .media-grid {
-    grid-template-columns: 1fr 1fr;
+      if (
+        chave.includes("imagem") ||
+        chave.includes("image") ||
+        chave.includes("foto") ||
+        chave.includes("url")
+      ) {
+        adicionar(valor);
+      }
+    });
   }
 
-  .media-card,
-  .media-card:first-child {
-    height: 300px;
-  }
+  return [...new Set(imagensEncontradas)];
+};
 
-  .media-card:first-child {
-    grid-column: 1 / -1;
-    height: 360px;
-  }
-}
+const Home = () => {
+  const [midias, setMidias] = useState([]);
+  const [carregandoMidias, setCarregandoMidias] = useState(true);
 
-/* CELULARES */
+  // Busca as mídias em tempo real no Firestore
+  useEffect(() => {
+    const referencia = collection(db, "midia");
 
-@media (max-width: 600px) {
-  .home-container {
-    padding: 0 12px 42px;
-  }
+    const cancelarInscricao = onSnapshot(
+      referencia,
+      (snapshot) => {
+        const todasImagens = [];
 
-  .home-hero {
-    min-height: 520px;
-    height: 72vh;
-    margin-bottom: 68px;
-    border-radius: 3px;
-    background-position: 58% center;
-  }
+        snapshot.forEach((documento) => {
+          const data = documento.data();
+          const imagensDocumento = extrairMidias(data);
 
-  .hero-overlay {
-    background:
-      linear-gradient(
-        90deg,
-        rgba(5,9,6,.85),
-        rgba(5,9,6,.25)
-      ),
-      linear-gradient(
-        0deg,
-        rgba(3,7,4,.75),
-        transparent 65%
-      );
-  }
+          imagensDocumento.forEach((url, index) => {
+            todasImagens.push({
+              id: `${documento.id}-${index}`,
+              url,
+              titulo:
+                data.title ||
+                data.name ||
+                data.titleImage ||
+                "Registro U.T.A."
+            });
+          });
+        });
 
-  .hero-content {
-    width: 100%;
-    padding: 35px 7%;
-  }
+        setMidias(todasImagens);
+        setCarregandoMidias(false);
+      },
+      (error) => {
+        console.error("Erro ao carregar mídias:", error);
+        setCarregandoMidias(false);
+      }
+    );
 
-  .hero-content h1 {
-    font-size: clamp(72px, 20vw, 110px);
-    letter-spacing: -5px;
-  }
+    return () => cancelarInscricao();
+  }, []);
 
-  .hero-content p {
-    max-width: 250px;
-    font-size: 10px;
-    line-height: 1.7;
-    letter-spacing: 2px;
-  }
+  return (
+    <Layout>
+      <Helmet>
+        <title>U.T.A | Unidade Tática Airsoft</title>
+        <meta
+          name="description"
+          content="Conheça a Unidade Tática Airsoft. Estratégia, disciplina, adrenalina e trabalho em equipe."
+        />
+      </Helmet>
 
-  .hero-bottom {
-    left: 7%;
-    right: 7%;
-    bottom: 18px;
-    font-size: 8px;
-    letter-spacing: 1px;
-  }
+      <div className="home-container">
 
-  .home-media,
-  .home-ranking {
-    margin-bottom: 70px;
-  }
+        {/* BANNER PRINCIPAL */}
+        <section
+          className="home-hero"
+          style={{ backgroundImage: `url("${imagens.hero}")` }}
+        >
+          <div className="hero-overlay"></div>
 
-  .section-topline {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
+          <div className="hero-content">
+            <span className="hero-label">
+              UNIDADE TÁTICA AIRSOFT
+            </span>
 
-  .section-topline h2 {
-    font-size: 27px;
-  }
+            <h1>
+              MAIS QUE UM JOGO.
+              <br />
+              <span>UMA OPERAÇÃO.</span>
+            </h1>
 
-  .media-grid {
-    display: flex;
-    overflow-x: auto;
-    gap: 12px;
-    padding-bottom: 8px;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: thin;
-    scrollbar-color: #8bc34a #151b15;
-  }
+            <p>
+              Estratégia, disciplina e trabalho em equipe.
+              Entre em campo, supere desafios e faça parte da missão.
+            </p>
 
-  .media-card,
-  .media-card:first-child {
-    flex: 0 0 82%;
-    height: 290px;
-    scroll-snap-align: start;
-  }
+            <div className="hero-buttons">
+              <Link to="/Briefings" className="hero-button primary">
+                CONHEÇA AS OPERAÇÕES
+              </Link>
 
-  .media-card-title {
-    font-size: 10px;
-  }
+              <Link to="/midia" className="hero-button secondary">
+                VER GALERIA
+              </Link>
+            </div>
+          </div>
 
-  .home-bottom {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 18px;
-    padding: 22px 0;
-  }
+          <div className="hero-bottom-info">
+            <span>● UNIDADE TÁTICA AIRSOFT</span>
+            <span>CHÁCARA ARGOLO</span>
+          </div>
+        </section>
 
-  .home-bottom h2 {
-    font-size: 18px;
-    line-height: 1.4;
-  }
-}
+        {/* INDICADORES */}
+        <section className="home-stats">
+          <div className="stat-item">
+            <span className="stat-icon">◎</span>
+            <div>
+              <strong>ESTRATÉGIA</strong>
+              <small>Cada movimento importa</small>
+            </div>
+          </div>
 
-/* ACESSIBILIDADE */
+          <div className="stat-item">
+            <span className="stat-icon">⌖</span>
+            <div>
+              <strong>DISCIPLINA</strong>
+              <small>Preparação para a missão</small>
+            </div>
+          </div>
 
-@media (prefers-reduced-motion: reduce) {
-  .home-container {
-    animation: none;
-  }
+          <div className="stat-item">
+            <span className="stat-icon">✦</span>
+            <div>
+              <strong>OPERAÇÕES</strong>
+              <small>Desafios em equipe</small>
+            </div>
+          </div>
+        </section>
 
-  .media-card img,
-  .hero-button {
-    transition: none;
-  }
-}
+        {/* SOBRE A UTA */}
+        <section className="home-about">
+          <div className="about-image">
+            <img src={imagens.estrategia} alt="Ambiente tático" />
+            <span className="image-tag">U.T.A / CAMPO</span>
+          </div>
+
+          <div className="about-content">
+            <span className="section-kicker">QUEM SOMOS</span>
+
+            <h2>
+              PREPARAÇÃO.
+              <br />
+              <span>ESTRATÉGIA.</span>
+              <br />
+              TRABALHO EM EQUIPE.
+            </h2>
+
+            <p>
+              O airsoft vai muito além dos equipamentos. É uma experiência
+              que exige comunicação, raciocínio, disciplina e confiança
+              entre os operadores.
+            </p>
+
+            <p>
+              Na Unidade Tática Airsoft, cada partida representa uma nova
+              missão, com objetivos, desafios e oportunidades de evolução.
+            </p>
+
+            <Link to="/regras" className="text-link">
+              CONHEÇA AS REGRAS <span>→</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* DESTAQUES */}
+        <section className="home-highlights">
+          <div className="section-heading">
+            <div>
+              <span className="section-kicker">NOSSO UNIVERSO</span>
+              <h2>O QUE MOVE A OPERAÇÃO</h2>
+            </div>
+
+            <span className="section-number">01 / 03</span>
+          </div>
+
+          <div className="highlight-grid">
+            <article className="highlight-card">
+              <img src={imagens.equipe} alt="Trabalho em equipe" />
+
+              <div className="highlight-card-content">
+                <span>01 — COOPERAÇÃO</span>
+                <h3>TRABALHO EM EQUIPE</h3>
+                <p>
+                  Comunicação e confiança são fundamentais para alcançar
+                  os objetivos da missão.
+                </p>
+              </div>
+            </article>
+
+            <article className="highlight-card">
+              <img src={imagens.estrategia} alt="Pensamento estratégico" />
+
+              <div className="highlight-card-content">
+                <span>02 — PLANEJAMENTO</span>
+                <h3>PENSAMENTO ESTRATÉGICO</h3>
+                <p>
+                  Cada cenário exige análise, planejamento e decisões
+                  rápidas.
+                </p>
+              </div>
+            </article>
+
+            <article className="highlight-card">
+              <img src={imagens.combate} alt="Experiência de airsoft" />
+
+              <div className="highlight-card-content">
+                <span>03 — EXPERIÊNCIA</span>
+                <h3>ADRENALINA</h3>
+                <p>
+                  Missões imersivas que colocam à prova as habilidades
+                  de cada operador.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        {/* GAVETA DE MÍDIAS DO FIREBASE */}
+        <section className="media-drawer">
+          <div className="media-drawer-header">
+            <div>
+              <span className="section-kicker">REGISTROS DE CAMPO</span>
+
+              <h2>POR TRÁS DE CADA OPERAÇÃO</h2>
+
+              <p>
+                Momentos, equipes e missões registrados em campo.
+              </p>
+            </div>
+
+            <Link to="/midia" className="media-all-button">
+              ACESSAR TODAS AS MÍDIAS <span>↗</span>
+            </Link>
+          </div>
+
+          {carregandoMidias ? (
+            <div className="media-loading">
+              <span className="media-loader"></span>
+              CARREGANDO REGISTROS...
+            </div>
+          ) : midias.length > 0 ? (
+            <div className="media-drawer-gallery">
+              {midias.slice(0, 3).map((midia, index) => (
+                <Link
+                  to="/midia"
+                  className={`media-photo ${
+                    index === 0 ? "media-photo-large" : ""
+                  }`}
+                  key={midia.id}
+                >
+                  <img
+                    src={midia.url}
+                    alt={midia.titulo}
+                    loading="lazy"
+                  />
+
+                  <div className="media-photo-caption">
+                    <span>
+                      REGISTRO {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    <strong>{midia.titulo}</strong>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="media-empty">
+              <span>▧</span>
+              <h3>NENHUM REGISTRO DISPONÍVEL</h3>
+              <p>
+                As próximas imagens cadastradas na galeria aparecerão aqui.
+              </p>
+            </div>
+          )}
+
+          <Link to="/midia" className="media-mobile-link">
+            EXPLORAR GALERIA COMPLETA →
+          </Link>
+        </section>
+
+        {/* REGRAS */}
+        <section className="home-rules">
+          <div className="rules-heading">
+            <span className="section-kicker">
+              SEGURANÇA EM PRIMEIRO LUGAR
+            </span>
+
+            <h2>ANTES DE ENTRAR EM CAMPO</h2>
+
+            <p>
+              A segurança e o respeito são responsabilidades de todos
+              os operadores.
+            </p>
+          </div>
+
+          <div className="rules-grid">
+            <div className="rule-card">
+              <span>01</span>
+              <div>
+                <h3>PROTEÇÃO OCULAR</h3>
+                <p>
+                  Óculos de proteção obrigatórios durante toda a partida.
+                </p>
+              </div>
+            </div>
+
+            <div className="rule-card">
+              <span>02</span>
+              <div>
+                <h3>EQUIPAMENTOS</h3>
+                <p>
+                  Confira suas condições antes de iniciar a operação.
+                </p>
+              </div>
+            </div>
+
+            <div className="rule-card">
+              <span>03</span>
+              <div>
+                <h3>CONDUTA</h3>
+                <p>
+                  Respeite os operadores, as regras e as orientações do campo.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="rules-footer">
+            <Link to="/regras">
+              LER TODAS AS REGRAS <span>→</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* RANKING */}
+        <section className="home-ranking">
+          <div className="section-heading">
+            <div>
+              <span className="section-kicker">
+                EVOLUÇÃO DOS OPERADORES
+              </span>
+
+              <h2>RANKING U.T.A.</h2>
+            </div>
+
+            <span className="section-number">RANK / UTA</span>
+          </div>
+
+          <Ranking />
+        </section>
+
+        {/* CHAMADA FINAL */}
+        <section className="home-cta">
+          <span className="section-kicker">
+            SUA PRÓXIMA MISSÃO COMEÇA AQUI
+          </span>
+
+          <h2>ESTÁ PRONTO PARA ENTRAR EM CAMPO?</h2>
+
+          <p>
+            Conheça nossas operações e acompanhe os registros
+            da Unidade Tática Airsoft.
+          </p>
+
+          <Link to="/Briefings" className="hero-button primary">
+            EXPLORAR OPERAÇÕES →
+          </Link>
+        </section>
+
+      </div>
+    </Layout>
+  );
+};
+
+export default Home;
