@@ -1,26 +1,44 @@
 
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Layout.css";
 import Sidebar from "./Sidebar";
 import logo from "../assets/logo.png";
-import {
-  FaInstagram,
-  FaWhatsapp,
-  FaMapMarkerAlt,
-  FaArrowUp,
-  FaHome,
-  FaImages,
-  FaClipboardList,
-  FaShieldAlt,
-  FaCrosshairs,
-} from "react-icons/fa";
+
+const Icon = ({ name }) => {
+  const icons = {
+    home: <><path d="m3 10 9-7 9 7" /><path d="M5 9v11h14V9" /><path d="M9 20v-7h6v7" /></>,
+    media: <><rect x="3" y="3" width="18" height="18" rx="2" /><circle cx="8.5" cy="8.5" r="1.5" /><path d="m21 15-5-5L5 21" /></>,
+    briefing: <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6M8 13h8M8 17h8" /></>,
+    shield: <><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z" /><path d="m9 12 2 2 4-4" /></>,
+    target: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1" /></>,
+    instagram: <><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><path d="M17.5 6.5h.01" /></>,
+    whatsapp: <><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5Z" /><path d="M9 9c.5 2 2 3.5 4 4l1-1 2 1c-.5 2-2 2.5-4 2-3-1-5-3-5-5 0-1 1-2 2-1Z" /></>,
+    location: <><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="2.5" /></>,
+    arrow: <><path d="M7 17 17 7M7 7h10v10" /></>,
+    up: <><path d="m18 15-6-6-6 6" /></>,
+  };
+
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      width="20"
+      height="20"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {icons[name]}
+    </svg>
+  );
+};
 
 const Layout = ({ children }) => {
   const voltarAoTopo = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -34,7 +52,6 @@ const Layout = ({ children }) => {
         </div>
       </main>
 
-      {/* RODAPÉ TÁTICO */}
       <footer className="footer">
 
         <div className="footer-top-line" />
@@ -73,31 +90,31 @@ const Layout = ({ children }) => {
           <div className="footer-column">
 
             <h3 className="footer-heading">
-              <FaCrosshairs />
+              <Icon name="target" />
               NAVEGAÇÃO
             </h3>
 
             <div className="footer-links">
 
-              <a href="/">
-                <FaHome />
+              <Link to="/">
+                <Icon name="home" />
                 Home
-              </a>
+              </Link>
 
-              <a href="/midia">
-                <FaImages />
+              <Link to="/midia">
+                <Icon name="media" />
                 Galeria de Mídia
-              </a>
+              </Link>
 
-              <a href="/Briefings">
-                <FaClipboardList />
+              <Link to="/Briefings">
+                <Icon name="briefing" />
                 Briefings
-              </a>
+              </Link>
 
-              <a href="/regras">
-                <FaShieldAlt />
+              <Link to="/regras">
+                <Icon name="shield" />
                 Regras da Unidade
-              </a>
+              </Link>
 
             </div>
 
@@ -107,7 +124,7 @@ const Layout = ({ children }) => {
           <div className="footer-column">
 
             <h3 className="footer-heading">
-              <FaCrosshairs />
+              <Icon name="target" />
               COMUNICAÇÃO
             </h3>
 
@@ -123,7 +140,7 @@ const Layout = ({ children }) => {
                 rel="noreferrer"
                 className="footer-social instagram"
               >
-                <FaInstagram />
+                <Icon name="instagram" />
                 <span>
                   <strong>Instagram</strong>
                   <small>@unidade_tatica_airsoft</small>
@@ -136,7 +153,7 @@ const Layout = ({ children }) => {
                 rel="noreferrer"
                 className="footer-social whatsapp"
               >
-                <FaWhatsapp />
+                <Icon name="whatsapp" />
                 <span>
                   <strong>WhatsApp</strong>
                   <small>Grupo da Unidade</small>
@@ -151,14 +168,14 @@ const Layout = ({ children }) => {
           <div className="footer-column">
 
             <h3 className="footer-heading">
-              <FaCrosshairs />
+              <Icon name="target" />
               BASE OPERACIONAL
             </h3>
 
             <div className="footer-location">
 
               <div className="footer-location-icon">
-                <FaMapMarkerAlt />
+                <Icon name="location" />
               </div>
 
               <div>
@@ -177,7 +194,7 @@ const Layout = ({ children }) => {
               className="footer-map-button"
             >
               VER LOCALIZAÇÃO
-              <span>↗</span>
+              <Icon name="arrow" />
             </a>
 
           </div>
@@ -202,7 +219,7 @@ const Layout = ({ children }) => {
               onClick={voltarAoTopo}
               aria-label="Voltar ao topo"
             >
-              <FaArrowUp />
+              <Icon name="up" />
             </button>
 
           </div>
