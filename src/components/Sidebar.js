@@ -14,13 +14,10 @@ const menuItems = [
 const Sidebar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scroll, setScroll] = useState(false);
-
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScroll(window.scrollY > 20);
-    };
+    const handleScroll = () => setScroll(window.scrollY > 20);
 
     window.addEventListener("scroll", handleScroll);
     handleScroll();
@@ -28,100 +25,77 @@ const Sidebar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Fecha o menu ao mudar de página
   useEffect(() => {
     setMenuOpen(false);
   }, [location.pathname]);
 
-  // Bloqueia a rolagem do fundo com o menu aberto
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
+    document.body.classList.toggle("uta-menu-open", menuOpen);
 
     return () => {
-      document.body.style.overflow = "";
+      document.body.classList.remove("uta-menu-open");
     };
   }, [menuOpen]);
 
-  const toggleMenu = () => {
-    setMenuOpen((previous) => !previous);
-  };
-
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
+  const closeMenu = () => setMenuOpen(false);
 
   const isActive = (link) => {
-    if (link === "/") {
-      return location.pathname === "/";
-    }
-
+    if (link === "/") return location.pathname === "/";
     return location.pathname.toLowerCase() === link.toLowerCase();
   };
 
   return (
     <>
-      {/* NAVBAR */}
-      <header className={`navbar ${scroll ? "scrolled" : ""}`}>
-
-        {/* IDENTIDADE VISUAL */}
-        <Link to="/" className="brand" onClick={closeMenu}>
-          <div className="brand-logo-container">
-            <img src={logo} alt="UTA" className="brand-logo" />
+      <header className={`uta-navbar ${scroll ? "scrolled" : ""}`}>
+        <Link to="/" className="uta-brand" onClick={closeMenu}>
+          <div className="uta-brand-logo">
+            <img src={logo} alt="UTA" />
           </div>
 
-          <div className="brand-text">
+          <div className="uta-brand-text">
             <h2>UNIDADE TÁTICA</h2>
             <span>AIRSOFT</span>
           </div>
         </Link>
 
-        {/* MENU DESKTOP */}
-        <nav className="desktop-menu">
+        <nav className="uta-desktop-menu">
           {menuItems.map((item, index) => (
             <Link
               key={item.title}
               to={item.link}
               className={isActive(item.link) ? "active" : ""}
             >
-              <span className="menu-index">
-                0{index + 1}
-              </span>
-
+              <span>0{index + 1}</span>
               {item.title}
             </Link>
           ))}
         </nav>
 
-        {/* BOTÃO MOBILE */}
         <button
-          className={`menu-btn ${menuOpen ? "active" : ""}`}
-          onClick={toggleMenu}
+          className={`uta-menu-button ${menuOpen ? "active" : ""}`}
+          onClick={() => setMenuOpen((previous) => !previous)}
           aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
           aria-expanded={menuOpen}
-          aria-controls="mobile-navigation"
+          aria-controls="uta-mobile-menu"
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          <span />
+          <span />
+          <span />
         </button>
-
       </header>
 
-      {/* FUNDO ESCURO */}
       <div
-        className={`overlay ${menuOpen ? "show" : ""}`}
+        className={`uta-menu-overlay ${menuOpen ? "show" : ""}`}
         onClick={closeMenu}
         aria-hidden="true"
       />
 
-      {/* MENU MOBILE */}
       <aside
-        id="mobile-navigation"
-        className={`mobile-menu ${menuOpen ? "show" : ""}`}
+        id="uta-mobile-menu"
+        className={`uta-mobile-menu ${menuOpen ? "show" : ""}`}
         aria-hidden={!menuOpen}
       >
-
-        <div className="mobile-menu-header">
+        <div className="uta-mobile-header">
           <img src={logo} alt="UTA" />
 
           <div>
@@ -130,7 +104,7 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div className="mobile-menu-label">
+        <div className="uta-mobile-label">
           <span>MENU PRINCIPAL</span>
           <span>U.T.A / 01</span>
         </div>
@@ -144,23 +118,20 @@ const Sidebar = () => {
               className={isActive(item.link) ? "active" : ""}
               tabIndex={menuOpen ? 0 : -1}
             >
-              <span className="mobile-menu-index">
-                0{index + 1}
-              </span>
-
+              <span className="uta-mobile-index">0{index + 1}</span>
               <span>{item.title}</span>
-
-              <span className="mobile-menu-arrow">↗</span>
+              <span className="uta-mobile-arrow">↗</span>
             </Link>
           ))}
         </nav>
 
-        <div className="mobile-menu-footer">
-          <span className="mobile-status-dot"></span>
-          UNIDADE TÁTICA AIRSOFT
+        <div className="uta-mobile-footer">
+          <div>
+            <span className="uta-status-dot" />
+            UNIDADE TÁTICA AIRSOFT
+          </div>
           <small>CHÁCARA ARGOLO</small>
         </div>
-
       </aside>
     </>
   );
