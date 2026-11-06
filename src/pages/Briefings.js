@@ -74,40 +74,29 @@ const Briefings = () => {
             </div>
           ) : (
             <div className="mission-grid">
-              {content.map((item, index) => (
+              {content.map((item) => (
                 <Link
                   to={`/briefings/${item.id}`}
                   key={item.id}
                   className="mission-card"
-                  aria-label={`Visualizar instruções: ${item.title || `Operação ${index + 1}`}`}
                 >
                   <div className="mission-image-container">
                     <img
                       src={item.images[0]}
-                      alt={item.title || `Briefing ${index + 1}`}
+                      alt={item.title || "Briefing U.T.A"}
                       className="mission-image"
                       loading="lazy"
                     />
-
-                    <div className="mission-number">
-                      OPERAÇÃO {String(index + 1).padStart(2, "0")}
-                    </div>
-
-                    <div className="mission-view">
-                      <span>VISUALIZAR INSTRUÇÕES</span>
-                    </div>
                   </div>
 
-                  {item.title && (
-                    <div className="mission-info">
-                      <h2>{item.title}</h2>
-                      <span>ABRIR BRIEFING →</span>
-                    </div>
-                  )}
+                  <div className="mission-button">
+                    VISUALIZAR INSTRUÇÕES
+                  </div>
                 </Link>
               ))}
             </div>
           )}
+
         </div>
       </div>
     </Layout>
