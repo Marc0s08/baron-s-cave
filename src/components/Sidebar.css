@@ -1,521 +1,419 @@
 
-/* =====================================
-   NAVBAR U.T.A.
-===================================== */
+/* NAVBAR */
 
-.navbar {
+.uta-navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 82px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   box-sizing: border-box;
-
-  background: rgba(10, 14, 11, 0.72);
+  background: rgba(10, 14, 11, 0.96);
+  border-bottom: 1px solid rgba(57, 231, 95, 0.15);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-
-  border-bottom: 1px solid rgba(57, 231, 95, 0.12);
-
-  transition: height 0.3s ease, background 0.3s ease,
-    box-shadow 0.3s ease;
-
-  z-index: 1000;
+  z-index: 10000;
+  transition: height 0.3s ease, background 0.3s ease;
 }
 
-.navbar.scrolled {
+.uta-navbar.scrolled {
   height: 70px;
-  background: rgba(7, 10, 8, 0.97);
+  background: rgba(7, 10, 8, 0.99);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-  border-bottom-color: rgba(57, 231, 95, 0.2);
 }
 
-/* =====================================
-   LOGO E IDENTIDADE
-===================================== */
+/* IDENTIDADE */
 
-.brand {
+.uta-brand {
   display: flex;
   align-items: center;
   gap: 13px;
-
   text-decoration: none;
   flex-shrink: 0;
 }
 
-.brand-logo-container {
+.uta-brand-logo {
+  width: 53px;
+  height: 53px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  width: 53px;
-  height: 53px;
-
   border: 1px solid rgba(57, 231, 95, 0.2);
   border-radius: 8px;
-
   background: rgba(57, 231, 95, 0.04);
-
-  transition: 0.3s ease;
 }
 
-.brand:hover .brand-logo-container {
-  border-color: rgba(57, 231, 95, 0.6);
-  background: rgba(57, 231, 95, 0.09);
-  transform: translateY(-2px);
-}
-
-.brand-logo {
+.uta-brand-logo img {
   width: 43px;
   height: 43px;
   object-fit: contain;
-  transition: 0.3s ease;
 }
 
-.brand-text {
+.uta-brand-text {
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
 
-.brand-text h2 {
+.uta-brand-text h2 {
   margin: 0;
-  color: #fff;
-
+  color: white;
   font-size: 17px;
   font-weight: 900;
   letter-spacing: 1.8px;
 }
 
-.brand-text span {
+.uta-brand-text span {
   color: #39e75f;
-
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 5px;
 }
 
-/* =====================================
-   MENU DESKTOP
-===================================== */
+/* DESKTOP */
 
-.desktop-menu {
+.uta-desktop-menu {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.desktop-menu a {
-  position: relative;
-
+.uta-desktop-menu a {
   display: flex;
   align-items: center;
   gap: 8px;
-
   padding: 12px 16px;
-
   color: #c0c9c1;
   text-decoration: none;
   text-transform: uppercase;
-
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 1px;
-
   border-radius: 5px;
-
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
-.menu-index {
+.uta-desktop-menu a span {
   color: #647267;
   font-size: 9px;
-  font-weight: 700;
-  transition: 0.3s ease;
 }
 
-.desktop-menu a:hover {
-  color: #39e75f;
-  background: rgba(57, 231, 95, 0.06);
-}
-
-.desktop-menu a:hover .menu-index {
-  color: #39e75f;
-}
-
-.desktop-menu a.active {
+.uta-desktop-menu a:hover,
+.uta-desktop-menu a.active {
   color: #39e75f;
   background: rgba(57, 231, 95, 0.08);
 }
 
-.desktop-menu a.active .menu-index {
-  color: #39e75f;
+.uta-desktop-menu a.active {
+  position: relative;
 }
 
-.desktop-menu a.active::after {
+.uta-desktop-menu a.active::after {
   content: "";
   position: absolute;
   bottom: 3px;
   left: 16px;
   right: 16px;
-
   height: 2px;
   background: #39e75f;
-
-  box-shadow: 0 0 8px rgba(57, 231, 95, 0.5);
 }
 
-/* =====================================
-   BOTÃO MOBILE
-===================================== */
+/* BOTÃO MOBILE */
 
-.menu-btn {
+.uta-menu-button {
   display: none;
-
   width: 45px;
   height: 45px;
-
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 6px;
-
   background: rgba(57, 231, 95, 0.07);
-  border: 1px solid rgba(57, 231, 95, 0.25);
+  border: 1px solid rgba(57, 231, 95, 0.3);
   border-radius: 7px;
-
   cursor: pointer;
-  transition: 0.3s ease;
+  position: relative;
+  z-index: 10003;
 }
 
-.menu-btn span {
-  display: block;
+.uta-menu-button span {
   width: 21px;
   height: 2px;
-
   background: #39e75f;
   border-radius: 5px;
-
-  transition: 0.3s ease;
+  transition: 0.3s;
 }
 
-.menu-btn:hover {
-  background: rgba(57, 231, 95, 0.15);
-  border-color: #39e75f;
-}
-
-.menu-btn.active span:nth-child(1) {
+.uta-menu-button.active span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
 
-.menu-btn.active span:nth-child(2) {
+.uta-menu-button.active span:nth-child(2) {
   opacity: 0;
-  transform: translateX(-8px);
 }
 
-.menu-btn.active span:nth-child(3) {
+.uta-menu-button.active span:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-/* =====================================
-   OVERLAY
-===================================== */
+/* OVERLAY */
 
-.overlay {
+.uta-menu-overlay {
   position: fixed;
   inset: 0;
-
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   opacity: 0;
   visibility: hidden;
-
-  transition: 0.3s ease;
-  z-index: 998;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 10001;
 }
 
-.overlay.show {
+.uta-menu-overlay.show {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
-/* =====================================
-   MENU MOBILE
-===================================== */
+/* MENU MOBILE */
 
-.mobile-menu {
+.uta-mobile-menu {
   position: fixed;
   top: 0;
   right: 0;
-
   width: min(320px, 85vw);
   height: 100vh;
   height: 100dvh;
-
   display: flex;
   flex-direction: column;
-
-  background:
-    linear-gradient(160deg, #151d17 0%, #090d0a 100%);
-
+  background: linear-gradient(160deg, #151d17, #090d0a);
   border-left: 1px solid rgba(57, 231, 95, 0.2);
-
+  box-shadow: -15px 0 45px rgba(0, 0, 0, 0.5);
   transform: translateX(105%);
   visibility: hidden;
-
+  pointer-events: none;
   transition: transform 0.35s ease, visibility 0.35s ease;
-
-  z-index: 999;
-  box-shadow: -15px 0 45px rgba(0, 0, 0, 0.5);
+  z-index: 10002;
+  overflow-y: auto;
 }
 
-.mobile-menu.show {
+.uta-mobile-menu.show {
   transform: translateX(0);
   visibility: visible;
+  pointer-events: auto;
 }
 
-/* Cabeçalho mobile */
+/* CABEÇALHO */
 
-.mobile-menu-header {
+.uta-mobile-header {
   display: flex;
   align-items: center;
   gap: 14px;
-
   padding: 35px 25px 28px;
-
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.mobile-menu-header img {
+.uta-mobile-header img {
   width: 58px;
   height: 58px;
   object-fit: contain;
-
   padding: 5px;
-
   background: rgba(57, 231, 95, 0.05);
   border: 1px solid rgba(57, 231, 95, 0.2);
   border-radius: 8px;
 }
 
-.mobile-menu-header h3 {
+.uta-mobile-header h3 {
   margin: 0 0 5px;
-
   color: white;
   font-size: 13px;
   font-weight: 900;
   letter-spacing: 1px;
 }
 
-.mobile-menu-header span {
+.uta-mobile-header span {
   color: #39e75f;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 4px;
 }
 
-/* Identificação do menu */
+/* IDENTIFICAÇÃO */
 
-.mobile-menu-label {
+.uta-mobile-label {
   display: flex;
   justify-content: space-between;
-
   padding: 25px 25px 12px;
-
   color: #657469;
   font-size: 8px;
   font-weight: 800;
   letter-spacing: 1.5px;
 }
 
-/* Links */
+/* LINKS */
 
-.mobile-menu nav {
+.uta-mobile-menu nav {
   display: flex;
   flex-direction: column;
   padding: 0 14px;
 }
 
-.mobile-menu nav a {
+.uta-mobile-menu nav a {
   display: flex;
   align-items: center;
   gap: 15px;
-
   padding: 17px 12px;
-
   color: #c4cdc5;
   text-decoration: none;
-
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 1px;
-
   border-bottom: 1px solid rgba(255, 255, 255, 0.055);
-
-  transition: 0.25s ease;
+  transition: 0.25s;
 }
 
-.mobile-menu-index {
+.uta-mobile-index {
   color: #68786b;
   font-size: 10px;
 }
 
-.mobile-menu-arrow {
+.uta-mobile-arrow {
   margin-left: auto;
   color: #66736a;
   font-size: 15px;
-  transition: 0.25s ease;
 }
 
-.mobile-menu nav a:hover,
-.mobile-menu nav a.active {
+.uta-mobile-menu nav a:hover,
+.uta-mobile-menu nav a.active {
   color: #39e75f;
   background: rgba(57, 231, 95, 0.06);
 }
 
-.mobile-menu nav a:hover .mobile-menu-index,
-.mobile-menu nav a.active .mobile-menu-index {
+.uta-mobile-menu nav a.active .uta-mobile-index,
+.uta-mobile-menu nav a.active .uta-mobile-arrow {
   color: #39e75f;
 }
 
-.mobile-menu nav a:hover .mobile-menu-arrow,
-.mobile-menu nav a.active .mobile-menu-arrow {
-  color: #39e75f;
-  transform: translate(3px, -3px);
-}
+/* RODAPÉ */
 
-/* Rodapé mobile */
-
-.mobile-menu-footer {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
+.uta-mobile-footer {
   margin-top: auto;
   padding: 22px 25px;
-
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   color: #89968b;
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 1px;
-
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.mobile-menu-footer small {
-  display: block;
-  width: 100%;
-  margin-top: 5px;
+.uta-mobile-footer > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
+.uta-mobile-footer small {
+  display: block;
+  margin-top: 8px;
+  margin-left: 15px;
   color: #58645b;
   font-size: 8px;
   letter-spacing: 1.5px;
 }
 
-.mobile-status-dot {
+.uta-status-dot {
   width: 7px;
   height: 7px;
-  flex-shrink: 0;
-
   background: #39e75f;
   border-radius: 50%;
-
   box-shadow: 0 0 8px #39e75f;
 }
 
-/* =====================================
-   RESPONSIVIDADE
-===================================== */
+/* RESPONSIVIDADE */
 
 @media (max-width: 900px) {
-  .navbar {
+  .uta-navbar {
     height: 72px;
     padding: 0 20px;
   }
 
-  .navbar.scrolled {
+  .uta-navbar.scrolled {
     height: 65px;
   }
 
-  .desktop-menu {
+  .uta-desktop-menu {
     display: none;
   }
 
-  .menu-btn {
+  .uta-menu-button {
     display: flex;
   }
 
-  .brand-logo-container {
+  .uta-brand-logo {
     width: 45px;
     height: 45px;
   }
 
-  .brand-logo {
+  .uta-brand-logo img {
     width: 37px;
     height: 37px;
   }
 
-  .brand-text h2 {
+  .uta-brand-text h2 {
     font-size: 14px;
     letter-spacing: 1px;
   }
 
-  .brand-text span {
+  .uta-brand-text span {
     font-size: 9px;
     letter-spacing: 3px;
   }
 }
 
 @media (max-width: 380px) {
-  .navbar {
+  .uta-navbar {
     padding: 0 13px;
   }
 
-  .brand {
+  .uta-brand {
     gap: 9px;
   }
 
-  .brand-logo-container {
+  .uta-brand-logo {
     width: 40px;
     height: 40px;
   }
 
-  .brand-logo {
+  .uta-brand-logo img {
     width: 33px;
     height: 33px;
   }
 
-  .brand-text h2 {
+  .uta-brand-text h2 {
     font-size: 12px;
   }
 
-  .brand-text span {
+  .uta-brand-text span {
     font-size: 8px;
   }
 
-  .menu-btn {
+  .uta-menu-button {
     width: 41px;
     height: 41px;
   }
 }
 
-/* Acessibilidade: reduz animações quando solicitado */
 @media (prefers-reduced-motion: reduce) {
-  .navbar,
-  .brand-logo,
-  .menu-btn,
-  .menu-btn span,
-  .mobile-menu,
-  .overlay,
-  .mobile-menu nav a {
+  .uta-navbar,
+  .uta-menu-button span,
+  .uta-mobile-menu,
+  .uta-menu-overlay {
     transition: none;
   }
 }
