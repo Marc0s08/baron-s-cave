@@ -80,14 +80,19 @@ const Briefings = () => {
                   key={item.id}
                   className="mission-card"
                 >
-                  <div className="mission-image-container">
-                    <img
-                      src={item.images[0]}
-                      alt={item.title || "Briefing U.T.A"}
-                      className="mission-image"
-                      loading="lazy"
-                    />
-                  </div>
+                  <div
+  className="mission-image-container"
+  style={{
+    backgroundImage: `url("${item.images[0]}")`
+  }}
+>
+  <img
+    src={item.images[0]}
+    alt={item.title || "Briefing U.T.A"}
+    className="mission-image"
+    loading="lazy"
+  />
+</div>
 
                   <div className="mission-footer">
                     <span>MAIS INFORMAÇÕES</span>
