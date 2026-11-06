@@ -1,291 +1,132 @@
-*{
 
-margin:0;
-
-padding:0;
-
-box-sizing:border-box;
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-body{
-
-font-family:Arial, Helvetica, sans-serif;
-
-color:white;
-
-background:
-
-linear-gradient(
-rgba(10,10,10,.88),
-rgba(10,10,10,.95)
-),
-
-url("../assets/background.jpg");
-
-
-background-size:cover;
-
-background-position:center;
-
-background-attachment:fixed;
-
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  background:
+    linear-gradient(rgba(10,10,10,.88), rgba(10,10,10,.95)),
+    url("../assets/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-
-
-/* Layout */
-
-.layout{
-
-min-height:100vh;
-
-display:flex;
-
-flex-direction:column;
-
+body.uta-menu-open {
+  overflow: hidden;
 }
 
-
-
-/* Conteúdo */
-
-.main-content{
-
-flex:1;
-
-padding-top:100px;
-
-padding-left:20px;
-
-padding-right:20px;
-
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-
-
-.page-container{
-
-
-max-width:1200px;
-
-margin:auto;
-
-padding:35px;
-
-
-background:
-
-rgba(255,255,255,.04);
-
-
-border:
-
-1px solid rgba(255,255,255,.08);
-
-
-border-radius:20px;
-
-
-backdrop-filter:blur(12px);
-
-
+.main-content {
+  flex: 1;
+  width: 100%;
+  padding-top: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-
-
-/* Entrada das páginas */
-
-.page-animation{
-
-animation:
-
-pageEnter .7s ease;
-
+.page-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 35px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
 }
 
-
-
-@keyframes pageEnter{
-
-
-from{
-
-opacity:0;
-
-transform:translateY(30px);
-
+.page-animation {
+  animation: pageEnter .7s ease;
 }
 
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
 
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-
+.footer {
+  position: relative;
+  z-index: 1;
+  background: #111;
+  border-top: 1px solid #292929;
+  margin-top: 80px;
 }
 
-
-
-/* Footer */
-
-
-.footer{
-
-background:#111;
-
-border-top:
-
-1px solid #292929;
-
-margin-top:80px;
-
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  padding: 50px 30px;
 }
 
-
-
-.footer-container{
-
-
-max-width:1200px;
-
-margin:auto;
-
-
-display:grid;
-
-
-grid-template-columns:
-
-repeat(3,1fr);
-
-
-gap:50px;
-
-
-padding:50px 30px;
-
-
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-
-
-.footer-column{
-
-
-display:flex;
-
-flex-direction:column;
-
-gap:12px;
-
+.footer-column h3 {
+  color: #27ae60;
 }
 
-
-
-.footer-column h3{
-
-
-color:#27ae60;
-
+.footer-column a {
+  color: #ddd;
+  text-decoration: none;
+  transition: .3s;
 }
 
-
-
-.footer-column a{
-
-
-color:#ddd;
-
-text-decoration:none;
-
-transition:.3s;
-
+.footer-column a:hover {
+  color: #27ae60;
+  transform: translateX(8px);
 }
 
-
-
-.footer-column a:hover{
-
-
-color:#27ae60;
-
-transform:translateX(8px);
-
+.footer-logo {
+  width: 90px;
 }
 
-
-
-.footer-logo{
-
-
-width:90px;
-
+.footer-copy {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #222;
+  color: #777;
 }
 
+@media(max-width: 900px) {
+  .main-content {
+    padding-top: 85px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
+  .page-container {
+    padding: 20px;
+    border-radius: 15px;
+  }
 
-.footer-copy{
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
 
-
-text-align:center;
-
-padding:20px;
-
-border-top:1px solid #222;
-
-color:#777;
-
-}
-
-
-
-@media(max-width:900px){
-
-
-.main-content{
-
-padding-top:85px;
-
-padding-left:10px;
-
-padding-right:10px;
-
-}
-
-
-
-.page-container{
-
-padding:20px;
-
-border-radius:15px;
-
-}
-
-
-
-.footer-container{
-
-grid-template-columns:1fr;
-
-text-align:center;
-
-}
-
-
-
-.footer-logo{
-
-margin:auto;
-
-}
-
-
-
+  .footer-logo {
+    margin: auto;
+  }
 }
