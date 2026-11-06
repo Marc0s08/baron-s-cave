@@ -39,7 +39,12 @@ const extrairMidias = (data) => {
     }
 
     if (typeof valor === "object" && valor !== null) {
-      adicionar(valor.url || valor.imageUrl || valor.src);
+      adicionar(
+        valor.url ||
+        valor.imageUrl ||
+        valor.src ||
+        valor.downloadURL
+      );
       return;
     }
 
@@ -77,7 +82,11 @@ const extrairMidias = (data) => {
   }
 
   // Campos dinâmicos em formato de objeto
-  if (data.fields && typeof data.fields === "object" && !Array.isArray(data.fields)) {
+  if (
+    data.fields &&
+    typeof data.fields === "object" &&
+    !Array.isArray(data.fields)
+  ) {
     Object.entries(data.fields).forEach(([nome, valor]) => {
       const chave = nome.toLowerCase();
 
@@ -115,12 +124,7 @@ const Home = () => {
           imagensDocumento.forEach((url, index) => {
             todasImagens.push({
               id: `${documento.id}-${index}`,
-              url,
-              titulo:
-                data.title ||
-                data.name ||
-                data.titleImage ||
-                "Registro U.T.A."
+              url
             });
           });
         });
@@ -305,10 +309,12 @@ const Home = () => {
         </section>
 
         {/* GAVETA DE MÍDIAS DO FIREBASE */}
-        <section className="-drawer">
-          <div className="-drawer-header">
+        <section className="media-drawer">
+          <div className="media-drawer-header">
             <div>
-              <span className="section-kicker">REGISTROS DE CAMPO</span>
+              <span className="section-kicker">
+                REGISTROS DE CAMPO
+              </span>
 
               <h2>POR TRÁS DE CADA OPERAÇÃO</h2>
 
@@ -317,7 +323,7 @@ const Home = () => {
               </p>
             </div>
 
-            <Link to="/midia" className="-all-button">
+            <Link to="/midia" className="media-all-button">
               ACESSAR TODAS AS MÍDIAS <span>↗</span>
             </Link>
           </div>
@@ -339,10 +345,9 @@ const Home = () => {
                 >
                   <img
                     src={midia.url}
-                    alt={midia.titulo}
+                    alt="Fotografia U.T.A."
                     loading="lazy"
                   />
-
                 </Link>
               ))}
             </div>
