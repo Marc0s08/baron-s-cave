@@ -1,264 +1,302 @@
+
 import React from "react";
+import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import Ranking from "../components/Ranking";
-import "./Home.css";
 import { Helmet } from "react-helmet-async";
-
-const Home = () => {
-
-
-return (
-
-<Layout>
-<Helmet>
-
-<title>U.T.A | Unidade Tática Airsoft</title>
-
-</Helmet>
-
-
-<div className="home-container">
-
-
-
-<section className="hero-section">
-
-
-<h1>
-
-DESCUBRA O MUNDO DO AIRSOFT
-
-</h1>
-
-
-<p>
-
-Estratégia, adrenalina e trabalho em equipe.
-O airsoft é uma experiência que une simulação tática,
-disciplina e diversão.
-
-</p>
-
-
-</section>
-
-
-
-
-
-<section className="highlights-section">
-
-
-<h2>
-
-POR QUE JOGAR AIRSOFT?
-
-</h2>
-
-
-
-<div className="highlight-cards">
-
-
-
-<div className="highlight-card">
-
-
-<img
-
-src="https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/images%2FWhatsApp%20Image%202026-11-06%20at%2014.24.18.jpeg?alt=media&token=7afb3604-5bcd-43f3-a693-837f0cdf5fc4"
-
-alt="Equipe"
-
-/>
-
-
-<h3>
-
-Trabalho em Equipe
-
-</h3>
-
-
-<p>
-
-O sucesso depende da comunicação,
-cooperação e estratégia entre operadores.
-
-</p>
-
-
-</div>
-
-
-
-
-
-<div className="highlight-card">
-
-
-<img
-
-src="https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/home%2FC%C3%A3es%20Militares.jpeg?alt=media&token=18369fec-edcd-4dfb-ab1d-e88393b31bda"
-
-alt="Estratégia"
-
-/>
-
-
-
-<h3>
-
-Pensamento Estratégico
-
-</h3>
-
-
-
-<p>
-
-Cada missão exige planejamento,
-decisão rápida e adaptação.
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-<div className="highlight-card">
-
-
-<img
-
-src="https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/home%2Fcombat.jpg?alt=media&token=62c1c1fb-4be0-4f08-85b1-1169358bb0a2"
-
-alt="Combate"
-
-/>
-
-
-
-<h3>
-
-Adrenalina
-
-</h3>
-
-
-
-<p>
-
-Cenários imersivos e desafios
-que simulam operações táticas.
-
-</p>
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-<section className="rules-section">
-
-
-
-<h2>
-
-REGRAS IMPORTANTES
-
-</h2>
-
-
-
-<ul>
-
-
-<li>
-
-<strong>
-Proteção:
-</strong>
-
-Uso obrigatório de óculos durante toda partida.
-
-</li>
-
-
-
-
-<li>
-
-<strong>
-Campo U.T.A:
-</strong>
-
-Utilize calçado adequado para terrenos variados.
-
-</li>
-
-
-
-
-<li>
-
-<strong>
-Equipamentos:
-</strong>
-
-Sempre revise seu equipamento antes da operação.
-
-</li>
-
-
-
-</ul>
-
-
-
-</section>
-
-
-
-
-
-
-
-{/* RANKING DOS OPERADORES */}
-
-
-<Ranking />
-
-
-
-
-
-</div>
-
-
-</Layout>
-
-
-);
-
-
+import "./Home.css";
+
+const imagens = {
+  hero: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/images%2FWhatsApp%20Image%202026-11-06%20at%2014.24.18.jpeg?alt=media&token=7afb3604-5bcd-43f3-a693-837f0cdf5fc4",
+  equipe: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/images%2FWhatsApp%20Image%202026-11-06%20at%2014.24.18.jpeg?alt=media&token=7afb3604-5bcd-43f3-a693-837f0cdf5fc4",
+  estrategia: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/home%2FC%C3%A3es%20Militares.jpeg?alt=media&token=18369fec-ed4c-4dfb-ab1d-e88393b31bda",
+  combate: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/home%2Fcombat.jpg?alt=media&token=62c1c1fb-4be0-4f08-85b1-1169358bb0a2"
 };
 
+const Home = () => {
+  return (
+    <Layout>
+      <Helmet>
+        <title>U.T.A | Unidade Tática Airsoft</title>
+        <meta
+          name="description"
+          content="Conheça a Unidade Tática Airsoft. Estratégia, disciplina, adrenalina e trabalho em equipe."
+        />
+      </Helmet>
+
+      <div className="home-container">
+
+        {/* BANNER PRINCIPAL */}
+        <section
+          className="home-hero"
+          style={{ backgroundImage: `url("${imagens.hero}")` }}
+        >
+          <div className="hero-overlay"></div>
+
+          <div className="hero-content">
+            <span className="hero-label">
+              UNIDADE TÁTICA AIRSOFT
+            </span>
+
+            <h1>
+              MAIS QUE UM JOGO.
+              <br />
+              <span>UMA OPERAÇÃO.</span>
+            </h1>
+
+            <p>
+              Estratégia, disciplina e trabalho em equipe.
+              Entre em campo, supere desafios e faça parte da missão.
+            </p>
+
+            <div className="hero-buttons">
+              <Link to="/Briefings" className="hero-button primary">
+                CONHEÇA AS OPERAÇÕES
+              </Link>
+
+              <Link to="/midia" className="hero-button secondary">
+                VER GALERIA
+              </Link>
+            </div>
+          </div>
+
+          <div className="hero-bottom-info">
+            <span>● UNIDADE TÁTICA AIRSOFT</span>
+            <span>CHÁCARA ARGOLO</span>
+          </div>
+        </section>
+
+        {/* INDICADORES */}
+        <section className="home-stats">
+          <div className="stat-item">
+            <span className="stat-icon">◎</span>
+            <div>
+              <strong>ESTRATÉGIA</strong>
+              <small>Cada movimento importa</small>
+            </div>
+          </div>
+
+          <div className="stat-item">
+            <span className="stat-icon">⌖</span>
+            <div>
+              <strong>DISCIPLINA</strong>
+              <small>Preparação para a missão</small>
+            </div>
+          </div>
+
+          <div className="stat-item">
+            <span className="stat-icon">✦</span>
+            <div>
+              <strong>OPERAÇÕES</strong>
+              <small>Desafios em equipe</small>
+            </div>
+          </div>
+        </section>
+
+        {/* SOBRE */}
+        <section className="home-about">
+          <div className="about-image">
+            <img src={imagens.estrategia} alt="Ambiente tático" />
+            <span className="image-tag">U.T.A / CAMPO</span>
+          </div>
+
+          <div className="about-content">
+            <span className="section-kicker">QUEM SOMOS</span>
+
+            <h2>
+              PREPARAÇÃO.
+              <br />
+              <span>ESTRATÉGIA.</span>
+              <br />
+              TRABALHO EM EQUIPE.
+            </h2>
+
+            <p>
+              O airsoft vai muito além dos equipamentos. É uma experiência
+              que exige comunicação, raciocínio, disciplina e confiança
+              entre os operadores.
+            </p>
+
+            <p>
+              Na Unidade Tática Airsoft, cada partida representa uma nova
+              missão, com objetivos, desafios e oportunidades de evolução.
+            </p>
+
+            <Link to="/regras" className="text-link">
+              CONHEÇA AS REGRAS <span>→</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* DESTAQUES */}
+        <section className="home-highlights">
+          <div className="section-heading">
+            <div>
+              <span className="section-kicker">NOSSO UNIVERSO</span>
+              <h2>O QUE MOVE A OPERAÇÃO</h2>
+            </div>
+            <span className="section-number">01 / 03</span>
+          </div>
+
+          <div className="highlight-grid">
+            <article className="highlight-card">
+              <img src={imagens.equipe} alt="Trabalho em equipe" />
+              <div className="highlight-card-content">
+                <span>01 — COOPERAÇÃO</span>
+                <h3>TRABALHO EM EQUIPE</h3>
+                <p>
+                  Comunicação e confiança são fundamentais para alcançar
+                  os objetivos da missão.
+                </p>
+              </div>
+            </article>
+
+            <article className="highlight-card">
+              <img src={imagens.estrategia} alt="Pensamento estratégico" />
+              <div className="highlight-card-content">
+                <span>02 — PLANEJAMENTO</span>
+                <h3>PENSAMENTO ESTRATÉGICO</h3>
+                <p>
+                  Cada cenário exige análise, planejamento e decisões
+                  rápidas.
+                </p>
+              </div>
+            </article>
+
+            <article className="highlight-card">
+              <img src={imagens.combate} alt="Experiência de airsoft" />
+              <div className="highlight-card-content">
+                <span>03 — EXPERIÊNCIA</span>
+                <h3>ADRENALINA</h3>
+                <p>
+                  Missões imersivas que colocam à prova as habilidades
+                  de cada operador.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        {/* GAVETA DE MÍDIAS */}
+        <section className="media-drawer">
+          <div className="media-drawer-header">
+            <div>
+              <span className="section-kicker">REGISTROS DE CAMPO</span>
+              <h2>POR TRÁS DE CADA OPERAÇÃO</h2>
+              <p>
+                Momentos, equipes e missões registrados em campo.
+              </p>
+            </div>
+
+            <Link to="/midia" className="media-all-button">
+              ACESSAR TODAS AS MÍDIAS <span>↗</span>
+            </Link>
+          </div>
+
+          <div className="media-drawer-gallery">
+            <Link to="/midia" className="media-photo media-photo-large">
+              <img src={imagens.equipe} alt="Registro da equipe UTA" />
+              <div className="media-photo-caption">
+                <span>01 / REGISTROS</span>
+                <strong>A EQUIPE EM CAMPO</strong>
+              </div>
+            </Link>
+
+            <Link to="/midia" className="media-photo">
+              <img src={imagens.estrategia} alt="Cenário de operação" />
+              <div className="media-photo-caption">
+                <span>02 / OPERAÇÕES</span>
+                <strong>ESTRATÉGIA</strong>
+              </div>
+            </Link>
+
+            <Link to="/midia" className="media-photo">
+              <img src={imagens.combate} alt="Partida de airsoft" />
+              <div className="media-photo-caption">
+                <span>03 / CAMPO</span>
+                <strong>EM AÇÃO</strong>
+              </div>
+            </Link>
+          </div>
+
+          <Link to="/midia" className="media-mobile-link">
+            EXPLORAR GALERIA COMPLETA →
+          </Link>
+        </section>
+
+        {/* REGRAS */}
+        <section className="home-rules">
+          <div className="rules-heading">
+            <span className="section-kicker">SEGURANÇA EM PRIMEIRO LUGAR</span>
+            <h2>ANTES DE ENTRAR EM CAMPO</h2>
+            <p>
+              A segurança e o respeito são responsabilidades de todos
+              os operadores.
+            </p>
+          </div>
+
+          <div className="rules-grid">
+            <div className="rule-card">
+              <span>01</span>
+              <div>
+                <h3>PROTEÇÃO OCULAR</h3>
+                <p>Óculos de proteção obrigatórios durante toda a partida.</p>
+              </div>
+            </div>
+
+            <div className="rule-card">
+              <span>02</span>
+              <div>
+                <h3>EQUIPAMENTOS</h3>
+                <p>Confira suas condições antes de iniciar a operação.</p>
+              </div>
+            </div>
+
+            <div className="rule-card">
+              <span>03</span>
+              <div>
+                <h3>CONDUTA</h3>
+                <p>Respeite os operadores, as regras e as orientações do campo.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="rules-footer">
+            <Link to="/regras">
+              LER TODAS AS REGRAS <span>→</span>
+            </Link>
+          </div>
+        </section>
+
+        {/* RANKING */}
+        <section className="home-ranking">
+          <div className="section-heading">
+            <div>
+              <span className="section-kicker">EVOLUÇÃO DOS OPERADORES</span>
+              <h2>RANKING U.T.A.</h2>
+            </div>
+            <span className="section-number">RANK / UTA</span>
+          </div>
+
+          <Ranking />
+        </section>
+
+        {/* CHAMADA FINAL */}
+        <section className="home-cta">
+          <span className="section-kicker">SUA PRÓXIMA MISSÃO COMEÇA AQUI</span>
+          <h2>ESTÁ PRONTO PARA ENTRAR EM CAMPO?</h2>
+          <p>
+            Conheça nossas operações e acompanhe os registros da Unidade Tática Airsoft.
+          </p>
+
+          <Link to="/Briefings" className="hero-button primary">
+            EXPLORAR OPERAÇÕES →
+          </Link>
+        </section>
+
+      </div>
+    </Layout>
+  );
+};
 
 export default Home;
