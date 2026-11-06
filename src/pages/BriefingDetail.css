@@ -1,26 +1,25 @@
 
-/* =====================================
+/* =========================================
    CONTAINER
-===================================== */
+========================================= */
 
 .briefing-detail-container {
-  width: 100%;
-  max-width: 1350px;
+  max-width: 1200px;
   margin: auto;
-  padding: 30px 25px 45px;
+  padding: 25px;
   box-sizing: border-box;
-  animation: briefingFade .6s ease;
   color: white;
+  animation: fadeIn .8s ease;
 }
 
-/* =====================================
+/* =========================================
    CABEÇALHO
-===================================== */
+========================================= */
 
 .operation-header {
   text-align: center;
-  margin-bottom: 55px;
-  padding: 20px 10px 0;
+  margin-bottom: 45px;
+  padding-top: 10px;
 }
 
 .operation-topline {
@@ -32,263 +31,277 @@
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 4px;
-  margin-bottom: 17px;
+  margin-bottom: 15px;
 }
 
 .operation-indicator {
   width: 7px;
   height: 7px;
-  background: #777;
+  background: #27ae60;
   border-radius: 50%;
-  box-shadow: 0 0 10px rgba(255,255,255,.2);
+  box-shadow: 0 0 8px rgba(39,174,96,.5);
 }
 
-.operation-header h1 {
-  margin: 0;
-  font-size: 38px;
-  font-weight: 900;
+.mission-title {
+  text-align: center;
+  font-size: 40px;
   letter-spacing: 5px;
-  color: #fff;
+  color: white;
+  margin: 0 0 12px;
+  font-weight: 900;
 }
 
 .operation-header p {
   color: #888;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 3px;
-  margin-top: 13px;
+  margin-top: 12px;
 }
 
 .operation-divider {
-  width: 100%;
-  max-width: 160px;
+  width: 150px;
   height: 2px;
+  margin: 22px auto 0;
   background: rgba(255,255,255,.12);
-  margin: 24px auto 0;
-  position: relative;
 }
 
 .operation-divider span {
   display: block;
   width: 45%;
-  height: 2px;
-  background: #888;
+  height: 100%;
   margin: auto;
+  background: #27ae60;
 }
 
-/* =====================================
-   SEÇÕES
-===================================== */
-
-.briefing-section {
-  margin-bottom: 55px;
-}
-
-.section-heading {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 15px;
-  margin-bottom: 22px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(255,255,255,.12);
-}
-
-.section-kicker {
-  display: block;
-  color: #888;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 3px;
-  margin-bottom: 7px;
-}
-
-.section-heading h2 {
-  color: #fff;
-  font-size: 19px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  margin: 0;
-}
-
-.image-counter {
-  color: #aaa;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  white-space: nowrap;
-}
-
-/* =====================================
-   GALERIA
-===================================== */
+/* =========================================
+   IMAGEM - ESTILO ORIGINAL
+========================================= */
 
 .image-gallery {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  margin-bottom: 50px;
 }
 
 .detail-image-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  min-width: 0;
-  padding: 12px;
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 12px;
-  background: #111;
-  overflow: hidden;
-  cursor: pointer;
-  transition: .3s ease;
+  padding: 20px;
+  border-radius: 20px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.15);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .3s;
+  cursor: zoom-in;
   box-sizing: border-box;
-  text-align: left;
 }
 
 .detail-image-card:hover {
-  border-color: rgba(255,255,255,.4);
-  background: #171717;
-  transform: translateY(-4px);
-  box-shadow: 0 12px 25px rgba(0,0,0,.35);
-}
-
-.image-number {
-  color: #999;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  padding: 3px 2px 11px;
+  transform: translateY(-5px);
+  border-color: #27ae60;
 }
 
 .briefing-detail-image {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 650px;
+  max-height: 900px;
   object-fit: contain;
-  object-position: center;
-  border-radius: 6px;
-  background: #090909;
+  border-radius: 15px;
 }
 
-.image-expand {
+/* =========================================
+   SEÇÃO EDITORIAL
+========================================= */
+
+.briefing-editorial {
+  margin-bottom: 45px;
+}
+
+.editorial-header {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 7px;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 15px;
+  padding-bottom: 17px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid rgba(255,255,255,.7);
+}
+
+.editorial-kicker {
+  display: block;
+  color: #27ae60;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin-bottom: 7px;
+}
+
+.editorial-header h2 {
+  margin: 0;
+  color: #fff;
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.editorial-count {
   color: #999;
   font-size: 9px;
   font-weight: 800;
-  letter-spacing: 1px;
-  padding: 12px 2px 2px;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
 }
 
-.image-expand span {
-  font-size: 17px;
-  line-height: 10px;
+/* =========================================
+   GRADE ESTILO JORNAL
+========================================= */
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-bottom: 1px solid rgba(255,255,255,.2);
 }
 
-.detail-image-card:hover .image-expand {
-  color: #fff;
+/* ITEM */
+
+.editorial-item {
+  position: relative;
+  min-width: 0;
+  padding: 25px 28px 28px;
+  box-sizing: border-box;
+  transition: background .25s ease;
 }
 
-/* =====================================
-   INFORMAÇÕES
-===================================== */
+/* DIVISÓRIAS ENTRE COLUNAS */
 
-.briefing-detail-content {
+.editorial-item:nth-child(odd) {
+  border-right: 1px solid rgba(255,255,255,.16);
+}
+
+.editorial-item:nth-child(n + 3) {
+  border-top: 1px solid rgba(255,255,255,.16);
+}
+
+.editorial-item:hover {
+  background: rgba(255,255,255,.035);
+}
+
+/* TOPO DO ITEM */
+
+.editorial-item-top {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 17px;
 }
 
-.field-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
-  padding: 25px;
-  background: linear-gradient(
-    145deg,
-    rgba(255,255,255,.055),
-    rgba(255,255,255,.015)
-  );
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 12px;
-  transition: .3s ease;
-}
-
-.field-card:hover {
-  border-color: rgba(255,255,255,.3);
-  background: rgba(255,255,255,.055);
-}
-
-.field-number {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+.editorial-number {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 8px;
-  color: #aaa;
-  font-size: 12px;
+  width: 29px;
+  height: 29px;
+  flex-shrink: 0;
+  color: #27ae60;
+  border: 1px solid rgba(39,174,96,.5);
+  font-size: 11px;
   font-weight: 900;
+  border-radius: 4px;
 }
 
-.field-information {
-  flex: 1;
-  min-width: 0;
+.editorial-category {
+  color: #888;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 2px;
 }
+
+/* TÍTULO */
 
 .field-name {
+  margin: 0;
   color: #fff;
-  font-size: 18px;
+  font-size: 21px;
   font-weight: 800;
-  letter-spacing: 1px;
-  margin: 0 0 12px;
+  line-height: 1.4;
+  letter-spacing: .3px;
 }
 
+/* LINHA DECORATIVA */
+
+.editorial-rule {
+  width: 42px;
+  height: 2px;
+  margin: 15px 0;
+  background: #27ae60;
+}
+
+/* TEXTO */
+
 .field-content {
+  margin: 0;
   color: #ccc;
   font-size: 15px;
   line-height: 1.85;
-  margin: 0;
   white-space: pre-wrap;
   text-align: left;
   overflow-wrap: anywhere;
 }
 
-.empty-information {
+/* PRIMEIRO ITEM EM DESTAQUE */
+
+.editorial-item:first-child {
+  grid-column: 1 / -1;
+  border-right: none;
   padding: 30px;
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 12px;
-  text-align: center;
-  color: #999;
-  background: #111;
 }
 
-/* =====================================
+.editorial-item:first-child .field-name {
+  font-size: 26px;
+}
+
+.editorial-item:first-child .field-content {
+  font-size: 16px;
+  max-width: 1000px;
+}
+
+/* ITEM VAZIO */
+
+.editorial-empty {
+  padding: 35px 20px;
+  color: #999;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,.15);
+}
+
+/* RODAPÉ EDITORIAL */
+
+.editorial-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255,255,255,.2);
+  color: #777;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+/* =========================================
    BOTÃO VOLTAR
-===================================== */
+========================================= */
 
 .briefing-bottom {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding-top: 25px;
-  border-top: 1px solid rgba(255,255,255,.12);
-}
-
-.briefing-bottom > span {
-  color: #777;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 2px;
+  justify-content: flex-start;
+  padding-top: 5px;
 }
 
 .back-button {
@@ -296,24 +309,24 @@
   background: #171717;
   color: #ddd;
   border: 1px solid rgba(255,255,255,.2);
-  border-radius: 7px;
+  border-radius: 6px;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 1px;
   cursor: pointer;
-  transition: .3s ease;
+  transition: .25s ease;
 }
 
 .back-button:hover {
   background: #252525;
-  border-color: rgba(255,255,255,.5);
-  color: white;
+  border-color: #27ae60;
+  color: #fff;
   transform: translateY(-2px);
 }
 
-/* =====================================
+/* =========================================
    LIGHTBOX
-===================================== */
+========================================= */
 
 .image-lightbox {
   position: fixed;
@@ -322,140 +335,100 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 55px 80px;
-  background: rgba(0,0,0,.96);
-  backdrop-filter: blur(10px);
-  animation: lightboxFade .25s ease;
+  padding: 55px 25px;
   box-sizing: border-box;
+  background: rgba(0,0,0,.96);
+  backdrop-filter: blur(8px);
+  animation: lightboxFade .2s ease;
 }
 
 .lightbox-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1100px;
-  max-height: 100%;
   width: 100%;
+  max-width: 1200px;
+  max-height: 100%;
 }
 
 .lightbox-content img {
   display: block;
   max-width: 100%;
-  max-height: 80vh;
+  max-height: 82vh;
   object-fit: contain;
-  border-radius: 7px;
+  border-radius: 6px;
 }
 
-.lightbox-caption {
+.lightbox-content span {
+  margin-top: 17px;
   color: #aaa;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 800;
   letter-spacing: 3px;
-  margin-top: 18px;
 }
 
 .lightbox-close {
   position: absolute;
   top: 20px;
-  right: 30px;
+  right: 25px;
   width: 42px;
   height: 42px;
   border: 1px solid rgba(255,255,255,.2);
   border-radius: 50%;
   background: #171717;
-  color: white;
-  font-size: 30px;
+  color: #fff;
+  font-size: 29px;
   cursor: pointer;
-  transition: .2s;
 }
 
 .lightbox-close:hover {
   background: #333;
 }
 
-.lightbox-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 45px;
-  height: 60px;
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 8px;
-  background: rgba(255,255,255,.08);
-  color: white;
-  font-size: 35px;
-  cursor: pointer;
-  transition: .2s;
-}
-
-.lightbox-arrow:hover {
-  background: rgba(255,255,255,.2);
-}
-
-.lightbox-prev {
-  left: 20px;
-}
-
-.lightbox-next {
-  right: 20px;
-}
-
-/* =====================================
-   LOADING E ERRO
-===================================== */
+/* =========================================
+   LOADING / ERRO
+========================================= */
 
 .briefing-status {
   min-height: 350px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   padding: 30px;
   text-align: center;
-  color: white;
+  color: #fff;
 }
 
 .briefing-status h2 {
+  margin: 20px 0 8px;
   font-size: 17px;
   letter-spacing: 3px;
-  margin: 20px 0 8px;
 }
 
 .briefing-status p {
+  margin-bottom: 20px;
   color: #999;
   font-size: 13px;
-  margin-bottom: 20px;
-}
-
-.status-icon {
-  width: 55px;
-  height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255,255,255,.3);
-  border-radius: 50%;
-  color: #ccc;
-  font-size: 25px;
 }
 
 .loading-indicator {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border: 3px solid rgba(255,255,255,.12);
-  border-top-color: #aaa;
+  border-top-color: #27ae60;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: briefingSpin 1s linear infinite;
 }
 
-/* =====================================
+/* =========================================
    ANIMAÇÕES
-===================================== */
+========================================= */
 
-@keyframes briefingFade {
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(20px);
   }
 
   to {
@@ -465,51 +438,45 @@
 }
 
 @keyframes lightboxFade {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+@keyframes briefingSpin {
+  to { transform: rotate(360deg); }
 }
 
-/* =====================================
+/* =========================================
    TABLET
-===================================== */
+========================================= */
 
 @media (max-width: 900px) {
-  .briefing-detail-container {
-    padding: 25px 18px 35px;
+  .mission-title {
+    font-size: 32px;
   }
 
-  .operation-header h1 {
-    font-size: 31px;
+  .editorial-item {
+    padding: 22px 20px;
   }
 
-  .image-gallery {
-    gap: 14px;
+  .editorial-item:first-child .field-name {
+    font-size: 23px;
   }
 }
 
-/* =====================================
+/* =========================================
    MOBILE
-===================================== */
+========================================= */
 
 @media (max-width: 600px) {
   .briefing-detail-container {
-    padding: 20px 10px 30px;
+    padding: 12px;
   }
 
-  .operation-header {
-    margin-bottom: 38px;
-    padding-top: 10px;
+  .mission-title {
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
   }
 
   .operation-topline {
@@ -517,76 +484,64 @@
     letter-spacing: 2px;
   }
 
-  .operation-header h1 {
-    font-size: 23px;
-    letter-spacing: 2px;
-    line-height: 1.4;
-  }
-
   .operation-header p {
-    font-size: 9px;
+    font-size: 8px;
     letter-spacing: 1.5px;
   }
 
-  .section-heading {
-    align-items: flex-start;
-  }
-
-  .section-heading h2 {
-    font-size: 15px;
-    letter-spacing: 1px;
-  }
-
-  .section-kicker {
-    font-size: 8px;
-    letter-spacing: 2px;
-  }
-
-  .image-counter {
-    font-size: 8px;
-  }
-
-  .image-gallery {
-    grid-template-columns: 1fr;
-    gap: 13px;
-  }
+  /* IMAGEM ORIGINAL */
 
   .detail-image-card {
-    padding: 9px;
-    border-radius: 9px;
+    padding: 8px;
+    border-radius: 15px;
   }
 
   .briefing-detail-image {
+    width: 100%;
     max-height: none;
   }
 
-  .field-card {
-    gap: 12px;
-    padding: 17px 13px;
+  /* JORNAL NO MOBILE */
+
+  .editorial-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .field-number {
-    width: 32px;
-    height: 32px;
-    font-size: 10px;
+  .editorial-header h2 {
+    font-size: 19px;
+  }
+
+  .editorial-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .editorial-item,
+  .editorial-item:first-child {
+    grid-column: auto;
+    padding: 22px 12px;
+    border-right: none;
+    border-top: 1px solid rgba(255,255,255,.16);
+  }
+
+  .editorial-item:first-child .field-name {
+    font-size: 21px;
   }
 
   .field-name {
-    font-size: 16px;
+    font-size: 19px;
   }
 
-  .field-content {
-    font-size: 14px;
+  .field-content,
+  .editorial-item:first-child .field-content {
+    font-size: 15px;
     line-height: 1.7;
   }
 
-  .briefing-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .briefing-bottom > span {
-    font-size: 8px;
+  .editorial-footer {
+    font-size: 7px;
+    letter-spacing: 1px;
   }
 
   .image-lightbox {
@@ -603,37 +558,16 @@
     width: 36px;
     height: 36px;
   }
-
-  .lightbox-arrow {
-    top: auto;
-    bottom: 12px;
-    width: 42px;
-    height: 42px;
-    font-size: 25px;
-    transform: none;
-  }
-
-  .lightbox-prev {
-    left: calc(50% - 52px);
-  }
-
-  .lightbox-next {
-    right: calc(50% - 52px);
-  }
 }
 
 /* CELULARES ESTREITOS */
 
 @media (max-width: 360px) {
-  .operation-header h1 {
-    font-size: 20px;
-  }
-
-  .field-card {
-    padding: 13px 10px;
+  .mission-title {
+    font-size: 21px;
   }
 
   .field-name {
-    font-size: 14px;
+    font-size: 17px;
   }
 }
