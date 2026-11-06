@@ -13,7 +13,7 @@ const BriefingDetail = () => {
 
   const [briefing, setBriefing] = useState(null);
   const [error, setError] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [imageExpanded, setImageExpanded] = useState(false);
 
   useEffect(() => {
     const fetchBriefing = async () => {
@@ -28,33 +28,19 @@ const BriefingDetail = () => {
           setError("Briefing não encontrado.");
         }
       } catch (err) {
-        setError(err.message);
+        setError("Não foi possível carregar o briefing.");
+        console.error("Erro ao buscar briefing:", err);
       }
     };
 
     fetchBriefing();
   }, [id]);
 
-  // FECHAR IMAGEM COM ESC E NAVEGAR COM AS SETAS
+  // FECHAR IMAGEM COM ESC
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (!selectedImage || !briefing?.images?.length) return;
-
       if (event.key === "Escape") {
-        setSelectedImage(null);
-      }
-
-      if (event.key === "ArrowRight") {
-        setSelectedImage((current) =>
-          (current + 1) % briefing.images.length
-        );
-      }
-
-      if (event.key === "ArrowLeft") {
-        setSelectedImage((current) =>
-          (current - 1 + briefing.images.length) %
-          briefing.images.length
-        );
+        setImageExpanded(false);
       }
     };
 
@@ -63,27 +49,13 @@ const BriefingDetail = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [selectedImage, briefing]);
-
-  const images = briefing?.images || [];
-
-  const previousImage = () => {
-    setSelectedImage((current) =>
-      (current - 1 + images.length) % images.length
-    );
-  };
-
-  const nextImage = () => {
-    setSelectedImage((current) =>
-      (current + 1) % images.length
-    );
-  };
+  }, []);
 
   if (error) {
     return (
       <Layout>
         <Helmet>
-          <title>Briefing não encontrado | U.T.A</title>
+          <title>Briefing | U.T.A</title>
         </Helmet>
 
         <div className="briefing-status">
@@ -118,12 +90,12 @@ const BriefingDetail = () => {
     );
   }
 
+  const briefingImage = briefing.images?.[0];
+
   return (
     <Layout>
       <Helmet>
-        <title>
-          {briefing.title || "Briefing da Operação"} | U.T.A
-        </title>
+        <title>Briefing da Operação | U.T.A</title>
       </Helmet>
 
       <div className="briefing-detail-container">
@@ -139,9 +111,7 @@ const BriefingDetail = () => {
 
           <h1>BRIEFING DA OPERAÇÃO</h1>
 
-          <p>
-            CENTRAL DE INFORMAÇÕES OPERACIONAIS
-          </p>
+          <p>DOCUMENTO DE INFORMAÇÕES OPERACIONAIS</p>
 
           <div className="operation-divider">
             <span></span>
@@ -149,105 +119,119 @@ const BriefingDetail = () => {
 
         </header>
 
-        {/* GALERIA */}
+        {/* IMAGEM PRINCIPAL */}
 
-        {images.length > 0 && (
-          <section className="briefing-section">
+        {briefingImage && (
+          <section className="operation-image-section">
 
             <div className="section-heading">
               <div>
-                <span className="section-kicker">REGISTROS VISUAIS</span>
-                <h2>GALERIA DA OPERAÇÃO</h2>
+                <span className="section-kicker">
+                  MATERIAL VISUAL
+                </span>
+
+                <h2>REGISTRO DA OPERAÇÃO</h2>
               </div>
 
-              <span className="image-counter">
-                {images.length} {images.length === 1 ? "IMAGEM" : "IMAGENS"}
+              <span className="section-reference">
+                REGISTRO 01
               </span>
             </div>
 
-            <div className="image-gallery">
+            <button
+              type="button"
+              className="operation-image-card"
+              onClick={() => setImageExpanded(true)}
+              aria-label="Ampliar imagem da operação"
+            >
+              <img
+                src={briefingImage}
+                alt="Imagem do briefing da operação"
+                className="operation-main-image"
+              />
 
-              {images.map((image, index) => (
-                <button
-                  className="detail-image-card"
-                  key={index}
-                  type="button"
-                  onClick={() => setSelectedImage(index)}
-                  aria-label={`Ampliar imagem ${index + 1}`}
-                >
-                  <div className="image-number">
-                    REGISTRO {String(index + 1).padStart(2, "0")}
-                  </div>
+              <span className="image-zoom-label">
+                <span>⌕</span>
+                CLIQUE PARA AMPLIAR
+              </span>
+            </button>
 
-                  <img
-                    src={image}
-                    alt={`Registro da operação ${index + 1}`}
-                    className="briefing-detail-image"
-                    loading="lazy"
-                  />
-
-                  <div className="image-expand">
-                    <span>⌕</span>
-                    AMPLIAR IMAGEM
-                  </div>
-                </button>
-              ))}
-
-            </div>
           </section>
         )}
 
-        {/* INFORMAÇÕES */}
+        {/* INFORMAÇÕES DA MISSÃO */}
 
-        <section className="briefing-section information-section">
+        <section className="operation-information">
 
-          <div className="section-heading">
+          <div className="section-heading information-heading">
             <div>
-              <span className="section-kicker">DADOS E ORIENTAÇÕES</span>
+              <span className="section-kicker">
+                DIRETRIZES E ORIENTAÇÕES
+              </span>
+
               <h2>INFORMAÇÕES DA MISSÃO</h2>
             </div>
+
+            <span className="section-reference">
+              {String(briefing.fields?.length || 0).padStart(2, "0")} SEÇÕES
+            </span>
           </div>
 
           {briefing.fields && briefing.fields.length > 0 ? (
-            <div className="briefing-detail-content">
+
+            <div className="information-list">
 
               {briefing.fields.map((field, index) => (
+
                 <article
+                  className="information-card"
                   key={index}
-                  className="field-card"
                 >
 
-                  <div className="field-number">
+                  <div className="information-index">
                     {String(index + 1).padStart(2, "0")}
                   </div>
 
-                  <div className="field-information">
+                  <div className="information-body">
 
-                    <h3 className="field-name">
+                    <div className="information-title-row">
+                      <span className="information-label">
+                        INFORMAÇÃO OPERACIONAL
+                      </span>
+
+                      <span className="information-line"></span>
+                    </div>
+
+                    <h3 className="information-title">
                       {field.name || "Sem título"}
                     </h3>
 
-                    <p className="field-content">
-                      {field.value || "Sem informação"}
+                    <p className="information-text">
+                      {field.value || "Sem informação disponível."}
                     </p>
 
                   </div>
 
                 </article>
+
               ))}
 
             </div>
+
           ) : (
+
             <div className="empty-information">
               Nenhuma informação disponível para esta operação.
             </div>
+
           )}
 
         </section>
 
-        {/* VOLTAR */}
+        {/* RODAPÉ */}
 
-        <div className="briefing-bottom">
+        <footer className="briefing-bottom">
+
           <button
             className="back-button"
             onClick={() => navigate("/Briefings")}
@@ -256,38 +240,27 @@ const BriefingDetail = () => {
           </button>
 
           <span>U.T.A • UNIDADE TÁTICA AIRSOFT</span>
-        </div>
+
+        </footer>
 
       </div>
 
-      {/* VISUALIZADOR DE IMAGEM */}
+      {/* IMAGEM AMPLIADA */}
 
-      {selectedImage !== null && (
+      {imageExpanded && briefingImage && (
+
         <div
           className="image-lightbox"
-          onClick={() => setSelectedImage(null)}
+          onClick={() => setImageExpanded(false)}
         >
 
           <button
             className="lightbox-close"
-            onClick={() => setSelectedImage(null)}
+            onClick={() => setImageExpanded(false)}
             aria-label="Fechar imagem"
           >
             ×
           </button>
-
-          {images.length > 1 && (
-            <button
-              className="lightbox-arrow lightbox-prev"
-              onClick={(event) => {
-                event.stopPropagation();
-                previousImage();
-              }}
-              aria-label="Imagem anterior"
-            >
-              ‹
-            </button>
-          )}
 
           <div
             className="lightbox-content"
@@ -295,32 +268,16 @@ const BriefingDetail = () => {
           >
 
             <img
-              src={images[selectedImage]}
-              alt={`Imagem ${selectedImage + 1}`}
+              src={briefingImage}
+              alt="Imagem ampliada da operação"
             />
 
-            <div className="lightbox-caption">
-              REGISTRO {String(selectedImage + 1).padStart(2, "0")}
-              {" / "}
-              {String(images.length).padStart(2, "0")}
-            </div>
+            <span>REGISTRO FOTOGRÁFICO • U.T.A</span>
 
           </div>
 
-          {images.length > 1 && (
-            <button
-              className="lightbox-arrow lightbox-next"
-              onClick={(event) => {
-                event.stopPropagation();
-                nextImage();
-              }}
-              aria-label="Próxima imagem"
-            >
-              ›
-            </button>
-          )}
-
         </div>
+
       )}
 
     </Layout>
