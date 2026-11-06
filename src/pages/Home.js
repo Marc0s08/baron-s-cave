@@ -66,7 +66,7 @@ POR QUE JOGAR AIRSOFT?
 
 <img
 
-src="https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/home%2Fequipe.jpg?alt=media&token=022de2e4-de88-4d36-b940-57a8409ddfb5"
+src="https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/images%2FWhatsApp%20Image%202026-11-06%20at%2014.24.18.jpeg?alt=media&token=7afb3604-5bcd-43f3-a693-837f0cdf5fc4"
 
 alt="Equipe"
 
