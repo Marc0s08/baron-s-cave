@@ -1,378 +1,159 @@
+
 .midia-container {
-
-
-max-width:1200px;
-
-
-margin:auto;
-
-
-animation:fadeIn .8s ease;
-
-
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: fadeIn .8s ease;
 }
-
-
 
 .midia-title {
-
-
-text-align:center;
-
-
-font-size:42px;
-
-
-letter-spacing:5px;
-
-
-color:white;
-
-
-margin-bottom:10px;
-
-
+  text-align: center;
+  font-size: 42px;
+  letter-spacing: 5px;
+  color: white;
+  margin-bottom: 10px;
 }
-
-
 
 .midia-subtitle {
-
-
-text-align:center;
-
-
-color:#bbb;
-
-
-font-size:18px;
-
-
-margin-bottom:40px;
-
-
+  text-align: center;
+  color: #bbb;
+  font-size: 18px;
+  margin-bottom: 30px;
 }
-
-
 
 /* GRID */
-
-
 .midia-grid {
-
-
-display:grid;
-
-
-grid-template-columns:
-
-
-repeat(auto-fit,minmax(260px,1fr));
-
-
-gap:25px;
-
-
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
 }
-
-
 
 /* CARD */
-
-
 .midia-card {
-
-
-height:260px;
-
-
-border-radius:18px;
-
-
-overflow:hidden;
-
-
-cursor:pointer;
-
-
-background:
-
-
-rgba(255,255,255,.05);
-
-
-border:
-
-
-1px solid rgba(255,255,255,.12);
-
-
-backdrop-filter:blur(10px);
-
-
-transition:.35s;
-
-
+  width: 100%;
+  height: 200px;
+  border-radius: 18px;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(10px);
+  transition: .35s;
 }
-
-
 
 .midia-card:hover {
-
-
-transform:translateY(-8px);
-
-
-border-color:#27ae60;
-
-
-box-shadow:
-
-
-0 15px 35px rgba(0,0,0,.5);
-
-
+  transform: translateY(-5px);
+  border-color: #27ae60;
+  box-shadow: 0 15px 35px rgba(0,0,0,.5);
 }
-
-
 
 /* IMAGEM */
-
-
 .midia-image {
-
-
-width:100%;
-
-
-height:100%;
-
-
-object-fit:cover;
-
-
-transition:.5s;
-
-
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: .5s;
 }
-
-
 
 .midia-card:hover .midia-image {
-
-
-transform:scale(1.08);
-
-
+  transform: scale(1.05);
 }
-
-
 
 /* MODAL */
-
-
 .image-modal {
-
-
-position:fixed;
-
-
-top:0;
-
-
-left:0;
-
-
-width:100%;
-
-
-height:100%;
-
-
-background:
-
-
-rgba(0,0,0,.9);
-
-
-display:flex;
-
-
-align-items:center;
-
-
-justify-content:center;
-
-
-z-index:9999;
-
-
-padding:20px;
-
-
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 15px;
+  box-sizing: border-box;
 }
-
-
 
 .image-modal img {
-
-
-max-width:95%;
-
-
-max-height:90%;
-
-
-object-fit:contain;
-
-
-border-radius:15px;
-
-
-border:2px solid #27ae60;
-
-
+  max-width: 95vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 15px;
+  border: 2px solid #27ae60;
 }
 
-
-
-
+/* LOADING */
 .midia-loading {
-
-
-text-align:center;
-
-
-color:#27ae60;
-
-
+  text-align: center;
+  color: #27ae60;
 }
-
-
 
 .midia-error {
-
-
-text-align:center;
-
-
-color:red;
-
-
+  text-align: center;
+  color: red;
 }
 
-
-
-
+/* ANIMAÇÃO */
 @keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-
-from{
-
-
-opacity:0;
-
-transform:translateY(20px);
-
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-
-
-to{
-
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-
-}
-
-
-
 
 /* TABLET */
+@media(max-width:800px) {
+  .midia-title {
+    font-size: 32px;
+  }
 
+  .midia-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 15px;
+  }
 
-@media(max-width:800px){
-
-
-.midia-title {
-
-
-font-size:32px;
-
-
+  .midia-card {
+    height: 170px;
+  }
 }
-
-
-}
-
-
 
 /* MOBILE */
+@media(max-width:600px) {
+  .midia-container {
+    padding: 10px;
+  }
 
+  .midia-title {
+    font-size: 26px;
+    letter-spacing: 3px;
+  }
 
-@media(max-width:600px){
+  .midia-subtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
 
+  .midia-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
 
-.midia-container {
-
-
-padding:10px;
-
-
-}
-
-
-
-.midia-title {
-
-
-font-size:26px;
-
-
-letter-spacing:3px;
-
-
-}
-
-
-
-.midia-subtitle {
-
-
-font-size:14px;
-
-
-}
-
-
-
-.midia-grid {
-
-
-grid-template-columns:
-
-
-repeat(2,1fr);
-
-
-gap:15px;
-
-
-}
-
-
-
-.midia-card {
-
-
-height:160px;
-
-
-}
-
-
+  .midia-card {
+    height: 140px;
+    border-radius: 12px;
+  }
 }
