@@ -451,6 +451,7 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(0deg, rgba(0,0,0,.9), transparent 75%);
+  pointer-events: none;
 }
 
 .media-photo-caption {
@@ -474,6 +475,52 @@
   color: #fff;
   font-size: 13px;
   letter-spacing: 1px;
+}
+
+.media-loading,
+.media-empty {
+  text-align: center;
+  padding: 45px 15px;
+  color: #aab4ac;
+  background: rgba(0,0,0,.2);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px;
+}
+
+.media-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.media-loader {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(57,231,95,.2);
+  border-top-color: #39e75f;
+  border-radius: 50%;
+  animation: mediaSpin .8s linear infinite;
+}
+
+.media-empty span {
+  display: block;
+  color: #39e75f;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.media-empty h3 {
+  color: white;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.media-empty p {
+  font-size: 13px;
 }
 
 .media-mobile-link {
@@ -584,16 +631,23 @@
   margin: 0 0 25px;
 }
 
-/* ANIMAÇÃO */
+/* ANIMAÇÕES */
 
 @keyframes homeFadeIn {
   from {
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes mediaSpin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
