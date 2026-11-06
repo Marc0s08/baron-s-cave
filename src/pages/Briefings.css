@@ -81,11 +81,10 @@
 /* IMAGEM */
 
 .mission-image-container {
-  position: relative;
   width: 100%;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  background: #050705;
+  background: #050505;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,77 +99,33 @@
 }
 
 .mission-card:hover .mission-image {
-  transform: scale(1.035);
+  transform: scale(1.025);
 }
 
-/* NÚMERO DA OPERAÇÃO */
+/* BOTÃO ABAIXO DA IMAGEM */
 
-.mission-number {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 6px 9px;
-  background: rgba(0,0,0,.8);
-  border-left: 3px solid #27ae60;
+.mission-button {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 8px;
+  background: #27ae60;
   color: white;
-  font-size: 10px;
-  font-weight: bold;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 800;
   letter-spacing: 1px;
-}
-
-/* VISUALIZAR */
-
-.mission-view {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,.55);
-  opacity: 0;
   transition: .3s ease;
 }
 
-.mission-view span {
-  padding: 11px 16px;
-  border: 1px solid #27ae60;
-  border-radius: 5px;
-  background: rgba(39,174,96,.9);
-  color: white;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1px;
+.mission-card:hover .mission-button {
+  background: #219150;
 }
 
-.mission-card:hover .mission-view {
-  opacity: 1;
-}
+/* ACESSIBILIDADE */
 
-/* INFORMAÇÕES */
-
-.mission-info {
-  padding: 13px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.mission-info h2 {
-  color: white;
-  font-size: 14px;
-  margin: 0;
-  font-weight: 700;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.mission-info span {
-  flex-shrink: 0;
-  color: #27ae60;
-  font-size: 9px;
-  font-weight: bold;
-  letter-spacing: .5px;
+.mission-card:focus-visible {
+  outline: 2px solid #27ae60;
+  outline-offset: 4px;
 }
 
 /* MENSAGENS */
@@ -258,52 +213,21 @@
     aspect-ratio: 3 / 4;
   }
 
-  .mission-number {
-    top: 6px;
-    left: 6px;
-    padding: 5px 6px;
-    font-size: 8px;
-  }
-
-  .mission-view {
-    opacity: 1;
-    align-items: flex-end;
-    padding-bottom: 10px;
-    box-sizing: border-box;
-    background: linear-gradient(
-      transparent 55%,
-      rgba(0,0,0,.75)
-    );
-  }
-
-  .mission-view span {
-    font-size: 8px;
-    padding: 7px 8px;
-    letter-spacing: .3px;
-  }
-
-  .mission-info {
-    padding: 9px 8px;
-  }
-
-  .mission-info h2 {
-    font-size: 11px;
-  }
-
-  .mission-info span {
-    display: none;
+  .mission-button {
+    padding: 11px 4px;
+    font-size: 9px;
+    letter-spacing: .4px;
   }
 }
 
-/* CELULARES MUITO ESTREITOS */
+/* CELULARES ESTREITOS */
 
 @media (max-width: 360px) {
   .mission-grid {
     gap: 7px;
   }
 
-  .mission-view span {
-    font-size: 7px;
-    padding: 6px;
+  .mission-button {
+    font-size: 8px;
   }
 }
