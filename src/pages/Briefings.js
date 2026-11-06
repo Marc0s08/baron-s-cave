@@ -80,17 +80,16 @@ const Briefings = () => {
                   key={item.id}
                   className="mission-card"
                 >
-                  <div className="mission-image-container">
-                    <img
-                      src={item.images[0]}
-                      alt={item.title || "Briefing U.T.A"}
-                      className="mission-image"
-                      loading="lazy"
-                    />
-                  </div>
+                  <img
+                    src={item.images[0]}
+                    alt={item.title || "Briefing U.T.A"}
+                    className="mission-image"
+                    loading="lazy"
+                  />
 
-                  <div className="mission-button">
-                    VISUALIZAR INSTRUÇÕES
+                  <div className="mission-info">
+                    <span>MAIS INFORMAÇÕES</span>
+                    <span className="mission-arrow">↗</span>
                   </div>
                 </Link>
               ))}
