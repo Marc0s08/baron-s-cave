@@ -1,465 +1,847 @@
 
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { collection, onSnapshot } from "firebase/firestore";
-import { db } from "../firebaseConfig";
-import Layout from "../components/Layout";
-import Ranking from "../components/Ranking";
-import { Helmet } from "react-helmet-async";
-import "./Home.css";
+.home-container {
+  width: 100%;
+  max-width: 1450px;
+  margin: 0 auto;
+  padding: 0 25px 60px;
+  box-sizing: border-box;
+  color: #fff;
+  animation: homeFadeIn 0.7s ease;
+}
 
-// Imagens utilizadas nas seções fixas da página
-const imagens = {
-  hero: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/images%2FWhatsApp%20Image%202026-11-06%20at%2014.24.18.jpeg?alt=media&token=7afb3604-5bcd-43f3-a693-837f0cdf5fc4",
+.home-container * {
+  box-sizing: border-box;
+}
 
-  equipe: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/images%2FWhatsApp%20Image%202026-11-06%20at%2014.24.18.jpeg?alt=media&token=7afb3604-5bcd-43f3-a693-837f0cdf5fc4",
+/* ELEMENTOS GERAIS */
 
-  estrategia: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/home%2FC%C3%A3es%20Militares.jpeg?alt=media&token=18369fec-ed4c-4dfb-ab1d-e88393b31bda",
+.section-kicker {
+  display: inline-block;
+  color: #39e75f;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
 
-  combate: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/home%2Fcombat.jpg?alt=media&token=62c1c1fb-4be0-4f08-85b1-1169358bb0a2"
-};
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 28px;
+}
 
-// Verifica se o valor é uma URL de imagem
-const ehUrlImagem = (valor) => {
-  return (
-    typeof valor === "string" &&
-    /^https?:\/\//i.test(valor.trim()) &&
-    /\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(valor.trim())
-  );
-};
+.section-heading h2,
+.media-drawer-header h2,
+.rules-heading h2 {
+  font-size: clamp(23px, 3vw, 32px);
+  letter-spacing: 2px;
+  margin: 0;
+  color: #fff;
+}
 
-// Extrai imagens de diferentes formatos de documentos
-const extrairMidias = (data) => {
-  let imagensEncontradas = [];
+.section-number {
+  color: #6c786f;
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
 
-  const adicionar = (valor) => {
-    if (Array.isArray(valor)) {
-      valor.forEach(adicionar);
-      return;
-    }
+/* HERO */
 
-    if (typeof valor === "object" && valor !== null) {
-      adicionar(valor.url || valor.imageUrl || valor.src);
-      return;
-    }
+.home-hero {
+  min-height: 540px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 70px 7%;
+  margin-bottom: 25px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+}
 
-    if (ehUrlImagem(valor)) {
-      imagensEncontradas.push(valor.trim());
-    }
-  };
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(4,9,6,.97) 0%, rgba(4,9,6,.82) 45%, rgba(4,9,6,.18) 100%),
+    linear-gradient(0deg, rgba(4,9,6,.7), transparent 45%);
+}
 
-  // Formato atual
-  adicionar(data.images);
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
 
-  // Formato legado
-  adicionar(data.imageUrl);
+.hero-label {
+  display: inline-block;
+  color: #39e75f;
+  border-left: 3px solid #39e75f;
+  padding-left: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin-bottom: 22px;
+}
 
-  // Outros formatos possíveis
-  adicionar(data.image);
-  adicionar(data.value);
+.hero-content h1 {
+  font-size: clamp(38px, 6vw, 68px);
+  line-height: 1.04;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin: 0 0 22px;
+  color: #fff;
+}
 
-  // Campos dinâmicos em formato de array
-  if (Array.isArray(data.fields)) {
-    data.fields.forEach((field) => {
-      if (!field) return;
+.hero-content h1 span {
+  color: #39e75f;
+}
 
-      const nome = String(field.name || "").toLowerCase();
+.hero-content p {
+  max-width: 580px;
+  color: #d0d7d1;
+  font-size: 17px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
 
-      if (
-        nome.includes("imagem") ||
-        nome.includes("image") ||
-        nome.includes("foto") ||
-        nome.includes("url")
-      ) {
-        adicionar(field.value);
-      }
-    });
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 22px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  transition: .25s ease;
+}
+
+.hero-button.primary {
+  background: #39e75f;
+  color: #061009;
+  border: 1px solid #39e75f;
+}
+
+.hero-button.primary:hover {
+  background: #fff;
+  border-color: #fff;
+  transform: translateY(-3px);
+}
+
+.hero-button.secondary {
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.5);
+  background: rgba(0,0,0,.25);
+}
+
+.hero-button.secondary:hover {
+  border-color: #39e75f;
+  color: #39e75f;
+  transform: translateY(-3px);
+}
+
+.hero-bottom-info {
+  position: absolute;
+  bottom: 20px;
+  left: 7%;
+  right: 7%;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255,255,255,.6);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  z-index: 2;
+}
+
+/* INDICADORES */
+
+.home-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: #101712;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+  margin-bottom: 90px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  padding: 24px;
+  border-right: 1px solid rgba(255,255,255,.08);
+}
+
+.stat-item:last-child {
+  border-right: 0;
+}
+
+.stat-icon {
+  color: #39e75f;
+  font-size: 30px;
+}
+
+.stat-item strong,
+.stat-item small {
+  display: block;
+}
+
+.stat-item strong {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+}
+
+.stat-item small {
+  color: #929d94;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+/* SOBRE */
+
+.home-about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 65px;
+  align-items: center;
+  margin: 0 auto 100px;
+  max-width: 1250px;
+}
+
+.about-image {
+  position: relative;
+  height: 420px;
+}
+
+.about-image::after {
+  content: "";
+  position: absolute;
+  inset: 12px -12px -12px 12px;
+  border: 1px solid #39e75f;
+  border-radius: 8px;
+  z-index: 0;
+}
+
+.about-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+  border-radius: 8px;
+}
+
+.image-tag {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  z-index: 2;
+  background: #39e75f;
+  color: #061009;
+  padding: 9px 14px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.about-content h2 {
+  font-size: clamp(28px, 4vw, 43px);
+  line-height: 1.13;
+  letter-spacing: 2px;
+  margin: 0 0 22px;
+}
+
+.about-content h2 span {
+  color: #39e75f;
+}
+
+.about-content p {
+  color: #aeb8b0;
+  line-height: 1.8;
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+
+.text-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #39e75f;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+}
+
+.text-link span {
+  margin-left: 8px;
+  font-size: 18px;
+}
+
+/* DESTAQUES */
+
+.home-highlights {
+  margin-bottom: 100px;
+}
+
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.highlight-card {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #111813;
+  border: 1px solid rgba(255,255,255,.08);
+  transition: .3s ease;
+}
+
+.highlight-card:hover {
+  transform: translateY(-7px);
+  border-color: #39e75f;
+}
+
+.highlight-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: .5s ease;
+}
+
+.highlight-card:hover img {
+  transform: scale(1.05);
+}
+
+.highlight-card-content {
+  padding: 22px;
+}
+
+.highlight-card-content span {
+  color: #39e75f;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.highlight-card-content h3 {
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin: 12px 0;
+}
+
+.highlight-card-content p {
+  color: #a8b2aa;
+  font-size: 13px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* GAVETA DE MÍDIAS */
+
+.media-drawer {
+  position: relative;
+  padding: 38px;
+  margin-bottom: 100px;
+  border: 1px solid rgba(57,231,95,.2);
+  border-radius: 12px;
+  background:
+    linear-gradient(135deg, rgba(31,55,37,.42), rgba(9,14,10,.95));
+  overflow: hidden;
+}
+
+.media-drawer::before {
+  content: "UTA";
+  position: absolute;
+  right: 20px;
+  top: -45px;
+  font-size: 180px;
+  font-weight: 900;
+  color: rgba(255,255,255,.025);
+  pointer-events: none;
+}
+
+.media-drawer-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.media-drawer-header p {
+  color: #aab4ac;
+  font-size: 14px;
+  margin: 10px 0 0;
+}
+
+.media-all-button {
+  flex-shrink: 0;
+  color: #39e75f;
+  border: 1px solid rgba(57,231,95,.5);
+  border-radius: 5px;
+  padding: 13px 17px;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-decoration: none;
+  transition: .25s;
+}
+
+.media-all-button:hover {
+  color: #071009;
+  background: #39e75f;
+}
+
+.media-all-button span {
+  margin-left: 8px;
+  font-size: 15px;
+}
+
+.media-drawer-gallery {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.media-photo {
+  position: relative;
+  height: 230px;
+  display: block;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #151d17;
+}
+
+.media-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: .5s ease;
+}
+
+.media-photo:hover img {
+  transform: scale(1.08);
+}
+
+.media-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(0,0,0,.9), transparent 75%);
+  pointer-events: none;
+}
+
+.media-photo-caption {
+  position: absolute;
+  z-index: 2;
+  bottom: 17px;
+  left: 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.media-photo-caption span {
+  color: #39e75f;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.media-photo-caption strong {
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.media-loading,
+.media-empty {
+  text-align: center;
+  padding: 45px 15px;
+  color: #aab4ac;
+  background: rgba(0,0,0,.2);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px;
+}
+
+.media-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.media-loader {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(57,231,95,.2);
+  border-top-color: #39e75f;
+  border-radius: 50%;
+  animation: mediaSpin .8s linear infinite;
+}
+
+.media-empty span {
+  display: block;
+  color: #39e75f;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.media-empty h3 {
+  color: white;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+.media-empty p {
+  font-size: 13px;
+}
+
+.media-mobile-link {
+  display: none;
+}
+
+/* REGRAS */
+
+.home-rules {
+  margin-bottom: 100px;
+}
+
+.rules-heading {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.rules-heading p {
+  color: #aab4ac;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.rule-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 17px;
+  padding: 24px;
+  background: #101712;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px;
+  transition: .25s;
+}
+
+.rule-card:hover {
+  border-color: #39e75f;
+}
+
+.rule-card > span {
+  color: #39e75f;
+  font-size: 25px;
+  font-weight: 900;
+}
+
+.rule-card h3 {
+  margin: 3px 0 9px;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.rule-card p {
+  color: #aab4ac;
+  font-size: 12px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.rules-footer {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.rules-footer a {
+  color: #39e75f;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+}
+
+/* RANKING */
+
+.home-ranking {
+  margin-bottom: 100px;
+}
+
+.home-ranking > .section-heading {
+  margin-bottom: 30px;
+}
+
+/* CHAMADA FINAL */
+
+.home-cta {
+  text-align: center;
+  padding: 65px 25px;
+  border: 1px solid rgba(57,231,95,.25);
+  border-radius: 12px;
+  background:
+    linear-gradient(rgba(5,12,7,.9), rgba(5,12,7,.94)),
+    url("https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/home%2Fcombat.jpg?alt=media&token=62c1c1fb-4be0-4f08-85b1-1169358bb0a2") center/cover;
+}
+
+.home-cta h2 {
+  font-size: clamp(23px, 4vw, 38px);
+  letter-spacing: 2px;
+  margin: 8px 0 15px;
+}
+
+.home-cta p {
+  color: #aab4ac;
+  font-size: 14px;
+  margin: 0 0 25px;
+}
+
+/* ANIMAÇÕES */
+
+@keyframes homeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
 
-  // Campos dinâmicos em formato de objeto
-  if (data.fields && typeof data.fields === "object" && !Array.isArray(data.fields)) {
-    Object.entries(data.fields).forEach(([nome, valor]) => {
-      const chave = nome.toLowerCase();
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-      if (
-        chave.includes("imagem") ||
-        chave.includes("image") ||
-        chave.includes("foto") ||
-        chave.includes("url")
-      ) {
-        adicionar(valor);
-      }
-    });
+@keyframes mediaSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* TABLETS */
+
+@media (max-width: 900px) {
+  .home-about {
+    gap: 35px;
   }
 
-  return [...new Set(imagensEncontradas)];
-};
+  .about-image {
+    height: 350px;
+  }
 
-const Home = () => {
-  const [midias, setMidias] = useState([]);
-  const [carregandoMidias, setCarregandoMidias] = useState(true);
+  .highlight-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 
-  // Busca as mídias em tempo real no Firestore
-  useEffect(() => {
-    const referencia = collection(db, "midia");
+  .highlight-card:last-child {
+    grid-column: 1 / -1;
+  }
 
-    const cancelarInscricao = onSnapshot(
-      referencia,
-      (snapshot) => {
-        const todasImagens = [];
+  .media-drawer-gallery {
+    grid-template-columns: 1fr 1fr;
+  }
 
-        snapshot.forEach((documento) => {
-          const data = documento.data();
-          const imagensDocumento = extrairMidias(data);
+  .media-photo-large {
+    grid-column: 1 / -1;
+  }
 
-          imagensDocumento.forEach((url, index) => {
-            todasImagens.push({
-              id: `${documento.id}-${index}`,
-              url,
-              titulo:
-                data.title ||
-                data.name ||
-                data.titleImage ||
-                "Registro U.T.A."
-            });
-          });
-        });
+  .rules-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
-        setMidias(todasImagens);
-        setCarregandoMidias(false);
-      },
-      (error) => {
-        console.error("Erro ao carregar mídias:", error);
-        setCarregandoMidias(false);
-      }
+/* CELULARES */
+
+@media (max-width: 600px) {
+  .home-container {
+    padding: 0 12px 40px;
+  }
+
+  .home-hero {
+    min-height: 500px;
+    padding: 45px 23px 65px;
+    border-radius: 9px;
+    background-position: center;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(
+      90deg,
+      rgba(4,9,6,.95),
+      rgba(4,9,6,.65)
     );
+  }
 
-    return () => cancelarInscricao();
-  }, []);
+  .hero-content h1 {
+    font-size: 37px;
+  }
 
-  return (
-    <Layout>
-      <Helmet>
-        <title>U.T.A | Unidade Tática Airsoft</title>
-        <meta
-          name="description"
-          content="Conheça a Unidade Tática Airsoft. Estratégia, disciplina, adrenalina e trabalho em equipe."
-        />
-      </Helmet>
+  .hero-content p {
+    font-size: 14px;
+  }
 
-      <div className="home-container">
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-        {/* BANNER PRINCIPAL */}
-        <section
-          className="home-hero"
-          style={{ backgroundImage: `url("${imagens.hero}")` }}
-        >
-          <div className="hero-overlay"></div>
+  .hero-button {
+    width: 100%;
+  }
 
-          <div className="hero-content">
-            <span className="hero-label">
-              UNIDADE TÁTICA AIRSOFT
-            </span>
+  .hero-bottom-info {
+    left: 20px;
+    right: 20px;
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
 
-            <h1>
-              MAIS QUE UM JOGO.
-              <br />
-              <span>UMA OPERAÇÃO.</span>
-            </h1>
+  .home-stats {
+    grid-template-columns: 1fr;
+    margin-bottom: 65px;
+  }
 
-            <p>
-              Estratégia, disciplina e trabalho em equipe.
-              Entre em campo, supere desafios e faça parte da missão.
-            </p>
+  .stat-item {
+    padding: 17px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
 
-            <div className="hero-buttons">
-              <Link to="/Briefings" className="hero-button primary">
-                CONHEÇA AS OPERAÇÕES
-              </Link>
+  .stat-item:last-child {
+    border-bottom: 0;
+  }
 
-              <Link to="/midia" className="hero-button secondary">
-                VER GALERIA
-              </Link>
-            </div>
-          </div>
+  .home-about {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    margin-bottom: 75px;
+  }
 
-          <div className="hero-bottom-info">
-            <span>● UNIDADE TÁTICA AIRSOFT</span>
-            <span>CHÁCARA ARGOLO</span>
-          </div>
-        </section>
+  .about-image {
+    height: 260px;
+    margin-right: 10px;
+  }
 
-        {/* INDICADORES */}
-        <section className="home-stats">
-          <div className="stat-item">
-            <span className="stat-icon">◎</span>
-            <div>
-              <strong>ESTRATÉGIA</strong>
-              <small>Cada movimento importa</small>
-            </div>
-          </div>
+  .about-content h2 {
+    font-size: 32px;
+  }
 
-          <div className="stat-item">
-            <span className="stat-icon">⌖</span>
-            <div>
-              <strong>DISCIPLINA</strong>
-              <small>Preparação para a missão</small>
-            </div>
-          </div>
+  .home-highlights,
+  .home-rules,
+  .home-ranking {
+    margin-bottom: 75px;
+  }
 
-          <div className="stat-item">
-            <span className="stat-icon">✦</span>
-            <div>
-              <strong>OPERAÇÕES</strong>
-              <small>Desafios em equipe</small>
-            </div>
-          </div>
-        </section>
+  .section-heading {
+    align-items: flex-start;
+  }
 
-        {/* SOBRE A UTA */}
-        <section className="home-about">
-          <div className="about-image">
-            <img src={imagens.estrategia} alt="Ambiente tático" />
-            <span className="image-tag">U.T.A / CAMPO</span>
-          </div>
+  .section-number {
+    font-size: 9px;
+  }
 
-          <div className="about-content">
-            <span className="section-kicker">QUEM SOMOS</span>
+  .highlight-grid {
+    grid-template-columns: 1fr;
+  }
 
-            <h2>
-              PREPARAÇÃO.
-              <br />
-              <span>ESTRATÉGIA.</span>
-              <br />
-              TRABALHO EM EQUIPE.
-            </h2>
+  .highlight-card:last-child {
+    grid-column: auto;
+  }
 
-            <p>
-              O airsoft vai muito além dos equipamentos. É uma experiência
-              que exige comunicação, raciocínio, disciplina e confiança
-              entre os operadores.
-            </p>
+  .highlight-card {
+    min-height: auto;
+  }
 
-            <p>
-              Na Unidade Tática Airsoft, cada partida representa uma nova
-              missão, com objetivos, desafios e oportunidades de evolução.
-            </p>
+  .highlight-card img {
+    height: 210px;
+  }
 
-            <Link to="/regras" className="text-link">
-              CONHEÇA AS REGRAS <span>→</span>
-            </Link>
-          </div>
-        </section>
+  .media-drawer {
+    padding: 23px 16px;
+    margin-bottom: 75px;
+  }
 
-        {/* DESTAQUES */}
-        <section className="home-highlights">
-          <div className="section-heading">
-            <div>
-              <span className="section-kicker">NOSSO UNIVERSO</span>
-              <h2>O QUE MOVE A OPERAÇÃO</h2>
-            </div>
+  .media-drawer-header {
+    display: block;
+  }
 
-            <span className="section-number">01 / 03</span>
-          </div>
+  .media-drawer-header h2 {
+    font-size: 23px;
+  }
 
-          <div className="highlight-grid">
-            <article className="highlight-card">
-              <img src={imagens.equipe} alt="Trabalho em equipe" />
+  .media-all-button {
+    display: none;
+  }
 
-              <div className="highlight-card-content">
-                <span>01 — COOPERAÇÃO</span>
-                <h3>TRABALHO EM EQUIPE</h3>
-                <p>
-                  Comunicação e confiança são fundamentais para alcançar
-                  os objetivos da missão.
-                </p>
-              </div>
-            </article>
+  .media-drawer-gallery {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: #39e75f #172019;
+  }
 
-            <article className="highlight-card">
-              <img src={imagens.estrategia} alt="Pensamento estratégico" />
+  .media-photo,
+  .media-photo-large {
+    flex: 0 0 85%;
+    height: 220px;
+    scroll-snap-align: start;
+  }
 
-              <div className="highlight-card-content">
-                <span>02 — PLANEJAMENTO</span>
-                <h3>PENSAMENTO ESTRATÉGICO</h3>
-                <p>
-                  Cada cenário exige análise, planejamento e decisões
-                  rápidas.
-                </p>
-              </div>
-            </article>
+  .media-mobile-link {
+    display: block;
+    color: #39e75f;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-top: 12px;
+  }
 
-            <article className="highlight-card">
-              <img src={imagens.combate} alt="Experiência de airsoft" />
+  .rules-heading h2 {
+    font-size: 23px;
+  }
 
-              <div className="highlight-card-content">
-                <span>03 — EXPERIÊNCIA</span>
-                <h3>ADRENALINA</h3>
-                <p>
-                  Missões imersivas que colocam à prova as habilidades
-                  de cada operador.
-                </p>
-              </div>
-            </article>
-          </div>
-        </section>
+  .rule-card {
+    padding: 19px;
+  }
 
-        {/* GAVETA DE MÍDIAS DO FIREBASE */}
-        <section className="media-drawer">
-          <div className="media-drawer-header">
-            <div>
-              <span className="section-kicker">REGISTROS DE CAMPO</span>
-
-              <h2>POR TRÁS DE CADA OPERAÇÃO</h2>
-
-              <p>
-                Momentos, equipes e missões registrados em campo.
-              </p>
-            </div>
-
-            <Link to="/midia" className="media-all-button">
-              ACESSAR TODAS AS MÍDIAS <span>↗</span>
-            </Link>
-          </div>
-
-          {carregandoMidias ? (
-            <div className="media-loading">
-              <span className="media-loader"></span>
-              CARREGANDO REGISTROS...
-            </div>
-          ) : midias.length > 0 ? (
-            <div className="media-drawer-gallery">
-              {midias.slice(0, 3).map((midia, index) => (
-                <Link
-                  to="/midia"
-                  className={`media-photo ${
-                    index === 0 ? "media-photo-large" : ""
-                  }`}
-                  key={midia.id}
-                >
-                  <img
-                    src={midia.url}
-                    alt={midia.titulo}
-                    loading="lazy"
-                  />
-
-                  <div className="media-photo-caption">
-                    <span>
-                      REGISTRO {String(index + 1).padStart(2, "0")}
-                    </span>
-
-                    <strong>{midia.titulo}</strong>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          ) : (
-            <div className="media-empty">
-              <span>▧</span>
-              <h3>NENHUM REGISTRO DISPONÍVEL</h3>
-              <p>
-                As próximas imagens cadastradas na galeria aparecerão aqui.
-              </p>
-            </div>
-          )}
-
-          <Link to="/midia" className="media-mobile-link">
-            EXPLORAR GALERIA COMPLETA →
-          </Link>
-        </section>
-
-        {/* REGRAS */}
-        <section className="home-rules">
-          <div className="rules-heading">
-            <span className="section-kicker">
-              SEGURANÇA EM PRIMEIRO LUGAR
-            </span>
-
-            <h2>ANTES DE ENTRAR EM CAMPO</h2>
-
-            <p>
-              A segurança e o respeito são responsabilidades de todos
-              os operadores.
-            </p>
-          </div>
-
-          <div className="rules-grid">
-            <div className="rule-card">
-              <span>01</span>
-              <div>
-                <h3>PROTEÇÃO OCULAR</h3>
-                <p>
-                  Óculos de proteção obrigatórios durante toda a partida.
-                </p>
-              </div>
-            </div>
-
-            <div className="rule-card">
-              <span>02</span>
-              <div>
-                <h3>EQUIPAMENTOS</h3>
-                <p>
-                  Confira suas condições antes de iniciar a operação.
-                </p>
-              </div>
-            </div>
-
-            <div className="rule-card">
-              <span>03</span>
-              <div>
-                <h3>CONDUTA</h3>
-                <p>
-                  Respeite os operadores, as regras e as orientações do campo.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="rules-footer">
-            <Link to="/regras">
-              LER TODAS AS REGRAS <span>→</span>
-            </Link>
-          </div>
-        </section>
-
-        {/* RANKING */}
-        <section className="home-ranking">
-          <div className="section-heading">
-            <div>
-              <span className="section-kicker">
-                EVOLUÇÃO DOS OPERADORES
-              </span>
-
-              <h2>RANKING U.T.A.</h2>
-            </div>
-
-            <span className="section-number">RANK / UTA</span>
-          </div>
-
-          <Ranking />
-        </section>
-
-        {/* CHAMADA FINAL */}
-        <section className="home-cta">
-          <span className="section-kicker">
-            SUA PRÓXIMA MISSÃO COMEÇA AQUI
-          </span>
-
-          <h2>ESTÁ PRONTO PARA ENTRAR EM CAMPO?</h2>
-
-          <p>
-            Conheça nossas operações e acompanhe os registros
-            da Unidade Tática Airsoft.
-          </p>
-
-          <Link to="/Briefings" className="hero-button primary">
-            EXPLORAR OPERAÇÕES →
-          </Link>
-        </section>
-
-      </div>
-    </Layout>
-  );
-};
-
-export default Home;
+  .home-cta {
+    padding: 45px 18px;
+  }
+}
