@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { db } from "../firebaseConfig";
 import { collection, onSnapshot } from "firebase/firestore";
-import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import "./Briefings.css";
+import { Helmet } from "react-helmet-async";
 
 const Briefings = () => {
   const [content, setContent] = useState([]);
@@ -17,11 +18,11 @@ const Briefings = () => {
       (snapshot) => {
         const data = snapshot.docs.map((doc) => ({
           id: doc.id,
-          ...doc.data(),
+          ...doc.data()
         }));
 
         const missions = data.filter(
-          (item) => Array.isArray(item.images) && item.images.length > 0
+          (item) => item.images && item.images.length > 0
         );
 
         setContent(missions);
@@ -29,8 +30,8 @@ const Briefings = () => {
         setError(null);
       },
       (error) => {
-        console.error("Erro ao carregar briefings:", error);
-        setError("Não foi possível carregar os briefings. Tente novamente.");
+        console.error(error);
+        setError(error.message);
         setLoading(false);
       }
     );
@@ -47,84 +48,66 @@ const Briefings = () => {
       <div className="briefings-page">
         <div className="briefings-container">
 
-          <header className="briefings-header">
-            <div className="briefings-line"></div>
-
-            <span className="briefings-label">
+          <header className="briefing-title">
+            <span className="briefing-subtitle">
               UNIDADE TÁTICA AIRSOFT
             </span>
 
             <h1>BRIEFINGS</h1>
 
             <p>
-              Planejamento operacional, instruções e informações das missões.
+              Planejamento das operações e missões da U.T.A.
             </p>
 
-            <div className="briefings-counter">
-              <span>{content.length}</span>
-              <small>
-                {content.length === 1 ? "BRIEFING DISPONÍVEL" : "BRIEFINGS DISPONÍVEIS"}
-              </small>
-            </div>
+            <div className="briefing-title-line"></div>
           </header>
 
           {loading ? (
-            <div className="briefings-state">
-              <div className="briefings-spinner"></div>
-              <p>Carregando briefings...</p>
+            <div className="briefings-message">
+              Carregando missões...
             </div>
           ) : error ? (
-            <div className="briefings-state briefings-error">
-              <p>{error}</p>
-            </div>
+            <p className="briefings-error">{error}</p>
           ) : content.length === 0 ? (
-            <div className="briefings-state">
-              <h3>NENHUM BRIEFING DISPONÍVEL</h3>
-              <p>As próximas instruções operacionais serão publicadas aqui.</p>
+            <div className="briefings-message">
+              Nenhuma missão disponível.
             </div>
           ) : (
             <div className="mission-grid">
               {content.map((item, index) => (
-                <a
+                <Link
+                  to={`/briefings/${item.id}`}
                   key={item.id}
-                  href={`/briefings/${item.id}`}
                   className="mission-card"
-                  aria-label={`Acessar briefing ${item.title || index + 1}`}
+                  aria-label={`Visualizar instruções: ${item.title || `Operação ${index + 1}`}`}
                 >
-                  <div className="mission-card-top">
-                    <span className="mission-number">
-                      OPERAÇÃO {String(index + 1).padStart(2, "0")}
-                    </span>
-
-                    <span className="mission-status">
-                      <span></span>
-                      DISPONÍVEL
-                    </span>
-                  </div>
-
                   <div className="mission-image-container">
                     <img
                       src={item.images[0]}
                       alt={item.title || `Briefing ${index + 1}`}
                       className="mission-image"
                       loading="lazy"
-                      decoding="async"
                     />
 
-                    <div className="mission-image-overlay">
-                      <span>ACESSAR BRIEFING</span>
+                    <div className="mission-number">
+                      OPERAÇÃO {String(index + 1).padStart(2, "0")}
+                    </div>
+
+                    <div className="mission-view">
+                      <span>VISUALIZAR INSTRUÇÕES</span>
                     </div>
                   </div>
 
-                  <div className="mission-card-bottom">
-                    <span>VISUALIZAR INSTRUÇÕES</span>
-                    <span className="mission-arrow">→</span>
-                  </div>
-                </a>
+                  {item.title && (
+                    <div className="mission-info">
+                      <h2>{item.title}</h2>
+                      <span>ABRIR BRIEFING →</span>
+                    </div>
+                  )}
+                </Link>
               ))}
             </div>
           )}
-
         </div>
       </div>
     </Layout>
