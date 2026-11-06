@@ -1,19 +1,142 @@
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../firebaseConfig";
 import Layout from "../components/Layout";
 import Ranking from "../components/Ranking";
 import { Helmet } from "react-helmet-async";
 import "./Home.css";
 
+// Imagens utilizadas nas seções fixas da página
 const imagens = {
   hero: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/images%2FWhatsApp%20Image%202026-11-06%20at%2014.24.18.jpeg?alt=media&token=7afb3604-5bcd-43f3-a693-837f0cdf5fc4",
+
   equipe: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/images%2FWhatsApp%20Image%202026-11-06%20at%2014.24.18.jpeg?alt=media&token=7afb3604-5bcd-43f3-a693-837f0cdf5fc4",
+
   estrategia: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/home%2FC%C3%A3es%20Militares.jpeg?alt=media&token=18369fec-ed4c-4dfb-ab1d-e88393b31bda",
+
   combate: "https://firebasestorage.googleapis.com/v0/b/barons-cave.appspot.com/o/home%2Fcombat.jpg?alt=media&token=62c1c1fb-4be0-4f08-85b1-1169358bb0a2"
 };
 
+// Verifica se o valor é uma URL de imagem
+const ehUrlImagem = (valor) => {
+  return (
+    typeof valor === "string" &&
+    /^https?:\/\//i.test(valor.trim()) &&
+    /\.(jpg|jpeg|png|webp|gif)(\?|$)/i.test(valor.trim())
+  );
+};
+
+// Extrai imagens de diferentes formatos de documentos
+const extrairMidias = (data) => {
+  let imagensEncontradas = [];
+
+  const adicionar = (valor) => {
+    if (Array.isArray(valor)) {
+      valor.forEach(adicionar);
+      return;
+    }
+
+    if (typeof valor === "object" && valor !== null) {
+      adicionar(valor.url || valor.imageUrl || valor.src);
+      return;
+    }
+
+    if (ehUrlImagem(valor)) {
+      imagensEncontradas.push(valor.trim());
+    }
+  };
+
+  // Formato atual
+  adicionar(data.images);
+
+  // Formato legado
+  adicionar(data.imageUrl);
+
+  // Outros formatos possíveis
+  adicionar(data.image);
+  adicionar(data.value);
+
+  // Campos dinâmicos em formato de array
+  if (Array.isArray(data.fields)) {
+    data.fields.forEach((field) => {
+      if (!field) return;
+
+      const nome = String(field.name || "").toLowerCase();
+
+      if (
+        nome.includes("imagem") ||
+        nome.includes("image") ||
+        nome.includes("foto") ||
+        nome.includes("url")
+      ) {
+        adicionar(field.value);
+      }
+    });
+  }
+
+  // Campos dinâmicos em formato de objeto
+  if (data.fields && typeof data.fields === "object" && !Array.isArray(data.fields)) {
+    Object.entries(data.fields).forEach(([nome, valor]) => {
+      const chave = nome.toLowerCase();
+
+      if (
+        chave.includes("imagem") ||
+        chave.includes("image") ||
+        chave.includes("foto") ||
+        chave.includes("url")
+      ) {
+        adicionar(valor);
+      }
+    });
+  }
+
+  return [...new Set(imagensEncontradas)];
+};
+
 const Home = () => {
+  const [midias, setMidias] = useState([]);
+  const [carregandoMidias, setCarregandoMidias] = useState(true);
+
+  // Busca as mídias em tempo real no Firestore
+  useEffect(() => {
+    const referencia = collection(db, "midia");
+
+    const cancelarInscricao = onSnapshot(
+      referencia,
+      (snapshot) => {
+        const todasImagens = [];
+
+        snapshot.forEach((documento) => {
+          const data = documento.data();
+          const imagensDocumento = extrairMidias(data);
+
+          imagensDocumento.forEach((url, index) => {
+            todasImagens.push({
+              id: `${documento.id}-${index}`,
+              url,
+              titulo:
+                data.title ||
+                data.name ||
+                data.titleImage ||
+                "Registro U.T.A."
+            });
+          });
+        });
+
+        setMidias(todasImagens);
+        setCarregandoMidias(false);
+      },
+      (error) => {
+        console.error("Erro ao carregar mídias:", error);
+        setCarregandoMidias(false);
+      }
+    );
+
+    return () => cancelarInscricao();
+  }, []);
+
   return (
     <Layout>
       <Helmet>
@@ -93,7 +216,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* SOBRE */}
+        {/* SOBRE A UTA */}
         <section className="home-about">
           <div className="about-image">
             <img src={imagens.estrategia} alt="Ambiente tático" />
@@ -135,12 +258,14 @@ const Home = () => {
               <span className="section-kicker">NOSSO UNIVERSO</span>
               <h2>O QUE MOVE A OPERAÇÃO</h2>
             </div>
+
             <span className="section-number">01 / 03</span>
           </div>
 
           <div className="highlight-grid">
             <article className="highlight-card">
               <img src={imagens.equipe} alt="Trabalho em equipe" />
+
               <div className="highlight-card-content">
                 <span>01 — COOPERAÇÃO</span>
                 <h3>TRABALHO EM EQUIPE</h3>
@@ -153,6 +278,7 @@ const Home = () => {
 
             <article className="highlight-card">
               <img src={imagens.estrategia} alt="Pensamento estratégico" />
+
               <div className="highlight-card-content">
                 <span>02 — PLANEJAMENTO</span>
                 <h3>PENSAMENTO ESTRATÉGICO</h3>
@@ -165,6 +291,7 @@ const Home = () => {
 
             <article className="highlight-card">
               <img src={imagens.combate} alt="Experiência de airsoft" />
+
               <div className="highlight-card-content">
                 <span>03 — EXPERIÊNCIA</span>
                 <h3>ADRENALINA</h3>
@@ -177,12 +304,14 @@ const Home = () => {
           </div>
         </section>
 
-        {/* GAVETA DE MÍDIAS */}
+        {/* GAVETA DE MÍDIAS DO FIREBASE */}
         <section className="media-drawer">
           <div className="media-drawer-header">
             <div>
               <span className="section-kicker">REGISTROS DE CAMPO</span>
+
               <h2>POR TRÁS DE CADA OPERAÇÃO</h2>
+
               <p>
                 Momentos, equipes e missões registrados em campo.
               </p>
@@ -193,31 +322,46 @@ const Home = () => {
             </Link>
           </div>
 
-          <div className="media-drawer-gallery">
-            <Link to="/midia" className="media-photo media-photo-large">
-              <img src={imagens.equipe} alt="Registro da equipe UTA" />
-              <div className="media-photo-caption">
-                <span>01 / REGISTROS</span>
-                <strong>A EQUIPE EM CAMPO</strong>
-              </div>
-            </Link>
+          {carregandoMidias ? (
+            <div className="media-loading">
+              <span className="media-loader"></span>
+              CARREGANDO REGISTROS...
+            </div>
+          ) : midias.length > 0 ? (
+            <div className="media-drawer-gallery">
+              {midias.slice(0, 3).map((midia, index) => (
+                <Link
+                  to="/midia"
+                  className={`media-photo ${
+                    index === 0 ? "media-photo-large" : ""
+                  }`}
+                  key={midia.id}
+                >
+                  <img
+                    src={midia.url}
+                    alt={midia.titulo}
+                    loading="lazy"
+                  />
 
-            <Link to="/midia" className="media-photo">
-              <img src={imagens.estrategia} alt="Cenário de operação" />
-              <div className="media-photo-caption">
-                <span>02 / OPERAÇÕES</span>
-                <strong>ESTRATÉGIA</strong>
-              </div>
-            </Link>
+                  <div className="media-photo-caption">
+                    <span>
+                      REGISTRO {String(index + 1).padStart(2, "0")}
+                    </span>
 
-            <Link to="/midia" className="media-photo">
-              <img src={imagens.combate} alt="Partida de airsoft" />
-              <div className="media-photo-caption">
-                <span>03 / CAMPO</span>
-                <strong>EM AÇÃO</strong>
-              </div>
-            </Link>
-          </div>
+                    <strong>{midia.titulo}</strong>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="media-empty">
+              <span>▧</span>
+              <h3>NENHUM REGISTRO DISPONÍVEL</h3>
+              <p>
+                As próximas imagens cadastradas na galeria aparecerão aqui.
+              </p>
+            </div>
+          )}
 
           <Link to="/midia" className="media-mobile-link">
             EXPLORAR GALERIA COMPLETA →
@@ -227,8 +371,12 @@ const Home = () => {
         {/* REGRAS */}
         <section className="home-rules">
           <div className="rules-heading">
-            <span className="section-kicker">SEGURANÇA EM PRIMEIRO LUGAR</span>
+            <span className="section-kicker">
+              SEGURANÇA EM PRIMEIRO LUGAR
+            </span>
+
             <h2>ANTES DE ENTRAR EM CAMPO</h2>
+
             <p>
               A segurança e o respeito são responsabilidades de todos
               os operadores.
@@ -240,7 +388,9 @@ const Home = () => {
               <span>01</span>
               <div>
                 <h3>PROTEÇÃO OCULAR</h3>
-                <p>Óculos de proteção obrigatórios durante toda a partida.</p>
+                <p>
+                  Óculos de proteção obrigatórios durante toda a partida.
+                </p>
               </div>
             </div>
 
@@ -248,7 +398,9 @@ const Home = () => {
               <span>02</span>
               <div>
                 <h3>EQUIPAMENTOS</h3>
-                <p>Confira suas condições antes de iniciar a operação.</p>
+                <p>
+                  Confira suas condições antes de iniciar a operação.
+                </p>
               </div>
             </div>
 
@@ -256,7 +408,9 @@ const Home = () => {
               <span>03</span>
               <div>
                 <h3>CONDUTA</h3>
-                <p>Respeite os operadores, as regras e as orientações do campo.</p>
+                <p>
+                  Respeite os operadores, as regras e as orientações do campo.
+                </p>
               </div>
             </div>
           </div>
@@ -272,9 +426,13 @@ const Home = () => {
         <section className="home-ranking">
           <div className="section-heading">
             <div>
-              <span className="section-kicker">EVOLUÇÃO DOS OPERADORES</span>
+              <span className="section-kicker">
+                EVOLUÇÃO DOS OPERADORES
+              </span>
+
               <h2>RANKING U.T.A.</h2>
             </div>
+
             <span className="section-number">RANK / UTA</span>
           </div>
 
@@ -283,10 +441,15 @@ const Home = () => {
 
         {/* CHAMADA FINAL */}
         <section className="home-cta">
-          <span className="section-kicker">SUA PRÓXIMA MISSÃO COMEÇA AQUI</span>
+          <span className="section-kicker">
+            SUA PRÓXIMA MISSÃO COMEÇA AQUI
+          </span>
+
           <h2>ESTÁ PRONTO PARA ENTRAR EM CAMPO?</h2>
+
           <p>
-            Conheça nossas operações e acompanhe os registros da Unidade Tática Airsoft.
+            Conheça nossas operações e acompanhe os registros
+            da Unidade Tática Airsoft.
           </p>
 
           <Link to="/Briefings" className="hero-button primary">
