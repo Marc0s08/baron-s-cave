@@ -1,647 +1,493 @@
-
-/* =========================================
-   CONTAINER PRINCIPAL
-========================================= */
-
 .briefing-detail-container {
-  width: 100%;
-  max-width: 1250px;
-  margin: auto;
-  padding: 30px 25px 45px;
-  box-sizing: border-box;
-  color: #fff;
-  animation: briefingFade .6s ease;
+
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:25px;
+
+
+    animation:fadeIn .8s ease;
+
+
 }
 
-/* =========================================
-   CABEÇALHO
-========================================= */
 
-.operation-header {
-  text-align: center;
-  margin-bottom: 45px;
-  padding: 15px 10px 0;
+
+
+/* TITULO */
+
+
+.mission-title {
+
+
+    text-align:center;
+
+
+    font-size:40px;
+
+
+    letter-spacing:5px;
+
+
+    color:white;
+
+
+    margin-bottom:45px;
+
+
 }
 
-.operation-topline {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 9px;
-  color: #999;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 4px;
-  margin-bottom: 15px;
+
+
+
+/* GALERIA */
+
+
+.image-gallery {
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:35px;
+
+
+    margin-bottom:50px;
+
+
 }
 
-.operation-indicator {
-  width: 7px;
-  height: 7px;
-  background: #888;
-  border-radius: 50%;
-  box-shadow: 0 0 8px rgba(255,255,255,.2);
+
+
+
+
+.detail-image-card {
+
+
+    width:100%;
+
+
+    padding:20px;
+
+
+    border-radius:20px;
+
+
+    background:
+
+    rgba(255,255,255,.05);
+
+
+
+    border:
+
+    1px solid rgba(255,255,255,.15);
+
+
+
+    backdrop-filter:blur(10px);
+
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+
+    transition:.3s;
+
+
 }
 
-.operation-header h1 {
-  margin: 0;
-  color: #fff;
-  font-size: 36px;
-  font-weight: 900;
-  letter-spacing: 5px;
+
+
+
+.detail-image-card:hover {
+
+
+    transform:translateY(-5px);
+
+
+    border-color:#27ae60;
+
+
 }
 
-.operation-header p {
-  color: #888;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  margin-top: 12px;
+
+
+
+
+
+.briefing-detail-image {
+
+
+    width:100%;
+
+
+    height:auto;
+
+
+    max-height:900px;
+
+
+    object-fit:contain;
+
+
+    border-radius:15px;
+
+
 }
 
-.operation-divider {
-  width: 150px;
-  height: 2px;
-  margin: 22px auto 0;
-  background: rgba(255,255,255,.12);
+
+
+
+
+
+
+/* CAMPOS */
+
+
+.briefing-detail-content {
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    gap:25px;
+
+
 }
 
-.operation-divider span {
-  display: block;
-  width: 45%;
-  height: 100%;
-  margin: auto;
-  background: #999;
+
+
+
+
+
+
+.field-card {
+
+
+    background:
+
+    linear-gradient(
+
+    145deg,
+
+    rgba(255,255,255,.08),
+
+    rgba(255,255,255,.03)
+
+    );
+
+
+
+    border:
+
+    1px solid rgba(39,174,96,.25);
+
+
+
+    border-radius:18px;
+
+
+    padding:30px;
+
+
+
+    backdrop-filter:blur(12px);
+
+
+
+    transition:.3s;
+
+
 }
 
-/* =========================================
-   TÍTULOS DAS SEÇÕES
-========================================= */
 
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 15px;
-  margin-bottom: 17px;
-  padding-bottom: 13px;
-  border-bottom: 1px solid rgba(255,255,255,.12);
+
+
+.field-card:hover {
+
+
+    transform:translateX(8px);
+
+
+    border-color:#27ae60;
+
+
 }
 
-.section-kicker {
-  display: block;
-  margin-bottom: 6px;
-  color: #888;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 3px;
+
+
+
+
+
+.field-name {
+
+
+    color:#27ae60;
+
+
+    font-size:24px;
+
+
+    margin-bottom:18px;
+
+
 }
 
-.section-heading h2 {
-  margin: 0;
-  color: #eee;
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 2px;
+
+
+
+
+
+
+.field-content {
+
+
+    color:#ddd;
+
+
+    font-size:17px;
+
+
+    line-height:1.9;
+
+
+
+    /* mantém formato do Firebase */
+
+
+    white-space:pre-wrap;
+
+
+
+    text-align:left;
+
+
+
+    word-break:break-word;
+
+
 }
 
-.section-reference {
-  color: #999;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  white-space: nowrap;
+
+
+
+
+
+
+/* LOADING */
+
+
+.briefing-loading,
+.briefing-error {
+
+
+    text-align:center;
+
+
+    padding:50px;
+
+
+    font-size:22px;
+
+
 }
 
-/* =========================================
-   IMAGEM PRINCIPAL
-========================================= */
 
-.operation-image-section {
-  margin-bottom: 50px;
+
+.briefing-error {
+
+
+    color:#ff4444;
+
+
 }
 
-.operation-image-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 12px;
-  overflow: hidden;
-  box-sizing: border-box;
-  border: 1px solid rgba(255,255,255,.14);
-  border-radius: 12px;
-  background: #101010;
-  cursor: zoom-in;
-  transition: .3s ease;
+
+
+
+
+
+/* ANIMAÇÃO */
+
+
+@keyframes fadeIn {
+
+
+    from{
+
+
+        opacity:0;
+
+
+        transform:translateY(20px);
+
+
+    }
+
+
+    to{
+
+
+        opacity:1;
+
+
+        transform:translateY(0);
+
+
+    }
+
+
 }
 
-.operation-image-card:hover {
-  border-color: rgba(255,255,255,.4);
-  box-shadow: 0 12px 30px rgba(0,0,0,.3);
+
+
+
+
+
+
+/* TABLET */
+
+
+@media(max-width:900px){
+
+
+
+    .mission-title{
+
+
+        font-size:32px;
+
+
+    }
+
+
 }
 
-.operation-main-image {
-  display: block;
-  width: 100%;
-  max-height: 680px;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
-  border-radius: 7px;
-}
-
-.image-zoom-label {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: 100%;
-  padding: 12px 5px 2px;
-  box-sizing: border-box;
-  color: #999;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-  transition: .3s ease;
-}
-
-.image-zoom-label span {
-  font-size: 18px;
-  line-height: 12px;
-}
-
-.operation-image-card:hover .image-zoom-label {
-  color: #fff;
-}
-
-/* =========================================
-   INFORMAÇÕES DA OPERAÇÃO
-========================================= */
-
-.operation-information {
-  margin-bottom: 45px;
-}
-
-.information-heading {
-  margin-bottom: 22px;
-}
-
-/* LISTA DE INFORMAÇÕES */
-
-.information-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* CARD INDIVIDUAL */
-
-.information-card {
-  position: relative;
-  display: flex;
-  gap: 22px;
-  padding: 23px 25px;
-  box-sizing: border-box;
-  overflow: hidden;
-  background: linear-gradient(
-    110deg,
-    rgba(255,255,255,.055),
-    rgba(255,255,255,.018)
-  );
-  border: 1px solid rgba(255,255,255,.10);
-  border-radius: 9px;
-  transition: .25s ease;
-}
-
-/* BARRA LATERAL */
-
-.information-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: #777;
-  transition: .25s ease;
-}
-
-.information-card:hover {
-  background: rgba(255,255,255,.055);
-  border-color: rgba(255,255,255,.25);
-  transform: translateX(3px);
-}
-
-.information-card:hover::before {
-  background: #bbb;
-}
-
-/* NUMERAÇÃO */
-
-.information-index {
-  flex-shrink: 0;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  width: 43px;
-  padding-top: 3px;
-  color: #999;
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: -1px;
-}
-
-/* CONTEÚDO DO CARD */
-
-.information-body {
-  flex: 1;
-  min-width: 0;
-}
-
-.information-title-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
-}
-
-.information-label {
-  color: #888;
-  font-size: 8px;
-  font-weight: 800;
-  letter-spacing: 2px;
-  white-space: nowrap;
-}
-
-.information-line {
-  flex: 1;
-  height: 1px;
-  background: rgba(255,255,255,.10);
-}
-
-.information-title {
-  margin: 0 0 12px;
-  color: #fff;
-  font-size: 19px;
-  font-weight: 800;
-  letter-spacing: .5px;
-  line-height: 1.4;
-}
-
-.information-text {
-  margin: 0;
-  color: #c7c7c7;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.85;
-  text-align: left;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-/* INFORMAÇÕES VAZIAS */
-
-.empty-information {
-  padding: 30px;
-  background: #111;
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 9px;
-  color: #999;
-  text-align: center;
-  font-size: 14px;
-}
-
-/* =========================================
-   RODAPÉ
-========================================= */
-
-.briefing-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 15px;
-  padding-top: 22px;
-  border-top: 1px solid rgba(255,255,255,.12);
-}
-
-.briefing-bottom > span {
-  color: #777;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 2px;
-}
-
-.back-button {
-  padding: 13px 18px;
-  background: #171717;
-  color: #ddd;
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 6px;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: .25s ease;
-}
-
-.back-button:hover {
-  background: #252525;
-  border-color: rgba(255,255,255,.5);
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-/* =========================================
-   VISUALIZAÇÃO AMPLIADA
-========================================= */
-
-.image-lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 55px 25px;
-  box-sizing: border-box;
-  background: rgba(0,0,0,.96);
-  backdrop-filter: blur(8px);
-  animation: lightboxFade .2s ease;
-}
-
-.lightbox-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px;
-  max-height: 100%;
-}
-
-.lightbox-content img {
-  display: block;
-  max-width: 100%;
-  max-height: 82vh;
-  object-fit: contain;
-  border-radius: 6px;
-}
-
-.lightbox-content span {
-  margin-top: 17px;
-  color: #aaa;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 3px;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 20px;
-  right: 25px;
-  width: 42px;
-  height: 42px;
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 50%;
-  background: #171717;
-  color: #fff;
-  font-size: 29px;
-  cursor: pointer;
-  transition: .2s;
-}
-
-.lightbox-close:hover {
-  background: #333;
-}
-
-/* =========================================
-   LOADING E ERRO
-========================================= */
-
-.briefing-status {
-  min-height: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 30px;
-  text-align: center;
-  color: #fff;
-}
-
-.briefing-status h2 {
-  margin: 20px 0 8px;
-  font-size: 17px;
-  letter-spacing: 3px;
-}
-
-.briefing-status p {
-  margin-bottom: 20px;
-  color: #999;
-  font-size: 13px;
-}
-
-.status-icon {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid rgba(255,255,255,.3);
-  border-radius: 50%;
-  color: #ccc;
-  font-size: 24px;
-}
-
-.loading-indicator {
-  width: 38px;
-  height: 38px;
-  border: 3px solid rgba(255,255,255,.12);
-  border-top-color: #aaa;
-  border-radius: 50%;
-  animation: briefingSpin 1s linear infinite;
-}
-
-/* =========================================
-   ANIMAÇÕES
-========================================= */
-
-@keyframes briefingFade {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes lightboxFade {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes briefingSpin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* =========================================
-   TABLET
-========================================= */
-
-@media (max-width: 900px) {
-  .briefing-detail-container {
-    padding: 25px 18px 35px;
-  }
-
-  .operation-header h1 {
-    font-size: 31px;
-  }
-
-  .operation-main-image {
-    max-height: 550px;
-  }
-}
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 600px) {
-  .briefing-detail-container {
-    padding: 18px 10px 30px;
-  }
-
-  .operation-header {
-    margin-bottom: 35px;
-    padding-top: 10px;
-  }
-
-  .operation-topline {
-    font-size: 8px;
-    letter-spacing: 2px;
-  }
-
-  .operation-header h1 {
-    font-size: 23px;
-    letter-spacing: 2px;
-    line-height: 1.4;
-  }
-
-  .operation-header p {
-    font-size: 8px;
-    letter-spacing: 1.5px;
-  }
-
-  .section-heading h2 {
-    font-size: 15px;
-    letter-spacing: 1px;
-  }
-
-  .section-kicker {
-    font-size: 8px;
-    letter-spacing: 2px;
-  }
-
-  .section-reference {
-    font-size: 8px;
-  }
-
-  .operation-image-section {
-    margin-bottom: 38px;
-  }
-
-  .operation-image-card {
-    padding: 7px;
-    border-radius: 8px;
-  }
-
-  .operation-main-image {
-    max-height: none;
-  }
-
-  .information-list {
-    gap: 10px;
-  }
-
-  .information-card {
-    gap: 12px;
-    padding: 18px 13px;
-  }
-
-  .information-index {
-    width: 30px;
-    font-size: 18px;
-  }
-
-  .information-label {
-    font-size: 7px;
-    letter-spacing: 1px;
-  }
-
-  .information-title {
-    font-size: 16px;
-    margin-bottom: 9px;
-  }
-
-  .information-text {
-    font-size: 14px;
-    line-height: 1.7;
-  }
-
-  .briefing-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .briefing-bottom > span {
-    font-size: 8px;
-  }
-
-  .image-lightbox {
-    padding: 55px 12px;
-  }
-
-  .lightbox-content img {
-    max-height: 75vh;
-  }
-
-  .lightbox-close {
-    top: 12px;
-    right: 12px;
-    width: 36px;
-    height: 36px;
-  }
-}
-
-/* CELULARES ESTREITOS */
-
-@media (max-width: 360px) {
-  .operation-header h1 {
-    font-size: 20px;
-  }
-
-  .information-card {
-    padding: 15px 10px;
-  }
-
-  .information-index {
-    width: 25px;
-    font-size: 16px;
-  }
-
-  .information-title {
-    font-size: 15px;
-  }
+
+
+
+
+
+
+
+/* MOBILE */
+
+
+@media(max-width:600px){
+
+
+
+    .briefing-detail-container{
+
+
+        padding:12px;
+
+
+    }
+
+
+
+    .mission-title{
+
+
+        font-size:24px;
+
+
+        letter-spacing:2px;
+
+
+        margin-bottom:30px;
+
+
+    }
+
+
+
+
+    .detail-image-card{
+
+
+        padding:8px;
+
+
+        border-radius:15px;
+
+
+    }
+
+
+
+
+    .briefing-detail-image{
+
+
+        width:100%;
+
+
+        max-height:none;
+
+
+    }
+
+
+
+
+    .field-card{
+
+
+        padding:20px;
+
+
+        border-radius:15px;
+
+
+    }
+
+
+
+
+
+    .field-name{
+
+
+        font-size:20px;
+
+
+    }
+
+
+
+
+    .field-content{
+
+
+        font-size:15px;
+
+
+        line-height:1.7;
+
+
+        white-space:pre-wrap;
+
+
+    }
+
+
+
 }
