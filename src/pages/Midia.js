@@ -1,5 +1,6 @@
 
 import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Layout from "../components/Layout";
 import { db } from "../firebaseConfig";
 import {
@@ -17,6 +18,7 @@ const Midia = () => {
   const [expandedImage, setExpandedImage] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Carregar imagens
   useEffect(() => {
     let active = true;
 
@@ -58,73 +60,108 @@ const Midia = () => {
     };
   }, []);
 
+  // Fechar com ESC e bloquear rolagem
+  useEffect(() => {
+    if (!expandedImage) return;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setExpandedImage(null);
+      }
+    };
+
+    const previousOverflow = document.body.style.overflow;
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [expandedImage]);
+
   return (
-    <Layout>
-      <Helmet>
-        <title>Mídia | U.T.A Airsoft</title>
-      </Helmet>
+    <>
+      <Layout>
+        <Helmet>
+          <title>Mídia | U.T.A Airsoft</title>
+        </Helmet>
 
-      <div className="midia-container">
+        <div className="midia-container">
 
-        <h1 className="midia-title">
-          GALERIA U.T.A.
-        </h1>
+          <h1 className="midia-title">
+            GALERIA U.T.A.
+          </h1>
 
-        <p className="midia-subtitle">
-          Momentos, operações e registros do campo.
-        </p>
-
-        {loading && (
-          <p className="midia-loading">
-            Carregando imagens...
+          <p className="midia-subtitle">
+            Momentos, operações e registros do campo.
           </p>
-        )}
 
-        {error && (
-          <p className="midia-error">
-            {error}
-          </p>
-        )}
+          {loading && (
+            <p className="midia-loading">
+              Carregando imagens...
+            </p>
+          )}
 
-        <div className="midia-grid">
-          {content.map(item => (
-            <div
-              key={item.id}
-              className="midia-card"
-              onClick={() => setExpandedImage(item.imageUrl)}
-            >
-              <img
-                src={item.imageUrl}
-                alt={item.title || "Imagem U.T.A."}
-                className="midia-image"
-                loading="lazy"
-                decoding="async"
-              />
-            </div>
-          ))}
-        </div>
+          {error && (
+            <p className="midia-error">
+              {error}
+            </p>
+          )}
 
-        {!loading && content.length === 0 && !error && (
-          <p className="midia-loading">
-            Nenhuma imagem disponível.
-          </p>
-        )}
-
-        {expandedImage && (
-          <div
-            className="image-modal"
-            onClick={() => setExpandedImage(null)}
-          >
-            <img
-              src={expandedImage}
-              alt="Imagem ampliada"
-              decoding="async"
-            />
+          <div className="midia-grid">
+            {content.map(item => (
+              <div
+                key={item.id}
+                className="midia-card"
+                onClick={() => setExpandedImage(item.imageUrl)}
+              >
+                <img
+                  src={item.imageUrl}
+                  alt={item.title || "Imagem U.T.A."}
+                  className="midia-image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            ))}
           </div>
-        )}
 
-      </div>
-    </Layout>
+          {!loading && content.length === 0 && !error && (
+            <p className="midia-loading">
+              Nenhuma imagem disponível.
+            </p>
+          )}
+
+        </div>
+      </Layout>
+
+      {/* MODAL FORA DO LAYOUT */}
+      {expandedImage && createPortal(
+        <div
+          className="image-modal"
+          onClick={() => setExpandedImage(null)}
+        >
+          <button
+            className="image-modal-close"
+            onClick={() => setExpandedImage(null)}
+            aria-label="Fechar imagem"
+          >
+            ×
+          </button>
+
+          <img
+            src={expandedImage}
+            alt="Imagem ampliada"
+            className="image-modal-photo"
+            onClick={(event) => event.stopPropagation()}
+            decoding="async"
+          />
+        </div>,
+        document.body
+      )}
+    </>
   );
 };
 
