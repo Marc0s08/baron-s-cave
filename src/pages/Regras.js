@@ -45,7 +45,7 @@ const Regras = () => {
     {
       number: "02",
       title: "Pano vermelho",
-      text: "Recomendado para sinalizar operador eliminado."
+      text: "Obrigatório para sinalizar operador eliminado."
     },
     {
       number: "03",
