@@ -310,7 +310,7 @@ const Regras = () => {
                     </div>
 
                     <div className="class-stat">
-                      <span>ENERGIA</span>
+                      <span>JOULE</span>
                       <strong>{item.joules}</strong>
                     </div>
 
@@ -323,7 +323,7 @@ const Regras = () => {
 
                   {item.name === "SUPPORT" && (
                     <div className="class-extra">
-                      FULL AUTOMÁTICO PERMITIDO
+                      FULL PERMITIDO
                     </div>
                   )}
 
